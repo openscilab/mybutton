@@ -1,0 +1,42 @@
+.input-selector {
+	.rs-picker-toggle-value {
+		@apply text-base;
+	}
+
+	.rs-picker-input {
+		@apply bg-transparent;
+	}
+
+	.rs-picker {
+		height: 2.8rem;
+		@apply w-full  pl-1.5;
+		input {
+			background: none !important ;
+		}
+		div {
+			background: none !important;
+			@apply h-full flex items-center bg-transparent;
+		}
+		svg,
+		.rs-picker-toggle-clean {
+			top: 0.8rem !important;
+		}
+		svg {
+			@apply mr-2;
+		}
+	}
+
+	&.input-selector-not-editable {
+		@apply pointer-events-none;
+		.rs-btn-close,
+		.rs-picker-toggle-caret {
+			@apply hidden;
+		}
+	}
+}
+
+.input-selector-not-editable {
+	.rs-picker-toggle-placeholder {
+		display: none !important;
+	}
+}

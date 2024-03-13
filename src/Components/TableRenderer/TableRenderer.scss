@@ -1,0 +1,100 @@
+@import '../../Assets/scss/base/export.scss';
+
+.react-table {
+	@apply mt-0 overflow-x-auto  rounded-md relative;
+	box-shadow: 8px 5px 14px 4px rgba(0, 0, 0, 0.05);
+
+	.panel-loader-wrapper {
+		@apply contents;
+	}
+
+	.panel-loader {
+		img {
+			height: 230px;
+			@apply py-10;
+		}
+	}
+
+	table {
+		@apply border-opacity-10 rounded-lg min-w-full;
+	}
+	tr {
+		@apply flex flex-row items-stretch w-full
+		border-secondary border-opacity-0;
+	}
+	thead {
+		@apply relative;
+		box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.1);
+		th {
+			font-size: 1rem !important;
+			@apply flex-center text-black text-opacity-80 font-semibold  py-7;
+			.th-sort-icon {
+				@apply ml-1 text-primary;
+				.fa-icon {
+					@apply w-3.5;
+				}
+			}
+		}
+		.th-sortable {
+			@apply cursor-pointer transition-all;
+			@apply hover:bg-dark hover:bg-opacity-10;
+		}
+		.th-sorted {
+			@apply text-white;
+			background: $primary !important;
+			.fa-icon {
+				@apply text-white;
+			}
+		}
+	}
+	tbody {
+		tr {
+			@apply bg-gray-400 bg-opacity-0 hover:bg-opacity-10;
+			min-height: 4rem;
+			&:not(:last-of-type) {
+				@apply border-b border-dark border-opacity-20;
+			}
+			&:hover {
+				border-color: transparent !important;
+				td {
+					background: #e0e0e0 !important;
+				}
+			}
+		}
+		td {
+			@apply flex-center py-3.5 font-medium text-center px-2;
+		}
+	}
+
+	.table-loader {
+		@apply absolute inset-0 flex-center bg-white bg-opacity-70;
+	}
+
+	&::-webkit-scrollbar {
+		@apply h-2;
+	}
+}
+
+.react-table-start-col-light {
+	th,
+	td {
+		background-color: white;
+		&:nth-of-type(2n) {
+			background: #f3f3f3;
+		}
+	}
+}
+
+.react-table-start-col-dark {
+	th,
+	td {
+		background-color: #f3f3f3;
+		&:nth-of-type(2n) {
+			background: white;
+		}
+	}
+}
+
+.table-no-record {
+	@apply w-full font-semibold flex-center py-8 opacity-75;
+}

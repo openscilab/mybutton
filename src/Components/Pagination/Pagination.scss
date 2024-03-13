@@ -1,0 +1,26 @@
+.pagination-layout {
+    @apply mt-4 mb-2 flex-center;
+
+    .rs-pagination {
+        :hover {
+            background-color: transparent !important;
+            color: #212122;
+        }
+
+        :focus{
+            box-shadow: none !important;
+
+        }
+        
+    }
+    .rs-pagination-symbol {
+        color: #0388cc !important;
+        border: 1px solid #0388cc;
+        border-radius: 100px !important;
+        height: 26px !important;
+        width: 26px !important;
+        svg {
+            @apply text-center mx-auto;
+        }
+    }
+}

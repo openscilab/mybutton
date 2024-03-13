@@ -1,0 +1,27 @@
+@import './base/export';
+
+.fa-btn {
+	border: 1px solid;
+	@apply rounded-full py-1.5 px-4 text-sm font-normal
+	 border-secondary border-opacity-10;
+	.fa-icon {
+		@apply w-5;
+	}
+}
+
+.loading-cover {
+	min-height: 300px;
+}
+
+.panel-loader-wrapper {
+	@apply animate-fade-in;
+}
+
+.rs-panel-group .rs-panel + .rs-panel:before {
+	@apply border-0;
+}
+
+.rs-picker-toggle-active,
+.rs-picker.rs-picker-focused {
+	box-shadow: none !important;
+}

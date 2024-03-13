@@ -1,0 +1,50 @@
+.rs-btn-disabled {
+	@apply bg-gray-base;
+}
+
+.fa-btn {
+	@apply rounded-md text-left flex-row;
+
+	.fa-icon {
+		@apply w-5 mr-0 text-left;
+	}
+
+	.center-icon {
+		margin-left: 0px !important;
+		margin-right: 0px !important;
+	}
+
+	.end-icon {
+		margin-right: 0px !important;
+		&:not(.indicator) {
+			@apply ml-2;
+		}
+	}
+
+	.indicator {
+		@apply mx-0;
+	}
+
+	&.rs-btn {
+		@apply p-1 px-2;
+	}
+
+	&.no-indicator {
+		.fa-icon {
+			@apply mr-2;
+		}
+	}
+}
+
+.rs-btn-spin {
+	&::after {
+		border-color: white transparent transparent !important;
+	}
+	&::before {
+		border-color: rgba(255, 255, 255, 0.1) !important;
+	}
+}
+
+.rs-btn-loading {
+	background-color: $primary !important;
+}

@@ -1,0 +1,37 @@
+@import '../../Assets/scss/base/colors.scss';
+
+.editable-input {
+	@apply border-none;
+
+	input,
+	textarea {
+		opacity: 1 !important;
+		-webkit-text-fill-color: $dark;
+		@apply text-base w-full  pl-4 py-2.5  outline-none bg-transparent;
+	}
+
+	textarea {
+		@apply resize-none;
+	}
+
+	.editable-input-hint {
+		@apply mt-1 text-xs ml-1.5 opacity-50;
+	}
+
+	.editable-input-inner-component {
+		@apply absolute;
+		top: 50%;
+		right: 0;
+		transform: translate(0, -50%);
+	}
+}
+
+.editable-input-not-editable {
+	.labeled-wrapper-outline {
+		border-color: rgba(0, 0, 0, 0.23) !important;
+		border-width: 1px !important;
+	}
+	input {
+		cursor: default !important;
+	}
+}

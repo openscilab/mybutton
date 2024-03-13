@@ -1,0 +1,43 @@
+{
+	"editor.tabSize": 4,
+	"prettier.printWidth": 130,
+	"scss.lint.unknownAtRules": "ignore",
+	"eslint.validate": ["typescript", "typescriptreact"],
+	"files.exclude": {
+		"*.env": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"**/reportWebVitals.ts": true,
+		"**/react-app-env.d.ts": true,
+		"fontawesome.config.js": true,
+		"src/Assets/fontawesome": true
+	},
+	"cSpell.words": [
+		"animatecss",
+		"autohqs",
+		"btns",
+		"contextmenu",
+		"countup",
+		"craco",
+		"fontawesome",
+		"imask",
+		"jszip",
+		"opentable",
+		"persistor",
+		"reduxjs",
+		"rels",
+		"respo",
+		"rsuite",
+		"semibold",
+		"Shipstation",
+		"sortablejs",
+		"swiper",
+		"tailwindcss",
+		"xmark",
+		"zipcode"
+	]
+}

@@ -1,0 +1,10 @@
+.upload-btn-container {
+	.panel-loader {
+		height: 35px;
+		width: 140px;
+		@apply bg-gray-50 bg-opacity-20 rounded-md;
+		img {
+			height: 35px !important;
+		}
+	}
+}

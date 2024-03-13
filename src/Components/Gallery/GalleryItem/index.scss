@@ -1,0 +1,45 @@
+.gallery-item-layout {
+	width: 100px;
+	height: 100px;
+	@apply animate-fade-in overflow-hidden rounded-md flex-center flex-col border relative transition-all transform hover:scale-105;
+
+	.s-play {
+		@apply text-white w-8 top-0 left-0 pl-2 pr-2 pb-2 pt-2 rounded-br-lg  border-primary 
+		bg-primary   absolute opacity-90  cursor-pointer transition-all;
+	}
+
+	.gallery-item-overlay {
+		font-size: 0.7rem;
+		@apply absolute bottom-0 transition-all bg-primary bg-opacity-80 w-full
+        text-white overflow-ellipsis flex flex-nowrap  
+        px-3 py-1 transform  pointer-events-none;
+		transform: translateY(110%);
+	}
+
+	&:hover {
+		.gallery-item-overlay {
+			transform: translateY(0px);
+		}
+
+		.s-play {
+			@apply text-primary opacity-100 bg-transparent;
+		}
+	}
+
+	.gallery-item-img {
+		width: 100px;
+		height: 100px;
+		@apply transition-all flex cursor-pointer;
+		filter: brightness(0.7);
+		&:hover {
+			filter: brightness(1);
+			@apply shadow-light;
+		}
+
+		.fa-icon {
+			width: 40px;
+			height: 40px;
+			@apply opacity-30 m-auto;
+		}
+	}
+}

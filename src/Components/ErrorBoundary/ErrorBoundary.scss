@@ -1,0 +1,27 @@
+.error-boundary-layout {
+	@apply bg-light h-screen flex-center flex-col;
+	.fa-icon {
+		width: 250px;
+		@apply text-gray-600 opacity-20;
+	}
+	h1 {
+		@apply font-bold text-lg mt-4 tracking-widest border-dashed  border-b border-dark pb-4 border-opacity-10;
+	}
+	.rs-btn {
+		width: 250px;
+		@apply mt-5  font-bold shadow-lg bg-dark text-white transition-all;
+	}
+
+	.go-to-home-btn {
+		@apply mt-7 bg-gray-700;
+	}
+
+	.report-btn {
+		@apply opacity-60 hover:opacity-100;
+	}
+
+	.error-timer {
+		width: 250px;
+		@apply bg-transparent border border-dashed border-dark rounded-md text-sm mt-10 flex-center py-2;
+	}
+}

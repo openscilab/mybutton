@@ -1,0 +1,166 @@
+@import './mixin';
+@import './media';
+@import './colors';
+@import './fonts';
+
+.rs-btn {
+	.fa-icon {
+		@apply mr-2.5 float-left;
+	}
+}
+
+.rs-input:focus {
+	@apply border-0 shadow-none;
+}
+
+.rs-loader-wrapper {
+	@apply absolute inset-0 bg-white text-white;
+	z-index: 100;
+}
+.rs-loader-spin {
+	&::after {
+		@apply border-0 border-t-4 border-solid border-primary;
+	}
+	&::before {
+		@apply border-4 border-solid border-secondary border-opacity-10;
+	}
+}
+
+.rs-breadcrumb {
+	@apply m-0 p-0;
+}
+
+.rs-table-row-header {
+	@apply bg-transparent;
+}
+
+.rs-grid-container,
+.rs-row {
+	@apply w-full m-0 p-0;
+}
+
+.rs-toast-container {
+	@apply font-light tracking-wide text-sm;
+	.rs-notification-description {
+		color: inherit;
+		@apply flex-center;
+		.fa-icon {
+			@apply w-7 mr-3;
+		}
+	}
+	.rs-custom-toast {
+		width: 330px;
+		.rs-notification-content {
+			@apply py-2;
+		}
+		.rs-notification-description {
+			@apply text-white  justify-start;
+		}
+	}
+}
+
+.rs-pagination {
+	@apply mt-5;
+	.rs-pagination-btn-active {
+		@apply bg-primary text-white border-primary font-bold;
+	}
+	.rs-pagination-btn {
+		@apply flex-center  rounded-full
+		 hover:bg-primary hover:text-white text-base px-2;
+		.rs-pagination-symbol {
+			@apply shadow-none;
+			@apply hover:bg-transparent text-lg text-secondary;
+		}
+	}
+}
+
+.rs-panel {
+	@apply relative;
+}
+
+.panel-body-none {
+	.rs-panel-body {
+		@apply hidden;
+	}
+}
+
+.rs-modal-wrapper {
+	@apply flex-center;
+}
+
+.rs-modal {
+	.rs-modal-header {
+		@apply border-b pb-2 border-opacity-30 text-base flex items-center;
+		.rs-modal-header-close {
+			top: 10px;
+			font-size: 12px;
+			@apply text-black transition-all mr-0;
+			&:hover {
+				@apply text-error;
+			}
+		}
+	}
+
+	.rs-modal-body {
+		max-height: 50vh;
+		@apply py-2 mt-0 overflow-y-auto;
+	}
+
+	.rs-modal-footer {
+		border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+		@apply pt-3;
+	}
+
+	.btn-accept {
+		@apply capitalize border-opacity-30
+		 text-primary font-medium border border-primary hover:bg-primary hover:text-white;
+	}
+
+	.btn-reject {
+		@apply capitalize border-opacity-30
+		 bg-red-50 bg-opacity-5 text-error border-error hover:bg-error hover:text-white;
+	}
+
+	.btn-cancel {
+		@apply capitalize border-opacity-30 border-dashed
+		 text-gray-900 font-medium border border-gray-900 hover:bg-gray-900 hover:text-white;
+	}
+}
+
+.rs-modal-no-border {
+	.rs-modal-header,
+	.rs-modal-footer {
+		border: none !important;
+	}
+}
+
+.rs-notification {
+	.rs-btn-close {
+		svg {
+			color: white !important;
+		}
+	}
+}
+
+.rs-picker-toggle,
+.rs-btn {
+	&:focus {
+		box-shadow: none !important;
+	}
+}
+
+.rs-picker-none {
+	@apply pb-2;
+}
+
+.rs-btn-outline {
+	border-width: 1px !important;
+	@apply border-primary text-primary bg-transparent;
+	&:hover {
+		@apply bg-primary text-white;
+	}
+}
+
+.rs-picker-select-menu-items {
+	@apply my-0;
+}

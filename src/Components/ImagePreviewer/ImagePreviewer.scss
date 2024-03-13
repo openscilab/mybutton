@@ -1,0 +1,23 @@
+.image-previewer {
+	@apply rounded-md transition-all;
+	.img-small {
+		width: 140px;
+		height: 140px;
+		object-fit: cover;
+	}
+}
+
+.image-previewer-popover {
+	@apply p-1 bg-primary bg-opacity-30 border-2 border-primary border-dashed cursor-pointer;
+	.img-main {
+		@apply transition-all;
+		max-width: 500px;
+		max-height: 500px;
+		min-width: 140px;
+		min-height: 140px;
+	}
+	.rs-popover-arrow::after {
+		@apply hidden;
+		// border-right-color: $primary !important;
+	}
+}

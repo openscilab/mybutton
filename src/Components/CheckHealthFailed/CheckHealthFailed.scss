@@ -1,0 +1,59 @@
+.check-health-failed-layout {
+	@apply flex-center flex-col fixed inset-0 overflow-hidden h-screen animate-fade-in;
+	z-index: 10000;
+	background: #fbfbfb;
+
+	.center-box {
+		@apply absolute inset-0 flex-center flex-col -mt-2;
+		.logo {
+			@apply -mt-4;
+			width: 80px;
+			height: 80px;
+		}
+
+		.t-cloud-exclamation {
+			@apply text-red-100 opacity-75 -mt-10;
+			width: 95px;
+		}
+		.title {
+			@apply text-lg font-light;
+		}
+
+		.description {
+			@apply mt-1 animate-pulse;
+		}
+
+		.fa-btn {
+			@apply flex justify-center mt-5 border-none pb-1.5;
+			@apply bg-gray-100 bg-opacity-20;
+			.fa-icon {
+				@apply w-4 h-4 mt-0.5;
+			}
+		}
+	}
+
+	.rs-loader {
+		@apply absolute inset-0 flex-center -mt-3.5;
+		.rs-loader-spin,
+		.rs-loader-spin::before,
+		.rs-loader-spin::after {
+			width: 300px;
+			height: 300px;
+		}
+
+		.rs-loader-spin {
+			&::after {
+				//? Moving part
+				border-top-color: rgba(#ff6161, 0.5);
+				border-top-width: 4px;
+				box-shadow: 0 -15px 30px -12px rgba(255, 0, 0, 0.2);
+				animation-duration: 3.5s;
+			}
+			&::before {
+				//? Bg part
+				@apply opacity-10;
+				border-color: #3e97b5 !important;
+			}
+		}
+	}
+}

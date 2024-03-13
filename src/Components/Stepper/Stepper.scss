@@ -1,0 +1,41 @@
+.stepper {
+    .rs-steps-item-title {
+        font-family: 'Roboto', sans-serif;
+        @apply font-medium text-black;
+    }
+
+    .rs-steps-item-icon-wrapper {
+        .rs-steps-item-icon {
+            @apply flex-center;
+        }
+    }
+
+    .rs-steps-item-status-wait {
+        .rs-steps-item-icon-wrapper {
+            @apply bg-gray-light text-gray-base border-gray-base bg-opacity-30;
+        }
+
+        .rs-steps-item-title::after {
+            @apply border-gray-base border-t;
+        }
+    }
+
+    .rs-steps-item-status-finish,
+    .rs-steps-item-status-process {
+        .rs-steps-item-title::after {
+            @apply border-primary border-t-2;
+        }
+
+        .rs-steps-item-icon-wrapper {
+            @apply bg-primary text-white;
+        }
+    }
+
+    .rs-steps-item-status-finish {
+        .rs-steps-item-icon-wrapper {
+            svg {
+                @apply transform scale-110;
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<rect fill="#1e88ce" x="12" y="12" width="30" height="30" rx="3" ry="3">
+<animate attributeName="x" dur="1.923076923076923s" repeatCount="indefinite" keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="12;58;58;58;58;12;12;12;12" begin="-1.7628205128205128s"></animate>
+<animate attributeName="y" dur="1.923076923076923s" repeatCount="indefinite" keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="12;58;58;58;58;12;12;12;12" begin="-1.282051282051282s"></animate>
+</rect><rect fill="#1e88ce" x="12" y="12" width="30" height="30" rx="3" ry="3">
+<animate attributeName="x" dur="1.923076923076923s" repeatCount="indefinite" keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="12;58;58;58;58;12;12;12;12" begin="-1.1217948717948718s"></animate>
+<animate attributeName="y" dur="1.923076923076923s" repeatCount="indefinite" keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="12;58;58;58;58;12;12;12;12" begin="-0.641025641025641s"></animate>
+</rect><rect fill="#1e88ce" x="12" y="12" width="30" height="30" rx="3" ry="3">
+<animate attributeName="x" dur="1.923076923076923s" repeatCount="indefinite" keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="12;58;58;58;58;12;12;12;12" begin="-0.4807692307692307s"></animate>
+<animate attributeName="y" dur="1.923076923076923s" repeatCount="indefinite" keyTimes="0;0.083;0.25;0.333;0.5;0.583;0.75;0.833;1" values="12;58;58;58;58;12;12;12;12" begin="0s"></animate>
+</rect>
+</svg>

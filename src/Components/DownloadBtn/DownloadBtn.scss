@@ -1,0 +1,22 @@
+.download-btn {
+	direction: ltr;
+	@apply relative flex cursor-pointer rounded-md text-primary pt-0.5 pb-1  border border-primary 
+		border-opacity-40 transition-all;
+	.fa-icon {
+		@apply w-3 ml-3 mr-1 mt-0.5;
+	}
+	&:hover {
+		@apply bg-primary  bg-opacity-10;
+	}
+	.trash {
+		width: 14px;
+		@apply ml-auto mr-3 text-gray-100 text-opacity-50;
+		&:hover {
+			@apply text-error;
+		}
+	}
+	span {
+		max-width: 125px;
+		@apply mr-3 overflow-text-dotted;
+	}
+}

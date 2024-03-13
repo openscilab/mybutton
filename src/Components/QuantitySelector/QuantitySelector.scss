@@ -1,0 +1,28 @@
+.quantity-selector {
+	height: 1rem;
+	@apply flex justify-center items-center min-h-0 flex-nowrap whitespace-nowrap select-none;
+	.l-minus,
+	.l-plus {
+		width: 18px;
+		@apply transform hover:scale-110 cursor-pointer transition-all
+         text-black opacity-40 hover:opacity-100 hover:text-primary;
+	}
+	.quantity {
+		font-size: 1rem;
+		@apply mx-2 select-none;
+
+		input {
+			@apply caret-transparent border-0 outline-none text-center bg-transparent cursor-pointer py-1 px-0.5 rounded-md;
+			&::selection {
+				@apply bg-gray-50;
+			}
+			&:focus {
+				@apply text-primary bg-primary bg-opacity-5 cursor-default;
+			}
+		}
+	}
+
+	.no-visible {
+		@apply opacity-10;
+	}
+}

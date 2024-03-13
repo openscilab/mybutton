@@ -1,0 +1,13 @@
+.circular-progress-bar {
+    @apply w-20;
+
+    .rs-progress-circle-info {
+        @apply text-black font-semibold;
+    }
+
+    .rs-progress-stroke {
+        // change degree for get result
+        transform: rotate(45deg);
+        transform-origin: center;
+    }
+}

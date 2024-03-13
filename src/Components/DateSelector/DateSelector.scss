@@ -1,0 +1,38 @@
+.date-selector {
+	.fa-icon {
+		@apply w-4 opacity-40;
+	}
+
+	.labeled-wrapper-container {
+		@apply relative;
+	}
+
+	.labeled-wrapper {
+		@apply w-full;
+
+		.inner-icons-wrapper {
+			@apply ml-4;
+
+			.r-angle-down {
+				top: 0.9rem !important;
+				@apply absolute z-10 right-0 mr-3 opacity-70 rotate-0;
+			}
+		}
+	}
+
+	.date-picker {
+		@apply w-full;
+	}
+
+	.rs-picker-toggle.rs-btn {
+		@apply pr-0;
+	}
+
+	.rs-picker-toggle-value {
+		@apply mt-0.5;
+	}
+
+	.rs-picker-toggle-caret {
+		@apply hidden;
+	}
+}

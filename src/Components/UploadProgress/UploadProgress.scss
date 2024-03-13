@@ -1,0 +1,23 @@
+.upload-progress-layout {
+	height: 12px;
+	z-index: 1100;
+	@apply fixed right-0 left-0 bottom-0 animate-fade-in bg-primary bg-opacity-10 transition-all;
+
+	.progress {
+		@apply bg-primary h-full absolute transition-all;
+	}
+
+	.label {
+		margin-top: -45px;
+		@apply flex-center absolute left-0 animate-pulse  pl-2 pr-3 py-2 text-primary;
+		border-radius: 0 1rem 0 0;
+
+		.fa-icon {
+			@apply w-7 mr-2 ml-1;
+		}
+
+		.message {
+			@apply ml-2;
+		}
+	}
+}

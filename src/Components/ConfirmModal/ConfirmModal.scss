@@ -1,0 +1,21 @@
+.confirm-modal {
+	.rs-modal-header {
+	}
+	.rs-modal-body {
+	}
+	.rs-modal-footer {
+	}
+	.btn-accept,
+	.btn-reject {
+		@apply pl-3 pr-5;
+	}
+	.btn-cancel {
+		@apply px-4;
+	}
+	.rs-btn-spin {
+		&::after {
+			border-width: 2px;
+			border-color: #0280c4 white white !important;
+		}
+	}
+}

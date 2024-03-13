@@ -1,0 +1,46 @@
+@import './base/export';
+
+* {
+	@apply box-border;
+	font-family: 'Inter', sans-serif;
+}
+
+html {
+	@apply bg-light;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	@apply m-0 p-0 w-full h-full absolute;
+	#root {
+		@apply min-h-full overflow-auto bg-light;
+	}
+}
+
+code {
+	@apply font-semibold;
+	font-family: 'JetBrains Mono', monospace;
+}
+
+.fa-icon {
+	@apply fill-current;
+}
+
+a:hover {
+	@apply no-underline;
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+select:-webkit-autofill,
+textarea:-webkit-autofill,
+input:-webkit-autofill:hover,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus {
+	-webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
+	transition: background-color 5000s ease-in-out 0s;
+}

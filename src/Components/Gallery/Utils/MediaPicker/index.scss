@@ -1,0 +1,97 @@
+.media-picker-modal-layout {
+	.video-player-layout {
+		video {
+			max-height: 390px;
+			@apply mb-4 rounded-md shadow-light w-full object-cover  bg-gray-300;
+		}
+		.editable-input {
+			@apply pb-2;
+		}
+	}
+
+	.image-cropper-layout {
+		.cropped-image {
+			min-height: 150px;
+			max-width: 200px;
+			@apply border border-gray-300 shadow-light w-full mb-3;
+		}
+
+		.rs-uploader {
+			@apply flex-center w-full h-full;
+			.rs-uploader-trigger {
+				@apply w-full mt-5;
+				.fa-btn {
+					@apply w-full;
+				}
+			}
+			.rs-uploader-trigger-btn {
+				@apply bg-gray-100;
+			}
+		}
+
+		.react-crop-image {
+			max-height: 60vh;
+		}
+
+		.react-crop {
+			@apply shadow-light;
+			.ReactCrop__image {
+				min-height: 200px;
+				max-height: 60vh;
+				@apply m-auto;
+			}
+		}
+
+		.image-cropper-edit-btn {
+			@apply rounded-md w-full;
+		}
+
+		.editable-input {
+			@apply mb-0;
+			input {
+				font-size: 0.9rem;
+			}
+		}
+	}
+
+	.rs-modal-body {
+		@apply m-0 border-opacity-50 mt-2 pb-2 pt-3 animate-fade-in;
+	}
+
+	.rs-modal-footer {
+		border-top: 1px solid rgba($color: #000000, $alpha: 0.06) !important ;
+		@apply flex items-center w-full mt-4 pt-3;
+
+		.fa-btn {
+			@apply rounded-md;
+		}
+
+		.image-cropper-save-btn {
+			@apply bg-primary bg-opacity-80 text-white hover:bg-opacity-100;
+		}
+
+		.image-cropper-remove-btn {
+			@apply flex items-center text-white text-opacity-70  mr-2 bg-red-100 hover:bg-error hover:text-white;
+		}
+	}
+
+	.media-picker-tag {
+		@apply ml-3  text-xs font-bold bg-gray-300 rounded-md px-1.5 flex-center pb-0.5 mt-0.5;
+		&::before {
+			content: '#';
+		}
+	}
+
+	.last-update-tag {
+		@apply text-xs ml-3 font-bold opacity-50;
+	}
+}
+
+.media-picker-confirm-modal-layout {
+	.fa-btn {
+		@apply rounded-md;
+	}
+	.rs-modal-body {
+		@apply font-bold  mt-3;
+	}
+}
