@@ -1,0 +1,45 @@
+.share-modal {
+	&.rs-anim-bounce-in {
+		-webkit-animation-name: bounce-in;
+		animation-name: bounce-in;
+	}
+
+	&.rs-anim-bounce-out {
+		-webkit-animation-name: bounce-out;
+		animation-name: bounce-out;
+	}
+
+	.rs-modal-dialog {
+		@apply border-primary border-2 border-opacity-50 rounded-lg;
+	}
+
+	.rs-modal-content {
+		@apply px-8;
+	}
+}
+
+@keyframes bounce-in {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+}
+
+@keyframes bounce-out {
+	0% {
+		opacity: 1;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: scale(0.8);
+		transform: scale(0.8);
+	}
+}

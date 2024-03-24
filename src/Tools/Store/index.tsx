@@ -6,8 +6,8 @@ import { isDev } from '../Utils/React';
 import { configureStore } from '@reduxjs/toolkit';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import reducers from './reducers';
 import persistStore from 'redux-persist/es/persistStore';
+import reducers from './reducers';
 
 const stateSyncConfig = { blacklist: ['persist/PERSIST', 'persist/REHYDRATE'] };
 

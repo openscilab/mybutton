@@ -1,4 +1,4 @@
-import { EffectFade } from 'swiper';
+import { EffectFade, EffectCards } from 'swiper';
 import { createContext, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper/types';
 import { SwiperProps, Swiper, SwiperSlide } from 'swiper/react/swiper-react';
@@ -6,6 +6,7 @@ import SwiperCore, { Mousewheel, Keyboard, Pagination, Scrollbar, Autoplay, Navi
 
 //? ------------------- Load styles --------------------------------------
 import 'swiper/swiper.scss'; // core Swiper
+import 'swiper/modules/effect-cards/effect-cards';
 import 'swiper/modules/effect-fade/effect-fade';
 import 'swiper/modules/navigation/navigation.scss'; // Navigation module
 import 'swiper/modules/pagination/pagination.scss'; // Pagination module
@@ -17,7 +18,7 @@ SwiperCore.use([Mousewheel, Keyboard, Scrollbar, Pagination, Autoplay, Navigatio
 
 export const SwiperContext = createContext<{ swiper?: SwiperType; setSwiper?: any }>({});
 
-export { Swiper, SwiperSlide, EffectFade };
+export { Swiper, SwiperSlide, EffectFade, EffectCards };
 
 export const useSwiper = () => {
 	const [swiper, setSwiper] = useState<SwiperType>();

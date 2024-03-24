@@ -89,6 +89,7 @@
 }
 
 .rs-modal {
+	@apply m-0;
 	.rs-modal-header {
 		@apply border-b pb-2 border-opacity-30 text-base flex items-center;
 		.rs-modal-header-close {

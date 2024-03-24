@@ -26,6 +26,7 @@ const reducers = combineReducers({
 			storage,
 			key: 'storage',
 			keyPrefix: `${CONFIG.APP_SHORT_NAME}-`,
+			blacklist: ['openShareModal'],
 			transforms: [compressor] as any,
 		},
 		LocalCacheReducer
