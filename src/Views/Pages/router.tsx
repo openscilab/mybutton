@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import RouteRenderer, { Path } from '@src/App/Routes/RouteRenderer';
 import Home from './Home/index';
 

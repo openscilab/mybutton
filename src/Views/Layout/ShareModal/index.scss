@@ -9,12 +9,27 @@
 		animation-name: bounce-out;
 	}
 
+	.rs-modal-header {
+		@apply border-none;
+	}
+
 	.rs-modal-dialog {
 		@apply border-primary border-2 border-opacity-50 rounded-lg;
 	}
 
 	.rs-modal-content {
 		@apply px-8;
+	}
+}
+
+.rs-modal-backdrop {
+	@apply backdrop-filter backdrop-blur-md;
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	&::before {
+		backdrop-filter: blur(12px) contrast(60%);
+		-webkit-backdrop-filter: blur(12px) contrast(60%);
+		width: contain;
 	}
 }
 

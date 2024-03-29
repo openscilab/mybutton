@@ -19,8 +19,11 @@ const ShareModal = () => {
 			onClose={() => dispatch(setOpenShareModal(false))}
 			backdrop
 			className='share-modal'>
-			<EditableInput label='URL' {...register('url')} placeholder='https://www.example.com' />
-			<div className='services-list'></div>
+			<Modal.Header />
+			<Modal.Body>
+				<EditableInput label='URL' {...register('url')} placeholder='https://www.example.com' />
+				<div className='services-list'></div>
+			</Modal.Body>
 		</Modal>
 	);
 };

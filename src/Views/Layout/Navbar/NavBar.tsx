@@ -7,7 +7,6 @@ import { setOpenShareModal } from '@src/Tools/Store/actions/DashboardActions';
 
 const NavBar = () => {
 	const { dispatch } = useStore();
-	const [isMinimal, setMinimal] = useState(false);
 	const [activeKey, setActiveKey] = useState('home');
 
 	// ? -------------------------------- UseEffects 👇 ------------------------------------------------------ //
@@ -15,7 +14,7 @@ const NavBar = () => {
 	// ? -------------------------------- Functions 👇 ------------------------------------------------------ //
 
 	return (
-		<div {...classes('navbar-layout', { 'navbar-layout-minimal': isMinimal })}>
+		<div {...classes('navbar-layout')}>
 			<Navbar className='navbar'>
 				<Navbar.Brand className='nav-brand'>MyButton</Navbar.Brand>
 
