@@ -1,4 +1,10 @@
 .root-layout {
 	@apply flex flex-col overflow-y-hidden;
 	background: #fbfbfb;
+
+	.background-img {
+		@apply fixed w-1/2;
+		right: -10%;
+		bottom: -40%;
+	}
 }

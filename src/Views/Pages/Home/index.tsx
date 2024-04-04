@@ -1,21 +1,23 @@
 import './index.scss';
 import { Autoplay } from 'swiper';
 import { Col, Row } from 'rsuite';
-import { ReactComponent as Bg } from '@assets/Images/bg.svg';
+import { useNavigate } from 'react-router-dom';
 import FaButton from '@src/Components/FaButton';
+import { classes } from '@src/Tools/Utils/React';
+import useWindow from '@src/Tools/Hooks/useWindow';
 import responsive from '@assets/Images/responsive.png';
 import openSource from '@assets/Images/open-source.png';
 import noAccount from '@assets/Images/no-account-needed.png';
 import { Swiper, SwiperSlide, useSwiper, EffectCards } from '@components/Swiper/Swiper';
-import { classes } from '@src/Tools/Utils/React';
-import useWindow from '@src/Tools/Hooks/useWindow';
 
 const Home = () => {
 	const { isDesktop } = useWindow();
 	const { registerSwiper } = useSwiper();
+	const navigate = useNavigate();
+
+	// -----------------------------------------------------------------
 	return (
 		<div className='home-layout'>
-			<Bg className='background-img' />
 			<Row className='grid md:flex'>
 				<Col xs={24} md={12} className='swiper-col'>
 					<Swiper
@@ -44,7 +46,7 @@ const Home = () => {
 				</Col>
 				<Col xs={24} md={12} {...classes('info-col', { reverse: !isDesktop })}>
 					<h1>My Button</h1>
-					<FaButton>Get Share Buttons</FaButton>
+					<FaButton onClick={() => navigate('/get')}>Get Share Buttons</FaButton>
 				</Col>
 			</Row>
 		</div>

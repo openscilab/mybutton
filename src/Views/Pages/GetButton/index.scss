@@ -1,0 +1,12 @@
+.get-button-layout {
+	@apply pt-32 w-full min-h-screen;
+
+	.container {
+		@apply p-8 rounded-lg bg-white bg-opacity-80 w-2/3 mx-auto z-10 text-center;
+		box-shadow: 0 1px 12px 1px rgba(69, 65, 78, 0.1);
+
+		h1 {
+			@apply text-lg font-medium;
+		}
+	}
+}
