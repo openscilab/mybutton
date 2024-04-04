@@ -41,8 +41,8 @@ export default class ErrorBoundary extends Component<EBProps> {
 					Back to home
 					{this.state.remainTime !== 0 ? ` (${this.state.remainTime}s)` : ''}
 				</Button>
-				<Button className='report-btn' href='mailto:amir@auto-hq.com'>
-					Report to AutoHQ
+				<Button className='report-btn' href='mailto:info@openscilab.com'>
+					Report to OSL
 				</Button>
 			</div>
 		);

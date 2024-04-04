@@ -3,6 +3,12 @@
 	@apply pt-24 absolute flex-center w-full;
 	min-height: 100%;
 
+	.background-img {
+		@apply fixed w-1/2;
+		right: -10%;
+		bottom: -40%;
+	}
+
 	.swiper-col {
 		.swiper {
 			@apply overflow-visible;
@@ -11,14 +17,22 @@
 		}
 
 		.swiper-slide {
-			@apply rounded-2xl text-white text-center p-5;
+			@apply rounded-2xl text-white text-center px-6 py-12 backdrop-filter blur-md relative flex flex-col;
+
+			-webkit-backdrop-filter: blur(12px);
+			backdrop-filter: blur(12px);
+			&::before {
+				backdrop-filter: blur(12px) contrast(60%);
+				-webkit-backdrop-filter: blur(12px) contrast(60%);
+				width: contain;
+			}
 
 			img {
-				@apply mt-4;
+				@apply mx-auto my-auto;
 			}
 
 			h2 {
-				@apply text-xl font-bold mt-4;
+				@apply text-xl font-bold;
 			}
 
 			p {
@@ -26,34 +40,34 @@
 			}
 
 			.swiper-slide-shadow {
-				@apply bg-transparent;
+				@apply hidden;
 			}
 
+			// &:nth-child(1n) {
+			// 	@apply bg-primary;
+			// 	--tw-bg-opacity: 0.85;
+			// }
 			&:nth-child(1n) {
-				@apply bg-primary;
-				// background-color: #9a79ba;
-				// background-color: rgba(206, 17, 17, 0.5);
-			}
-			&:nth-child(2n) {
-				@apply bg-indigo-800 bg-opacity-90;
-				background-color: #9a79ba;
+				background-color: rgba(154, 121, 186, 0.85);
 				// background-color: rgba(0, 140, 255, 0.5);
 			}
-			&:nth-child(3n) {
-				@apply bg-blue-dark bg-opacity-90;
-				background-color: #a1c9bc;
+			&:nth-child(2n) {
+				background-color: rgba(161, 201, 188, 0.85);
 				// background-color: rgba(10, 184, 111, 0.5);
 			}
-			&:nth-child(4n) {
-				@apply bg-info bg-opacity-90;
-				background-color: #272462;
+			&:nth-child(3n) {
+				background-color: rgba(39, 36, 98, 0.85);
 				// background-color: rgba(211, 122, 7, 0.5);
 			}
 		}
 	}
 
 	.info-col {
-		@apply text-center my-auto h-full;
+		@apply text-center h-full;
+
+		&.reverse {
+			order: -1;
+		}
 
 		h1 {
 			@apply text-7xl font-sans font-bold text-black mt-16 mb-20;

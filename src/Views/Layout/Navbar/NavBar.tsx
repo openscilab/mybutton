@@ -19,9 +19,10 @@ const NavBar = () => {
 				<Navbar.Brand className='nav-brand'>MyButton</Navbar.Brand>
 
 				<Nav className='main-nav' activeKey={activeKey} onSelect={setActiveKey} pullRight>
-					<Nav.Item className='nav-item' eventKey='home' onClick={() => dispatch(setOpenShareModal(true))}>
+					<div className='nav-item' onClick={() => dispatch(setOpenShareModal(true))}>
 						Share
-					</Nav.Item>
+					</div>
+					<div className='nav-item'>Get</div>
 				</Nav>
 			</Navbar>
 		</div>
