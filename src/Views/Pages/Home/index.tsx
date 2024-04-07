@@ -3,15 +3,12 @@ import { Autoplay } from 'swiper';
 import { Col, Row } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
 import FaButton from '@src/Components/FaButton';
-import { classes } from '@src/Tools/Utils/React';
-import useWindow from '@src/Tools/Hooks/useWindow';
 import responsive from '@assets/Images/responsive.png';
 import openSource from '@assets/Images/open-source.png';
 import noAccount from '@assets/Images/no-account-needed.png';
 import { Swiper, SwiperSlide, useSwiper, EffectCards } from '@components/Swiper/Swiper';
 
 const Home = () => {
-	const { isDesktop } = useWindow();
 	const { registerSwiper } = useSwiper();
 	const navigate = useNavigate();
 
@@ -44,7 +41,7 @@ const Home = () => {
 						</SwiperSlide>
 					</Swiper>
 				</Col>
-				<Col xs={24} md={12} {...classes('info-col', { reverse: !isDesktop })}>
+				<Col xs={24} md={12} className='info-col'>
 					<h1>My Button</h1>
 					<FaButton onClick={() => navigate('/get')}>Get Share Buttons</FaButton>
 				</Col>

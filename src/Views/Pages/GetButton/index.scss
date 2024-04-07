@@ -1,12 +1,46 @@
 .get-button-layout {
-	@apply pt-32 w-full min-h-screen;
+	@apply w-full min-h-screen flex-center;
 
 	.container {
-		@apply p-8 rounded-lg bg-white bg-opacity-80 w-2/3 mx-auto z-10 text-center;
+		@apply p-8 rounded-lg bg-white bg-opacity-50 w-4/5 md:w-1/2 mx-auto z-10 flex flex-col;
+		min-height: 30rem;
 		box-shadow: 0 1px 12px 1px rgba(69, 65, 78, 0.1);
 
 		h1 {
-			@apply text-lg font-medium;
+			@apply text-lg font-medium text-center;
+			letter-spacing: 0.05em;
+		}
+
+		.input-container {
+			@apply w-full flex-center mt-8;
+
+			.input-label {
+				@apply mr-8 text-primary font-medium;
+			}
+
+			.editable-input {
+				@apply w-3/4;
+
+				.label {
+					@apply text-primary;
+				}
+			}
+		}
+
+		.buttons {
+			@apply flex-center w-full mt-8;
+
+			.rs-btn {
+				@apply w-40 text-white font-medium;
+			}
+
+			.choose {
+				@apply bg-primary bg-opacity-70  hover:bg-opacity-90 mr-10;
+			}
+
+			.get-code {
+				@apply bg-cyan-dark bg-opacity-70 hover:bg-opacity-100;
+			}
 		}
 	}
 }

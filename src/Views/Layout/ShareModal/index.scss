@@ -1,24 +1,44 @@
 .share-modal {
-	&.rs-anim-bounce-in {
-		-webkit-animation-name: bounce-in;
-		animation-name: bounce-in;
-	}
-
-	&.rs-anim-bounce-out {
-		-webkit-animation-name: bounce-out;
-		animation-name: bounce-out;
-	}
-
-	.rs-modal-header {
-		@apply border-none;
-	}
-
-	.rs-modal-dialog {
-		@apply border-primary border-2 border-opacity-50 rounded-lg;
-	}
-
 	.rs-modal-content {
-		@apply px-8;
+		@apply sm:px-8;
+
+		.rs-modal-body {
+			@apply flex-center flex-col;
+			overflow: visible !important;
+
+			.services-list {
+				@apply w-full overflow-y-auto mt-8;
+
+				.rs-col {
+					@apply md:flex md:justify-center;
+				}
+				.service-container {
+					@apply cursor-pointer flex items-center;
+					width: fit-content;
+					height: fit-content;
+
+					.service-logo {
+						@apply rounded-md;
+						width: fit-content;
+						height: fit-content;
+
+						img {
+							@apply w-6 h-6 sm:w-8 sm:h-8;
+						}
+					}
+
+					h2 {
+						@apply ml-1.5 capitalize transition-colors;
+					}
+
+					&:hover {
+						h2 {
+							@apply text-black;
+						}
+					}
+				}
+			}
+		}
 	}
 }
 

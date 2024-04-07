@@ -1,5 +1,5 @@
 .home-layout {
-	@apply pt-24 flex-center w-full min-h-screen;
+	@apply pt-12 flex-center w-full min-h-screen;
 
 	.swiper-col {
 		.swiper {
@@ -56,8 +56,9 @@
 
 	.info-col {
 		@apply text-center h-full;
+		order: 1;
 
-		&.reverse {
+		@include down(md) {
 			order: -1;
 		}
 
