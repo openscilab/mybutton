@@ -18,7 +18,9 @@ const NavBar = () => {
 	return (
 		<div {...classes('navbar-layout')}>
 			<Navbar className='navbar'>
-				<Navbar.Brand className='nav-brand'>MyButton</Navbar.Brand>
+				<Navbar.Brand className='nav-brand' onClick={() => navigate('/')}>
+					MyButton
+				</Navbar.Brand>
 
 				<Nav className='main-nav' activeKey={activeKey} onSelect={setActiveKey} pullRight>
 					<div className='nav-item' onClick={() => dispatch(setOpenShareModal(true))}>
