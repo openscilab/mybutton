@@ -1,0 +1,39 @@
+.footer-layout {
+	@apply bg-white bg-opacity-30 flex-center py-4 z-10 backdrop-filter backdrop-blur-md shadow-light md:fixed bottom-0 w-full;
+
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	&::before {
+		backdrop-filter: blur(12px) contrast(60%);
+		-webkit-backdrop-filter: blur(12px) contrast(60%);
+		width: contain;
+	}
+
+	.social-links {
+		@apply flex-center text-gray-700;
+
+		a {
+			@apply transition-all;
+			&:hover {
+				scale: 1.05;
+
+				.fa-icon {
+					@apply bg-gray-900;
+				}
+			}
+			&:not(:last-of-type) {
+				@apply mr-2;
+			}
+		}
+
+		.fa-icon {
+			@apply text-white p-1 rounded-full bg-gray-500 transition-colors;
+			width: 1.6rem;
+			padding: 0.3rem;
+		}
+	}
+
+	.empowered {
+		@apply mr-5 text-xs text-gray-500 hover:text-gray-900 transition-colors;
+	}
+}

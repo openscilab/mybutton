@@ -2,11 +2,12 @@ import routesArray from './routes';
 import { RolePath } from './Guard';
 import LoadingCover from '../../Components/LoadingCover';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { ROLE_NAME } from '../../Tools/Store/reducers/AccountReducer';
 import { LazyExoticComponent, Suspense, Fragment, useRef } from 'react';
+import { ROLE_NAME } from '@src/Tools/Store/reducers/AccountReducer';
 
 export type Path = {
 	guard?: any;
+	exact: boolean;
 	path: string[];
 	role?: Partial<Record<'is' | 'not', ROLE_NAME[]>>;
 	component: LazyExoticComponent<() => JSX.Element> | (() => JSX.Element) | FC;

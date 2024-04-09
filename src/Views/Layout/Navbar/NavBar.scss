@@ -1,0 +1,145 @@
+.navbar-layout {
+	@apply w-full fixed top-0 z-40 backdrop-filter backdrop-blur-md items-center bg-transparent;
+	padding: 15px 5% 15px 5%;
+	height: fit-content;
+	-webkit-box-shadow: 0px 0px 12px 1px #29075963;
+	box-shadow: 0px 0px 12px 1px #29075963;
+	-webkit-backdrop-filter: blur(12px);
+	backdrop-filter: blur(12px);
+	&::before {
+		backdrop-filter: blur(12px) contrast(60%);
+		-webkit-backdrop-filter: blur(12px) contrast(60%);
+		width: contain;
+	}
+
+	@include down(md) {
+		padding: 5px 4%;
+	}
+
+	* {
+		@apply transition-all;
+	}
+
+	.navbar {
+		@apply bg-transparent flex items-center font-normal text-lg relative;
+
+		@include down(sm) {
+			@apply text-sm;
+		}
+
+		.main-nav {
+			@apply w-full flex items-center justify-end;
+			.nav-item {
+				@apply text-base font-normal transition-all px-0 py-2;
+				margin-right: 2rem !important;
+				margin-left: 2rem !important;
+				color: #3b3b3b;
+				background: none !important;
+				height: fit-content;
+
+				@include down(md) {
+					margin-right: 1rem !important;
+					margin-left: 1rem !important;
+				}
+
+				.rs-ripple {
+					background: none !important;
+				}
+
+				&.rs-navbar-item-active {
+					@apply font-medium flex-col flex-center;
+
+					&::after {
+						@apply absolute bottom-1 flex-center animate-fade-in;
+						animation-duration: 0.5s;
+					}
+				}
+
+				&:hover {
+					@apply text-primary text-opacity-100 font-medium cursor-pointer;
+				}
+			}
+		}
+
+		.nav-brand {
+			@apply px-0 py-0 select-none text-primary font-bold text-lg sm:text-xl cursor-pointer;
+			height: max-content;
+		}
+
+		.login-btn {
+			@apply flex justify-end absolute right-0;
+			// @apply mt-12;
+			.fa-btn {
+				@apply text-white text-base font-medium animate-fade-in;
+				background-color: $secondary;
+				padding: 0.5rem 2.3rem;
+				border-radius: 20px;
+				.fa-icon {
+					@apply w-4;
+				}
+			}
+		}
+
+		.logout-btn {
+			width: 20px;
+			height: 20px;
+			@apply md:mr-6 md:mt-2.5 text-error text-opacity-60 cursor-pointer;
+			&:hover {
+				@apply text-opacity-100;
+			}
+
+			@include down(md) {
+				top: -19px;
+				@apply absolute right-14;
+			}
+		}
+	}
+}
+
+.navbar-layout-minimal {
+	@apply bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm shadow-light transition-all;
+
+	padding: 10px 5% 10px 5%;
+
+	.logout-btn {
+		@include down(md) {
+			top: 0.75rem !important;
+		}
+	}
+
+	.rs-navbar-brand {
+		// padding-top: 5px !important;
+	}
+	img {
+		width: 70% !important;
+	}
+	.nav-item {
+		font-size: 14px !important;
+		padding: 0.5rem 0 !important;
+		margin-right: 2.5rem !important;
+		margin-left: 2.5rem !important;
+		// margin-top: 10px !important;
+		// margin-right: 0.5rem !important;
+		border: 0 !important;
+		@apply mt-1 rounded-md;
+		&.rs-navbar-item-active {
+			background: rgba($color: $primary, $alpha: 0.1) !important;
+
+			&::after {
+				top: 25px !important;
+				bottom: 0 !important;
+			}
+			// @apply shadow-inner;
+		}
+	}
+	.login-btn {
+		.fa-btn {
+			font-size: 14px !important;
+			padding: 0.4rem 1.5rem 0.4rem !important;
+
+			.fa-icon {
+				width: 0.8rem !important;
+			}
+		}
+	}
+}

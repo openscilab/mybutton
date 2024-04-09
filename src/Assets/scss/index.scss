@@ -44,3 +44,15 @@ textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus {
 	-webkit-box-shadow: 0 0 0px 1000px rgba(0, 0, 0, 0) inset;
 	transition: background-color 5000s ease-in-out 0s;
 }
+
+::-webkit-scrollbar {
+	width: 0.2rem;
+	margin-left: 2rem;
+}
+::-webkit-scrollbar-track {
+	@apply rounded bg-gray-light bg-opacity-30;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply rounded bg-primary bg-opacity-60;
+}

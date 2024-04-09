@@ -1,5 +1,5 @@
+import { ROLE_NAME } from '@src/Tools/Store/reducers/AccountReducer';
 import useAccount from '../useAccount';
-import { ROLE_NAME } from '../../Store/reducers/AccountReducer';
 
 const useRole = () => {
 	const { user } = useAccount();

@@ -1,0 +1,35 @@
+.root-layout {
+	@apply flex flex-col overflow-y-hidden;
+	background: #fbfbfb;
+
+	.background-img {
+		@apply fixed -right-40;
+		width: 700px;
+		bottom: -20rem;
+
+		@include up(1537px) {
+			width: 900px;
+			bottom: -15rem;
+		}
+	}
+}
+
+.rs-modal {
+	&.rs-anim-bounce-in {
+		-webkit-animation-name: bounce-in;
+		animation-name: bounce-in;
+	}
+
+	&.rs-anim-bounce-out {
+		-webkit-animation-name: bounce-out;
+		animation-name: bounce-out;
+	}
+
+	.rs-modal-dialog {
+		@apply border-primary border-2 border-opacity-50 rounded-lg;
+	}
+
+	.rs-modal-header {
+		@apply border-none mb-4;
+	}
+}

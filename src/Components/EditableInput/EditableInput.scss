@@ -6,8 +6,8 @@
 	input,
 	textarea {
 		opacity: 1 !important;
-		-webkit-text-fill-color: $dark;
-		@apply text-base w-full  pl-4 py-2.5  outline-none bg-transparent;
+		// -webkit-text-fill-color: $dark;
+		@apply text-base w-full  pl-4 py-2.5 text-dark  outline-none bg-transparent;
 	}
 
 	textarea {

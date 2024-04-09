@@ -4,7 +4,7 @@ type WindowSize = { width: number; height: number };
 
 const useWindow = () => {
 	const [focused, setFocused] = useState(hasFocus);
-	const [windowSize, setWindowSize] = useState<WindowSize>({ width: 0, height: 0 });
+	const [windowSize, setWindowSize] = useState<WindowSize>({ width: window.innerWidth, height: window.innerHeight });
 	const winRef = useRef({ focused, windowSize });
 
 	//? --------------------- Utils ---------------------------------

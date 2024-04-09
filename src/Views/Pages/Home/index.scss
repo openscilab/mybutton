@@ -1,3 +1,138 @@
 .home-layout {
-	@apply h-screen flex-center flex-col;
+	@apply py-24 md:pb-0 md:pt-12 flex-center w-full min-h-screen overflow-hidden;
+
+	.swiper-col {
+		.swiper {
+			width: 340px;
+			height: 420px;
+
+			@apply px-6;
+
+			@include up(680px) {
+				width: 660px;
+			}
+
+			@include up(800px) {
+				width: 700px;
+			}
+
+			@include up(md) {
+				@apply overflow-visible;
+				width: 340px;
+			}
+
+			@include up(1537px) {
+				width: 440px;
+				height: 520px;
+			}
+
+			.swiper-wrapper {
+				height: 90%;
+				@apply w-full;
+			}
+			.swiper-pagination {
+				left: 0;
+				bottom: 0;
+
+				.swiper-pagination-bullet {
+					margin-bottom: 0 !important;
+				}
+			}
+
+			.swiper-pagination-bullet-active {
+				@apply bg-primary;
+			}
+
+			.swiper-button-next,
+			.swiper-button-prev {
+				&:after {
+					color: $primary;
+					font-size: 25px;
+				}
+			}
+
+			.fa-icon {
+				@apply w-6 text-primary absolute z-10 cursor-pointer as as-fadeIn;
+				top: 42%;
+				&.d-angle-right {
+					@apply -right-0;
+				}
+
+				&.d-angle-left {
+					@apply -left-0;
+				}
+
+				&.last {
+					@apply hidden;
+				}
+
+				&.first {
+					@apply hidden;
+				}
+			}
+		}
+
+		.swiper-slide {
+			@apply rounded-2xl text-white text-center px-6 py-12 backdrop-filter blur-md relative flex flex-col;
+
+			-webkit-backdrop-filter: blur(12px);
+			backdrop-filter: blur(12px);
+			&::before {
+				backdrop-filter: blur(12px) contrast(60%);
+				-webkit-backdrop-filter: blur(12px) contrast(60%);
+				width: contain;
+			}
+
+			img {
+				@apply mx-auto my-auto;
+			}
+
+			h2 {
+				@apply text-xl font-bold;
+			}
+
+			p {
+				@apply mt-4;
+			}
+
+			.swiper-slide-shadow {
+				@apply hidden;
+			}
+
+			// &:nth-child(1n) {
+			// 	@apply bg-primary;
+			// 	--tw-bg-opacity: 0.85;
+			// }
+			&:nth-child(1n) {
+				background-color: rgba(154, 121, 186, 0.85);
+				// background-color: rgba(0, 140, 255, 0.5);
+			}
+			&:nth-child(2n) {
+				background-color: rgba(161, 201, 188, 0.85);
+				// background-color: rgba(10, 184, 111, 0.5);
+			}
+			&:nth-child(3n) {
+				background-color: rgba(39, 36, 98, 0.85);
+				// background-color: rgba(211, 122, 7, 0.5);
+			}
+		}
+	}
+
+	.info-col {
+		@apply text-center h-full;
+		order: 1;
+
+		@include down(md) {
+			order: -1;
+			@apply mb-20;
+		}
+
+		h1 {
+			@apply text-5xl sm:text-7xl font-sans font-bold text-black mt-16 mb-12 sm:mb-20;
+		}
+
+		.fa-btn {
+			@apply rounded-lg py-2 border-primary border-2 font-medium text-primary bg-transparent hover:bg-primary hover:text-white w-60;
+		}
+	}
 }
