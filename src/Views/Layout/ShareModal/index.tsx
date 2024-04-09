@@ -7,12 +7,11 @@ import useDashboard from '@src/Tools/Hooks/useDashboard';
 import Telegram from '@assets/icons/services/telegram.svg';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { setOpenShareModal } from '@src/Tools/Store/actions/DashboardActions';
-import { useState } from 'react';
 
 const ShareModal = () => {
 	const { openShareModal } = useDashboard();
 	const { dispatch } = useStore();
-	const [url, setUrl] = useState('');
+	// const [url, setUrl] = useState('');
 
 	// --------------------------------------------------------------
 	return (
@@ -22,13 +21,13 @@ const ShareModal = () => {
 			onClose={() => dispatch(setOpenShareModal(false))}
 			backdrop
 			className='share-modal'>
-			<Modal.Header />
+			<Modal.Header>Share to</Modal.Header>
 			<Modal.Body>
 				<EditableInput
 					label='URL'
-					onChange={e => {
-						setUrl(e.target.value);
-					}}
+					// onChange={e => {
+					// 	setUrl(e.target.value);
+					// }}
 					placeholder='https://www.example.com'
 				/>
 				<div className='services-list'>
