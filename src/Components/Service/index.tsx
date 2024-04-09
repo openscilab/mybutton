@@ -6,14 +6,24 @@ type Props = {
 	icon: string;
 	title: string;
 	checked?: boolean;
+	onSelect: (title: string) => void;
+	onRemove: (title: string) => void;
 };
 
 const Service = (props: Props) => {
 	const [checked, setChecked] = useState(props.checked || false);
 
+	// ? --------------------------- Functions --------------------------
+	const onChange = () => {
+		if (!checked) props.onSelect(props.title);
+		else props.onRemove(props.title);
+
+		setChecked(!checked);
+	};
+
 	// -------------------------------------------------------
 	return (
-		<Radio className='service-radio' checked={checked} onClick={() => setChecked(!checked)}>
+		<Radio className='service-radio' checked={checked} onClick={onChange}>
 			<div className='service-logo' style={{ backgroundColor: props.bg }}>
 				<img src={props.icon} alt={props.title} />
 			</div>
