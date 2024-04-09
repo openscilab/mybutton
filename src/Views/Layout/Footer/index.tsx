@@ -4,7 +4,7 @@ import FaIcon from '@src/Components/FaIcon';
 const Footer = () => {
 	return (
 		<div className='footer-layout'>
-			<a href='https://openscilab.com' className='empowered'>
+			<a href='https://openscilab.com' target='_blank' rel='noreferrer' className='empowered'>
 				empowered by OSL team
 			</a>
 			<div className='social-links'>
