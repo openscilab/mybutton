@@ -6,6 +6,11 @@
 		@apply fixed -right-40;
 		width: 700px;
 		bottom: -20rem;
+
+		@include up(1537px) {
+			width: 900px;
+			bottom: -15rem;
+		}
 	}
 }
 

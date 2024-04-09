@@ -1,11 +1,75 @@
 .home-layout {
-	@apply pt-12 flex-center w-full min-h-screen;
+	@apply py-24 md:pb-0 md:pt-12 flex-center w-full min-h-screen overflow-hidden;
 
 	.swiper-col {
 		.swiper {
-			@apply overflow-visible;
 			width: 340px;
 			height: 420px;
+
+			@apply px-6;
+
+			@include up(680px) {
+				width: 660px;
+			}
+
+			@include up(800px) {
+				width: 700px;
+			}
+
+			@include up(md) {
+				@apply overflow-visible;
+				width: 340px;
+			}
+
+			@include up(1537px) {
+				width: 440px;
+				height: 520px;
+			}
+
+			.swiper-wrapper {
+				height: 90%;
+				@apply w-full;
+			}
+			.swiper-pagination {
+				left: 0;
+				bottom: 0;
+
+				.swiper-pagination-bullet {
+					margin-bottom: 0 !important;
+				}
+			}
+
+			.swiper-pagination-bullet-active {
+				@apply bg-primary;
+			}
+
+			.swiper-button-next,
+			.swiper-button-prev {
+				&:after {
+					color: $primary;
+					font-size: 25px;
+				}
+			}
+
+			.fa-icon {
+				@apply w-6 text-primary absolute z-10 cursor-pointer as as-fadeIn;
+				top: 42%;
+				&.d-angle-right {
+					@apply -right-0;
+				}
+
+				&.d-angle-left {
+					@apply -left-0;
+				}
+
+				&.last {
+					@apply hidden;
+				}
+
+				&.first {
+					@apply hidden;
+				}
+			}
 		}
 
 		.swiper-slide {
@@ -60,10 +124,11 @@
 
 		@include down(md) {
 			order: -1;
+			@apply mb-20;
 		}
 
 		h1 {
-			@apply text-7xl font-sans font-bold text-black mt-16 mb-20;
+			@apply text-5xl sm:text-7xl font-sans font-bold text-black mt-16 mb-12 sm:mb-20;
 		}
 
 		.fa-btn {

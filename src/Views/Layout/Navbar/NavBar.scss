@@ -13,7 +13,7 @@
 	}
 
 	@include down(md) {
-		padding: 0 4%;
+		padding: 5px 4%;
 	}
 
 	* {
@@ -37,6 +37,11 @@
 				background: none !important;
 				height: fit-content;
 
+				@include down(md) {
+					margin-right: 1rem !important;
+					margin-left: 1rem !important;
+				}
+
 				.rs-ripple {
 					background: none !important;
 				}
@@ -57,12 +62,8 @@
 		}
 
 		.nav-brand {
-			@apply px-0 py-0 select-none text-primary font-bold text-xl cursor-pointer;
+			@apply px-0 py-0 select-none text-primary font-bold text-lg sm:text-xl cursor-pointer;
 			height: max-content;
-
-			@include down(md) {
-				@apply pt-3;
-			}
 		}
 
 		.login-btn {

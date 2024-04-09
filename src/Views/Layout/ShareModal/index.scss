@@ -1,4 +1,7 @@
 .share-modal {
+	.rs-modal-header {
+		@apply text-center text-lg font-medium block p-0;
+	}
 	.rs-modal-content {
 		@apply sm:px-8;
 
