@@ -47,7 +47,10 @@ const ShareModal = () => {
 		<Modal
 			open={openShareModal}
 			size='sm'
-			onClose={() => dispatch(setOpenShareModal(false))}
+			onClose={() => {
+				dispatch(setOpenShareModal(false));
+				setIsValid(true);
+			}}
 			backdrop
 			className='share-modal'>
 			<Modal.Header>Share to</Modal.Header>
@@ -59,6 +62,7 @@ const ShareModal = () => {
 							if (!isValid) setIsValid(true);
 							setUrl(e.target.value);
 						}}
+						defaultValue={url}
 						errorMessage='required'
 						isValid={isValid}
 						placeholder='https://www.example.com'
