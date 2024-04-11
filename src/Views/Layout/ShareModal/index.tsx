@@ -1,4 +1,5 @@
 import './index.scss';
+import { useMemo, useState } from 'react';
 import { Col, Modal, Row } from 'rsuite';
 import useStore from '@src/Tools/Store/useStore';
 import Email from '@assets/icons/services/email.svg';
@@ -9,10 +10,38 @@ import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { setOpenShareModal } from '@src/Tools/Store/actions/DashboardActions';
 
 const ShareModal = () => {
-	const { openShareModal } = useDashboard();
 	const { dispatch } = useStore();
-	// const [url, setUrl] = useState('');
+	const [url, setUrl] = useState('');
+	const [isValid, setIsValid] = useState(true);
+	const { openShareModal } = useDashboard();
 
+	// ? ------------------------- Functions -----------------------
+
+	const finalUrl = (url: string) => {
+		if (url.startsWith('https://') || url.startsWith('http://')) return url;
+
+		return `http://${url}`;
+	};
+
+	// ? ---------------------- Var -------------------------------
+	const Services = useMemo(
+		() => [
+			{
+				title: 'email',
+				icon: Email,
+				bg: '#888990',
+				url: `mailto:?subject=&body=${finalUrl(url)}`,
+			},
+			{
+				title: 'gmail',
+				icon: Gmail,
+				bg: '#EA4335',
+				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su&body=${finalUrl(url)}`,
+			},
+			{ title: 'telegram', icon: Telegram, bg: '#2CA5E0', url: `https://telegram.me/share/url?url=${finalUrl(url)}&text=` },
+		],
+		[url]
+	);
 	// --------------------------------------------------------------
 	return (
 		<Modal
@@ -23,19 +52,29 @@ const ShareModal = () => {
 			className='share-modal'>
 			<Modal.Header>Share to</Modal.Header>
 			<Modal.Body>
-				<EditableInput
-					label='URL'
-					// onChange={e => {
-					// 	setUrl(e.target.value);
-					// }}
-					placeholder='https://www.example.com'
-				/>
+				<div className='editable-input-container'>
+					<EditableInput
+						label='URL'
+						onChange={e => {
+							if (!isValid) setIsValid(true);
+							setUrl(e.target.value);
+						}}
+						errorMessage='required'
+						isValid={isValid}
+						placeholder='https://www.example.com'
+					/>
+				</div>
 				<div className='services-list'>
 					<Row>
 						{Services.map((service, i) => {
 							return (
 								<Col xs={8} key={i}>
-									<div className='service-container'>
+									<div
+										className='service-container'
+										onClick={() => {
+											if (url === '') setIsValid(false);
+											else window.open(service.url, '_blank');
+										}}>
 										<div className='service-logo' style={{ backgroundColor: service.bg }}>
 											<img src={service.icon} alt={service.title} />
 										</div>
@@ -50,11 +89,5 @@ const ShareModal = () => {
 		</Modal>
 	);
 };
-
-const Services = [
-	{ title: 'email', icon: Email, bg: '#888990' },
-	{ title: 'gmail', icon: Gmail, bg: '#EA4335' },
-	{ title: 'telegram', icon: Telegram, bg: '#2CA5E0' },
-];
 
 export default ShareModal;
