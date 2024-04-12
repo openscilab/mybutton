@@ -7,14 +7,16 @@ import Gmail from '@assets/icons/services/gmail.svg';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import Telegram from '@assets/icons/services/telegram.svg';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
-import { atelierCaveLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import FaIcon from '@src/Components/FaIcon';
 import { copyToClipboard } from '@src/Tools/Utils/React';
+import useWindow from '@src/Tools/Hooks/useWindow';
 
 const GetButton = () => {
+	const { isMobile } = useWindow();
 	const [url, setUrl] = useState('');
-	const [open, setOpen] = useState(false);
 	const [code, setCode] = useState('');
+	const [open, setOpen] = useState(false);
 	const [isValid, setIsValid] = useState(true);
 	const [showCode, setShowCode] = useState(false);
 	const [openTooltip, setOpenTooltip] = useState(false);
@@ -31,10 +33,15 @@ const GetButton = () => {
 	};
 
 	const getCode = () => {
-		if (!url || selectedServices.length === 0) {
+		if (!url) {
 			setIsValid(false);
 			return;
 		}
+		if (selectedServices.length === 0) {
+			setShowCode(false);
+			return;
+		}
+
 		setShowCode(true);
 		const selected = Services(url).filter(service => selectedServices.includes(service.title));
 		const code = `	<div>
@@ -86,7 +93,6 @@ const GetButton = () => {
 			<div className='get-button-container'>
 				<h1>Get share button code</h1>
 				<div className='input-container'>
-					{/* <label className='input-label'>Page url</label> */}
 					<EditableInput
 						label='Page URL'
 						defaultValue={url}
@@ -103,13 +109,19 @@ const GetButton = () => {
 					<Button className='choose' onClick={() => setOpen(true)}>
 						Choose Services
 					</Button>
-					<Button className='get-code' onClick={getCode}>
-						Get Code
-					</Button>
+					<Whisper
+						disabled={selectedServices.length !== 0}
+						placement={isMobile ? 'bottom' : 'top'}
+						trigger='click'
+						speaker={<Tooltip className='err-tooltip'>Please choose services!</Tooltip>}>
+						<Button className='get-code' onClick={getCode}>
+							Get Code
+						</Button>
+					</Whisper>
 				</div>
 				{showCode && (
 					<div className='code-container'>
-						<SyntaxHighlighter language={'xml'} style={atelierCaveLight} children={code} />
+						<SyntaxHighlighter language={'xml'} style={lightfair} children={code} />
 						<Whisper
 							className='copy-whisper'
 							onClick={() => {
@@ -123,7 +135,7 @@ const GetButton = () => {
 							open={openTooltip}
 							placement='top'
 							trigger='click'
-							speaker={<Tooltip>Copied!</Tooltip>}>
+							speaker={<Tooltip className='copy-tooltip'>Copied!</Tooltip>}>
 							<div className='copy-icon'>
 								<FaIcon
 									fa='l-clone'

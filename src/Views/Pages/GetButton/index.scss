@@ -1,5 +1,5 @@
 .get-button-layout {
-	@apply w-full min-h-screen flex-center pt-8;
+	@apply w-full min-h-screen flex-center py-24;
 
 	.get-button-container {
 		@apply py-8 px-6 sm:p-8 sm:pb-16 rounded-lg bg-white bg-opacity-50 w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
@@ -52,12 +52,13 @@
 		}
 
 		.code-container {
-			@apply mt-8 relative;
+			@apply mt-8 relative animate-fade-in;
 
 			pre {
 				@apply rounded-lg overflow-y-hidden;
 				padding-top: 1rem !important;
 				padding-bottom: 1rem !important;
+				background-color: rgb(239, 236, 244) !important;
 			}
 
 			.copy-icon {
@@ -70,11 +71,22 @@
 	}
 }
 
-.rs-tooltip {
+.copy-tooltip {
 	@apply border bg-white border-primary text-primary;
 
 	&::after {
 		border-top-color: $primary !important;
+	}
+}
+
+.err-tooltip {
+	@apply border bg-white border-error text-error;
+	// border-color: rgb(255, 109, 109);
+	// color: rgb(255, 109, 109);
+
+	&::after {
+		border-top-color: $error !important;
+		border-bottom-color: $error !important;
 	}
 }
 
