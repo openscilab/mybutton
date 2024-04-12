@@ -1,13 +1,15 @@
 import './index.scss';
 import { useState } from 'react';
 import Service from '@src/Components/Service';
-import { Button, Col, Modal, Row } from 'rsuite';
+import { Button, Col, Modal, Row, Tooltip, Whisper } from 'rsuite';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import Telegram from '@assets/icons/services/telegram.svg';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { atelierCaveLight } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import FaIcon from '@src/Components/FaIcon';
+import { copyToClipboard } from '@src/Tools/Utils/React';
 
 const GetButton = () => {
 	const [url, setUrl] = useState('');
@@ -15,6 +17,7 @@ const GetButton = () => {
 	const [code, setCode] = useState('');
 	const [isValid, setIsValid] = useState(true);
 	const [showCode, setShowCode] = useState(false);
+	const [openTooltip, setOpenTooltip] = useState(false);
 	const [selectedServices, setSelectedServices] = useState<string[]>(['email']);
 
 	// ? -------------------------- Functions ------------------------------
@@ -107,6 +110,29 @@ const GetButton = () => {
 				{showCode && (
 					<div className='code-container'>
 						<SyntaxHighlighter language={'xml'} style={atelierCaveLight} children={code} />
+						<Whisper
+							className='copy-whisper'
+							onClick={() => {
+								if (!openTooltip) setOpenTooltip(true);
+							}}
+							onOpen={() => {
+								setTimeout(() => {
+									setOpenTooltip(false);
+								}, 1500);
+							}}
+							open={openTooltip}
+							placement='top'
+							trigger='click'
+							speaker={<Tooltip>Copied!</Tooltip>}>
+							<div className='copy-icon'>
+								<FaIcon
+									fa='l-clone'
+									onClick={async () => {
+										await copyToClipboard(code);
+									}}
+								/>
+							</div>
+						</Whisper>
 					</div>
 				)}
 			</div>

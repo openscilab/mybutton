@@ -60,10 +60,21 @@
 				padding-bottom: 1rem !important;
 			}
 
-			.fa-icon {
-				@apply absolute w-4 top-2.5 right-3 text-primary cursor-pointer hover:text-opacity-70 transition-all;
+			.copy-icon {
+				@apply absolute top-2.5 right-3;
+				.fa-icon {
+					@apply w-4 text-primary cursor-pointer hover:text-opacity-70 transition-all;
+				}
 			}
 		}
+	}
+}
+
+.rs-tooltip {
+	@apply border bg-white border-primary text-primary;
+
+	&::after {
+		border-top-color: $primary !important;
 	}
 }
 
