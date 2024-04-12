@@ -1,8 +1,8 @@
 .get-button-layout {
-	@apply w-full min-h-screen flex-center;
+	@apply w-full min-h-screen flex-center pt-8;
 
 	.get-button-container {
-		@apply p-8 pb-16 rounded-lg bg-white bg-opacity-50 w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
+		@apply py-8 px-6 sm:p-8 sm:pb-16 rounded-lg bg-white bg-opacity-50 w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
 		// min-height: 30rem;
 		box-shadow: 0 1px 12px 1px rgba(69, 65, 78, 0.1);
 
@@ -12,7 +12,7 @@
 		}
 
 		.input-container {
-			@apply w-full flex flex-col items-center sm:flex-row sm:justify-center mt-8;
+			@apply w-full flex flex-col items-center mt-8;
 
 			.input-label {
 				@apply mb-2 sm:mb-0 sm:mr-8 text-primary font-medium;
@@ -48,6 +48,20 @@
 
 			.get-code {
 				@apply bg-cyan-dark bg-opacity-70 hover:bg-opacity-100;
+			}
+		}
+
+		.code-container {
+			@apply mt-8 relative;
+
+			pre {
+				@apply rounded-lg overflow-y-hidden;
+				padding-top: 1rem !important;
+				padding-bottom: 1rem !important;
+			}
+
+			.fa-icon {
+				@apply absolute w-4 top-2.5 right-3 text-primary cursor-pointer hover:text-opacity-70 transition-all;
 			}
 		}
 	}
