@@ -11,15 +11,19 @@ import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import FaIcon from '@src/Components/FaIcon';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import useWindow from '@src/Tools/Hooks/useWindow';
+import { useAdvancedState } from 'ahq-front-tools';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
-	const [url, setUrl] = useState('');
-	const [code, setCode] = useState('');
-	const [open, setOpen] = useState(false);
-	const [isValid, setIsValid] = useState(true);
-	const [showCode, setShowCode] = useState(false);
-	const [openTooltip, setOpenTooltip] = useState(false);
+	const [buttons, setButtons] = useState<JSX.Element>();
+	const { set, tmp } = useAdvancedState({
+		url: '',
+		code: '',
+		isValid: true,
+		showCode: false,
+		openModal: false,
+		openTooltip: false,
+	});
 	const [selectedServices, setSelectedServices] = useState<string[]>(['email']);
 
 	// ? -------------------------- Functions ------------------------------
@@ -33,27 +37,45 @@ const GetButton = () => {
 	};
 
 	const getCode = () => {
-		if (!url) {
-			setIsValid(false);
+		if (!tmp.url) {
+			set.tmp('isValid', false);
 			return;
 		}
 		if (selectedServices.length === 0) {
-			setShowCode(false);
+			set.tmp('showCode', false);
 			return;
 		}
 
-		setShowCode(true);
-		const selected = Services(url).filter(service => selectedServices.includes(service.title));
+		const selected = Services(tmp.url).filter(service => selectedServices.includes(service.title));
+		const buttons = (
+			<div className='flex-center'>
+				{selected.map((service, i) => {
+					return (
+						<a href={service.url} target='_blank' rel='noreferrer' key={i}>
+							<img
+								src={service.icon}
+								width={32}
+								height={32}
+								style={{ backgroundColor: service.bg, borderRadius: 4, paddingLeft: 1, paddingRight: 1 }}
+								alt=''
+							/>
+						</a>
+					);
+				})}
+			</div>
+		);
+		setButtons(buttons);
+
 		const code = `	<div>
 			${selected
 				.map(service => {
-					return `<a href="${service.url}" target="_blank">
-					<img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:6px"/>
-			</a>`;
+					return `<a href="${service.url}" target="_blank"><img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:4px"/></a>`;
 				})
 				.join(`\n			`)}
 	</div>`;
-		setCode(code);
+		set.tmp('code', code);
+
+		set.tmp('showCode', true);
 	};
 
 	const finalUrl = (url: string) => {
@@ -95,18 +117,18 @@ const GetButton = () => {
 				<div className='input-container'>
 					<EditableInput
 						label='Page URL'
-						defaultValue={url}
-						isValid={isValid}
+						defaultValue={tmp.url}
+						isValid={tmp.isValid}
 						errorMessage='required'
 						onChange={e => {
-							if (!isValid) setIsValid(true);
-							setUrl(e.target.value);
+							if (!tmp.isValid) set.tmp('isValid', true);
+							set.tmp('url', e.target.value);
 						}}
 						placeholder='https://www.example.com'
 					/>
 				</div>
 				<div className='buttons'>
-					<Button className='choose' onClick={() => setOpen(true)}>
+					<Button className='choose' onClick={() => set.tmp('openModal', true)}>
 						Choose Services
 					</Button>
 					<Whisper
@@ -119,20 +141,20 @@ const GetButton = () => {
 						</Button>
 					</Whisper>
 				</div>
-				{showCode && (
+				{tmp.showCode && (
 					<div className='code-container'>
-						<SyntaxHighlighter language={'xml'} style={lightfair} children={code} />
+						<SyntaxHighlighter language={'xml'} style={lightfair} children={tmp.code} />
 						<Whisper
 							className='copy-whisper'
 							onClick={() => {
-								if (!openTooltip) setOpenTooltip(true);
+								if (!tmp.openTooltip) set.tmp('openTooltip', true);
 							}}
 							onOpen={() => {
 								setTimeout(() => {
-									setOpenTooltip(false);
+									set.tmp('openTooltip', false);
 								}, 1500);
 							}}
-							open={openTooltip}
+							open={tmp.openTooltip}
 							placement='top'
 							trigger='click'
 							speaker={<Tooltip className='copy-tooltip'>Copied!</Tooltip>}>
@@ -140,15 +162,21 @@ const GetButton = () => {
 								<FaIcon
 									fa='l-clone'
 									onClick={async () => {
-										await copyToClipboard(code);
+										await copyToClipboard(tmp.code);
 									}}
 								/>
 							</div>
 						</Whisper>
+						<div className='services-button'>{buttons}</div>
 					</div>
 				)}
 			</div>
-			<Modal open={open} size='sm' onClose={() => setOpen(false)} backdrop className='choose-services-modal'>
+			<Modal
+				open={tmp.openModal}
+				size='sm'
+				onClose={() => set.tmp('openModal', false)}
+				backdrop
+				className='choose-services-modal'>
 				<Modal.Header>Choose services</Modal.Header>
 				<Modal.Body>
 					<div className='services-list'>
@@ -170,7 +198,7 @@ const GetButton = () => {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => setOpen(false)}>Done</Button>
+					<Button onClick={() => set.tmp('openModal', false)}>Done</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

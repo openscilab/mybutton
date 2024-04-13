@@ -2,7 +2,7 @@
 	@apply w-full min-h-screen flex-center py-24;
 
 	.get-button-container {
-		@apply py-8 px-6 sm:p-8 sm:pb-16 rounded-lg bg-white bg-opacity-50 w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
+		@apply py-8 px-6 sm:p-8 sm:pb-14 rounded-lg bg-white bg-opacity-50 w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
 		// min-height: 30rem;
 		box-shadow: 0 1px 12px 1px rgba(69, 65, 78, 0.1);
 
@@ -65,6 +65,16 @@
 				@apply absolute top-2.5 right-3;
 				.fa-icon {
 					@apply w-4 text-primary cursor-pointer hover:text-opacity-70 transition-all;
+				}
+			}
+
+			.services-button {
+				@apply mt-6;
+
+				a {
+					&:not(:last-of-type) {
+						@apply mr-2;
+					}
 				}
 			}
 		}
