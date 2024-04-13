@@ -11,12 +11,12 @@ import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import FaIcon from '@src/Components/FaIcon';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import useWindow from '@src/Tools/Hooks/useWindow';
-import { useAdvancedState } from 'ahq-front-tools';
+import { useData } from '@src/Tools/Hooks/useData';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
 	const [buttons, setButtons] = useState<JSX.Element>();
-	const { set, tmp } = useAdvancedState({
+	const { set, temp } = useData({
 		url: '',
 		code: '',
 		isValid: true,
@@ -37,16 +37,16 @@ const GetButton = () => {
 	};
 
 	const getCode = () => {
-		if (!tmp.url) {
-			set.tmp('isValid', false);
+		if (!temp.url) {
+			set.ou.temp('isValid', false);
 			return;
 		}
 		if (selectedServices.length === 0) {
-			set.tmp('showCode', false);
+			set.ou.temp('showCode', false);
 			return;
 		}
 
-		const selected = Services(tmp.url).filter(service => selectedServices.includes(service.title));
+		const selected = Services(temp.url).filter(service => selectedServices.includes(service.title));
 		const buttons = (
 			<div className='flex-center'>
 				{selected.map((service, i) => {
@@ -73,9 +73,9 @@ const GetButton = () => {
 				})
 				.join(`\n			`)}
 	</div>`;
-		set.tmp('code', code);
+		set.ou.temp('code', code);
 
-		set.tmp('showCode', true);
+		set.ou.temp('showCode', true);
 	};
 
 	const finalUrl = (url: string) => {
@@ -117,18 +117,21 @@ const GetButton = () => {
 				<div className='input-container'>
 					<EditableInput
 						label='Page URL'
-						defaultValue={tmp.url}
-						isValid={tmp.isValid}
+						defaultValue={temp.url}
+						isValid={temp.isValid}
 						errorMessage='required'
 						onChange={e => {
-							if (!tmp.isValid) set.tmp('isValid', true);
-							set.tmp('url', e.target.value);
+							if (!temp.isValid) {
+								console.log(temp);
+								set.ou.temp('isValid', true);
+							}
+							set.ou.temp('url', e.target.value);
 						}}
 						placeholder='https://www.example.com'
 					/>
 				</div>
 				<div className='buttons'>
-					<Button className='choose' onClick={() => set.tmp('openModal', true)}>
+					<Button className='choose' onClick={() => set.ou.temp('openModal', true)}>
 						Choose Services
 					</Button>
 					<Whisper
@@ -141,20 +144,20 @@ const GetButton = () => {
 						</Button>
 					</Whisper>
 				</div>
-				{tmp.showCode && (
+				{temp.showCode && (
 					<div className='code-container'>
-						<SyntaxHighlighter language={'xml'} style={lightfair} children={tmp.code} />
+						<SyntaxHighlighter language={'xml'} style={lightfair} children={temp.code} />
 						<Whisper
 							className='copy-whisper'
 							onClick={() => {
-								if (!tmp.openTooltip) set.tmp('openTooltip', true);
+								if (!temp.openTooltip) set.ou.temp('openTooltip', true);
 							}}
 							onOpen={() => {
 								setTimeout(() => {
-									set.tmp('openTooltip', false);
+									set.ou.temp('openTooltip', false);
 								}, 1500);
 							}}
-							open={tmp.openTooltip}
+							open={temp.openTooltip}
 							placement='top'
 							trigger='click'
 							speaker={<Tooltip className='copy-tooltip'>Copied!</Tooltip>}>
@@ -162,7 +165,7 @@ const GetButton = () => {
 								<FaIcon
 									fa='l-clone'
 									onClick={async () => {
-										await copyToClipboard(tmp.code);
+										await copyToClipboard(temp.code);
 									}}
 								/>
 							</div>
@@ -172,9 +175,9 @@ const GetButton = () => {
 				)}
 			</div>
 			<Modal
-				open={tmp.openModal}
+				open={temp.openModal}
 				size='sm'
-				onClose={() => set.tmp('openModal', false)}
+				onClose={() => set.ou.temp('openModal', false)}
 				backdrop
 				className='choose-services-modal'>
 				<Modal.Header>Choose services</Modal.Header>
@@ -198,7 +201,7 @@ const GetButton = () => {
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => set.tmp('openModal', false)}>Done</Button>
+					<Button onClick={() => set.ou.temp('openModal', false)}>Done</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>
