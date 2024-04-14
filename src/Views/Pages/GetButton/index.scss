@@ -1,8 +1,8 @@
 .get-button-layout {
-	@apply w-full min-h-screen flex-center;
+	@apply w-full min-h-screen flex-center py-24;
 
 	.get-button-container {
-		@apply p-8 pb-16 rounded-lg bg-white bg-opacity-50 w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
+		@apply py-8 px-6 sm:p-8 sm:pb-14 rounded-lg bg-white bg-opacity-50 w-11/12 sm:w-4/5 md:w-2/3 lg:w-1/2 mx-auto z-10 flex flex-col;
 		// min-height: 30rem;
 		box-shadow: 0 1px 12px 1px rgba(69, 65, 78, 0.1);
 
@@ -12,7 +12,7 @@
 		}
 
 		.input-container {
-			@apply w-full flex flex-col items-center sm:flex-row sm:justify-center mt-8;
+			@apply w-full flex flex-col items-center mt-8;
 
 			.input-label {
 				@apply mb-2 sm:mb-0 sm:mr-8 text-primary font-medium;
@@ -50,6 +50,53 @@
 				@apply bg-cyan-dark bg-opacity-70 hover:bg-opacity-100;
 			}
 		}
+
+		.code-container {
+			@apply mt-8 relative animate-fade-in;
+
+			pre {
+				@apply rounded-lg overflow-y-hidden;
+				padding-top: 1rem !important;
+				padding-bottom: 1rem !important;
+				background-color: rgb(239, 236, 244) !important;
+			}
+
+			.copy-icon {
+				@apply absolute top-2.5 right-3;
+				.fa-icon {
+					@apply w-4 text-primary cursor-pointer hover:text-opacity-70 transition-all;
+				}
+			}
+
+			.services-button {
+				@apply mt-6;
+
+				a {
+					&:not(:last-of-type) {
+						@apply mr-2;
+					}
+				}
+			}
+		}
+	}
+}
+
+.copy-tooltip {
+	@apply border bg-white border-primary text-primary;
+
+	&::after {
+		border-top-color: $primary !important;
+	}
+}
+
+.err-tooltip {
+	@apply border bg-white border-error text-error;
+	// border-color: rgb(255, 109, 109);
+	// color: rgb(255, 109, 109);
+
+	&::after {
+		border-top-color: $error !important;
+		border-bottom-color: $error !important;
 	}
 }
 
