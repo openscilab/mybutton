@@ -1,4 +1,4 @@
-name: mybutton dev deployment
+name: mybutton production deployment
 
 on:
   push:
