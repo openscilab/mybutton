@@ -1,0 +1,22 @@
+name: mybutton dev deployment
+
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: Download Code
+        uses: actions/checkout@v3
+      - name: Install Node 16.15.1
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+      - name: Install Dependencies & Build 
+        run: |
+          yarn install  
+          yarn build
