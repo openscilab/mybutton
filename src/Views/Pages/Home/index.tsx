@@ -1,8 +1,7 @@
 import './index.scss';
 import { Autoplay } from 'swiper';
-import { Col, Row } from 'rsuite';
+import { Button, Col, Row } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
-import FaButton from '@src/Components/FaButton';
 import responsive from '@assets/Images/responsive.png';
 import openSource from '@assets/Images/open-source.png';
 import noAccount from '@assets/Images/no-account-needed.png';
@@ -38,7 +37,9 @@ const Home = () => {
 				</Col>
 				<Col xs={24} md={12} className='info-col'>
 					<h1>My Button</h1>
-					<FaButton onClick={() => navigate('/get')}>Get Share Buttons</FaButton>
+					<Button className='get-share-buttons' onClick={() => navigate('/get')}>
+						Get Share Buttons
+					</Button>
 				</Col>
 			</Row>
 		</div>

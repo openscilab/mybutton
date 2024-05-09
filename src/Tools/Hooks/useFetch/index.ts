@@ -1,4 +1,3 @@
-import useAccount from '../useAccount';
 import { Notify } from '../../Utils/React';
 import useStore from '@tools/Store/useStore';
 import { useCallback, useState } from 'react';
@@ -16,7 +15,6 @@ const ReqInit: RequestOptions = { base: true, throwError: false };
 const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?: RequestOptions) => {
 	const loadings = useLoading();
 	const { dispatch } = useStore();
-	const { user, tokenRef } = useAccount();
 	const [data, setData] = useState<null | T>(null);
 	const [error, setError] = useState<boolean | any>(false);
 
@@ -43,7 +41,7 @@ const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?
 			if (!url) return;
 
 			try {
-				const ext_options = { ...mergedOptions, token: tokenRef?.current, method: method };
+				const ext_options = { ...mergedOptions, method: method };
 				const { json: res_json } = await authFetch(url, ext_options);
 				json = res_json;
 				setData(json);
@@ -58,7 +56,7 @@ const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?
 
 			return json as T;
 		},
-		[fetchOptions, fetchUrl, CONFIG, user]
+		[fetchOptions, fetchUrl, CONFIG]
 	);
 
 	const LOADING = {

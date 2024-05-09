@@ -131,8 +131,12 @@
 			@apply text-5xl sm:text-7xl font-sans font-bold text-black mt-16 mb-12 sm:mb-20;
 		}
 
-		.fa-btn {
-			@apply rounded-lg py-2 border-primary border-2 font-medium text-primary bg-transparent hover:bg-primary hover:text-white w-60;
+		.get-share-buttons {
+			@apply rounded-lg py-2.5 font-medium text-primary bg-transparent hover:bg-primary hover:text-white w-60;
+
+			.rs-ripple-pond {
+				@apply border-primary border-2 rounded-lg;
+			}
 		}
 	}
 }
