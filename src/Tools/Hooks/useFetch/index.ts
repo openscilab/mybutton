@@ -95,7 +95,7 @@ export const authFetch = async (url: string, options?: RequestOptions) => {
 	if (!navigator.onLine) {
 		//! if the internet is offline, throw an error
 		const msg = 'You are offline. Please check your internet connection.';
-		Notify.error(msg, { duration: 4000, icon: 'l-wifi-slash' });
+		Notify.error(msg, { duration: 4000 });
 		throw new Error(msg);
 	}
 

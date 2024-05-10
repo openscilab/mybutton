@@ -51,14 +51,14 @@
 				}
 			}
 
-			.fa-icon {
+			.angle {
 				@apply w-6 text-primary absolute z-10 cursor-pointer as as-fadeIn;
 				top: 42%;
-				&.d-angle-right {
+				&.angle-right {
 					@apply -right-0;
 				}
 
-				&.d-angle-left {
+				&.angle-left {
 					@apply -left-0;
 				}
 

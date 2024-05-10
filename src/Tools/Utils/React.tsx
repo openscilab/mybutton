@@ -1,6 +1,4 @@
-import FaIcon from '../../Components/FaIcon';
 import { Notification, toaster } from 'rsuite';
-import { IconNames } from '../../Assets/fontawesome/fa.names';
 import { PlacementType } from 'rsuite/esm/toaster/ToastContainer';
 
 export const isDev = process.env.NODE_ENV === 'development';
@@ -34,7 +32,6 @@ export const copyToClipboard = async (content: string) => {
 };
 
 type NotifyOptions = {
-	icon?: IconNames;
 	duration?: number;
 	className?: string;
 	closable?: boolean;
@@ -59,7 +56,6 @@ export const notify = (message: string, options?: NotifyOptions) => {
 					})}
 					duration={options?.duration || 4500}
 					closable={options?.closable === undefined ? true : options?.closable}>
-					{options?.icon && <FaIcon fa={options?.icon} />}
 					{message}
 				</Notification>,
 				{ placement: options?.placement || 'bottomEnd' }
@@ -71,15 +67,15 @@ export const notify = (message: string, options?: NotifyOptions) => {
 
 export const Notify = {
 	error: (message: string, options?: NotifyOptions) => {
-		notify(message, { type: 'error', icon: 'l-xmark', ...(options || {}) });
+		notify(message, { type: 'error', ...(options || {}) });
 	},
 	info: (message: string, options?: NotifyOptions) => {
-		notify(message, { type: 'info', icon: 'l-info', ...(options || {}) });
+		notify(message, { type: 'info', ...(options || {}) });
 	},
 	success: (message: string, options?: NotifyOptions) => {
-		notify(message, { type: 'success', icon: 'l-check', ...(options || {}) });
+		notify(message, { type: 'success', ...(options || {}) });
 	},
 	warning: (message: string, options?: NotifyOptions) => {
-		notify(message, { type: 'warning', icon: 'l-triangle-exclamation', ...(options || {}) });
+		notify(message, { type: 'warning', ...(options || {}) });
 	},
 };

@@ -1,8 +1,3 @@
-export const removeFaIconCache = () => {
-	if (!('caches' in window)) return;
-	caches.has('FaIconBundle').then(has => has && caches.delete('FaIconBundle'));
-};
-
 export const removeImagesCache = () => {
 	if (!('caches' in window)) return;
 	caches.has('Images').then(has => has && caches.delete('Images'));
@@ -14,7 +9,6 @@ export const removeFontsCache = () => {
 };
 
 export const removeBrowserCache = () => {
-	removeFaIconCache();
 	removeImagesCache();
 	removeFontsCache();
 };

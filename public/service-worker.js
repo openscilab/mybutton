@@ -9,7 +9,6 @@ self.addEventListener('fetch', event => {
 			const { pathname, protocol } = new URL(req.url);
 
 			//? Type of request
-			let isFaIcon = /fa\.bundle/.test(pathname);
 			let isFont = /\.(woff2?|ttf|otf|eot)$/i.test(pathname);
 			let isImage = /\.(png|jpe?g|gif|svg|webp)$/i.test(pathname);
 
@@ -22,10 +21,8 @@ self.addEventListener('fetch', event => {
 					let cache;
 					const clonedRes = networkRes.clone();
 
-					//* FaIcons
-					if (isFaIcon) cache = await caches.open('FaIconBundle');
 					//* Images
-					else if (isImage) cache = await caches.open('Images');
+					if (isImage) cache = await caches.open('Images');
 					//* Fonts
 					else if (isFont) cache = await caches.open('Fonts');
 
@@ -36,7 +33,6 @@ self.addEventListener('fetch', event => {
 				console.log('Cache Error:', error);
 				if (isFont) caches.delete('Fonts');
 				if (isImage) caches.delete('Images');
-				if (isFaIcon) caches.delete('FaIconBundle');
 
 				return fetch(req);
 
