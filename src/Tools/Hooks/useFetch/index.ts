@@ -4,7 +4,6 @@ import { useCallback, useState } from 'react';
 import useLoading from '../useLoading/useLoading';
 import axios, { AxiosRequestConfig } from 'axios';
 import { CONFIG } from '../../../App/Config/constants';
-import { setUploadProgress } from '@tools/Store/actions/DashboardActions';
 
 //? ----------------- 👇 Initial data ------------------------------------
 
@@ -23,11 +22,6 @@ const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?
 		if (method) loadings.set(method, isLoading);
 	};
 
-	const onUploadProgress: OnUploadProgress = (event, percentage) => {
-		dispatch(setUploadProgress(percentage));
-		fetchOptions?.onUploadProgress?.(event, percentage);
-	};
-
 	const fetchByMethod = useCallback(
 		(method: RequestMethods) => async (options?: RequestOptions) => {
 			let json;
@@ -36,7 +30,7 @@ const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?
 			setError(false);
 			setLoadingByMethod(true, method);
 
-			const mergedOptions = { ...fetchOptions, ...options, onUploadProgress } as RequestOptions;
+			const mergedOptions = { ...fetchOptions, ...options } as RequestOptions;
 			const url = mergedOptions?.url || fetchUrl;
 			if (!url) return;
 

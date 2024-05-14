@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Navbar, Nav } from 'rsuite';
 import { classes } from '@tools/Utils/React';
 import useStore from '@src/Tools/Store/useStore';
-import { setOpenShareModal } from '@src/Tools/Store/actions/DashboardActions';
 import { useNavigate } from 'react-router-dom';
+import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
 
 const NavBar = () => {
 	const navigate = useNavigate();
