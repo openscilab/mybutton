@@ -1,14 +1,15 @@
 import './index.scss';
 import { Autoplay } from 'swiper';
-import { Col, Row } from 'rsuite';
+import { Button, Col, Row } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
-import FaButton from '@src/Components/FaButton';
 import responsive from '@assets/Images/responsive.png';
 import openSource from '@assets/Images/open-source.png';
 import noAccount from '@assets/Images/no-account-needed.png';
 import { Swiper, SwiperSlide, useSwiper, EffectCards } from '@components/Swiper/Swiper';
 import useWindow from '@src/Tools/Hooks/useWindow';
-import FaIcon from '@src/Components/FaIcon';
+import { ReactComponent as Right } from '@assets/icons/angle-right-solid.svg';
+import { ReactComponent as Left } from '@assets/icons/angle-left-solid.svg';
+import { classes } from '../../../Tools/Utils/React';
 
 const Home = () => {
 	const navigate = useNavigate();
@@ -23,7 +24,6 @@ const Home = () => {
 							<SwiperSlide>
 								<h2>Open Source & Free</h2>
 								<img src={openSource} alt='' />
-								{/* <p>You do not have to create an account or sign up to avail our services.</p> */}
 							</SwiperSlide>
 							<SwiperSlide>
 								<h2>No Account Necessary</h2>
@@ -38,7 +38,9 @@ const Home = () => {
 				</Col>
 				<Col xs={24} md={12} className='info-col'>
 					<h1>My Button</h1>
-					<FaButton onClick={() => navigate('/get')}>Get Share Buttons</FaButton>
+					<Button className='get-share-buttons' onClick={() => navigate('/get')}>
+						Get Share Buttons
+					</Button>
 				</Col>
 			</Row>
 		</div>
@@ -73,11 +75,10 @@ const SwiperWrapper: FC = ({ children }) => {
 			pagination={{ clickable: true }}
 			allowTouchMove={true}
 			autoplay={{ delay: 2500, pauseOnMouseEnter: false, disableOnInteraction: false }}>
-			<FaIcon className={swiper?.activeIndex === 0 ? 'first' : ''} fa='d-angle-left' onClick={() => swiper?.slidePrev()} />
+			<Left {...classes('angle angle-left', { first: swiper?.activeIndex === 0 })} onClick={() => swiper?.slidePrev()} />
 			{children}
-			<FaIcon
-				className={swiper?.activeIndex === 3 - numberOfSlides ? 'last' : ''}
-				fa='d-angle-right'
+			<Right
+				{...classes('angle angle-right', { last: swiper?.activeIndex === 3 - numberOfSlides })}
 				onClick={() => swiper?.slideNext()}
 			/>
 		</Swiper>

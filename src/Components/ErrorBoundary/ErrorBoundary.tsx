@@ -1,8 +1,8 @@
 import './ErrorBoundary.scss';
 import { Component } from 'react';
-import FaIcon from '../FaIcon';
 import { Button } from 'rsuite';
 import { isDev } from '../../Tools/Utils/React';
+import { ReactComponent as Exclamation } from '@assets/icons/exclamation-solid.svg';
 
 interface EBProps {
 	children?: React.ReactNode;
@@ -35,7 +35,7 @@ export default class ErrorBoundary extends Component<EBProps> {
 		if (!this.state.hasError) return this.props.children;
 		return (
 			<div className='error-boundary-layout'>
-				<FaIcon fa='s-exclamation' className='w-1/3' />
+				<Exclamation className='w-1/3 icon' />
 				<h1>Something went wrong !</h1>
 				<Button href='/' className='go-to-home-btn'>
 					Back to home

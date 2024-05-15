@@ -1,17 +1,17 @@
 import './index.scss';
 import { useState } from 'react';
 import Service from '@src/Components/Service';
-import { Button, Col, Modal, Row, Tooltip, Whisper } from 'rsuite';
+import useWindow from '@src/Tools/Hooks/useWindow';
+import { useData } from '@src/Tools/Hooks/useData';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import SyntaxHighlighter from 'react-syntax-highlighter';
+import { copyToClipboard } from '@src/Tools/Utils/React';
 import Telegram from '@assets/icons/services/telegram.svg';
+import { Button, Col, Modal, Row, Tooltip, Whisper } from 'rsuite';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
-import FaIcon from '@src/Components/FaIcon';
-import { copyToClipboard } from '@src/Tools/Utils/React';
-import useWindow from '@src/Tools/Hooks/useWindow';
-import { useData } from '@src/Tools/Hooks/useData';
+import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
@@ -162,8 +162,8 @@ const GetButton = () => {
 							trigger='click'
 							speaker={<Tooltip className='copy-tooltip'>Copied!</Tooltip>}>
 							<div className='copy-icon'>
-								<FaIcon
-									fa='l-clone'
+								<Clone
+									className='icon'
 									onClick={async () => {
 										await copyToClipboard(temp.code);
 									}}

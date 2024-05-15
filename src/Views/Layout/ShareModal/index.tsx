@@ -1,19 +1,19 @@
 import './index.scss';
-import { useMemo, useState } from 'react';
 import { Col, Modal, Row } from 'rsuite';
+import { useMemo, useState } from 'react';
 import useStore from '@src/Tools/Store/useStore';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
-import useDashboard from '@src/Tools/Hooks/useDashboard';
 import Telegram from '@assets/icons/services/telegram.svg';
+import useLocalCache from '@src/Tools/Hooks/useLocalCache';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
-import { setOpenShareModal } from '@src/Tools/Store/actions/DashboardActions';
+import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
 
 const ShareModal = () => {
 	const { dispatch } = useStore();
 	const [url, setUrl] = useState('');
 	const [isValid, setIsValid] = useState(true);
-	const { openShareModal } = useDashboard();
+	const { openShareModal } = useLocalCache();
 
 	// ? ------------------------- Functions -----------------------
 

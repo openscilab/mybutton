@@ -12,9 +12,7 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true,
 		"**/reportWebVitals.ts": true,
-		"**/react-app-env.d.ts": true,
-		"fontawesome.config.js": true,
-		"src/Assets/fontawesome": true
+		"**/react-app-env.d.ts": true
 	},
 	"cSpell.words": [
 		"animatecss",
@@ -23,7 +21,6 @@
 		"contextmenu",
 		"countup",
 		"craco",
-		"fontawesome",
 		"imask",
 		"jszip",
 		"opentable",
@@ -39,5 +36,6 @@
 		"tailwindcss",
 		"xmark",
 		"zipcode"
-	]
+	],
+	"svg.preview.background": "dark-transparent"
 }

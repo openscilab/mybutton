@@ -1,11 +1,9 @@
-import useAccount from '../useAccount';
 import { Notify } from '../../Utils/React';
 import useStore from '@tools/Store/useStore';
 import { useCallback, useState } from 'react';
 import useLoading from '../useLoading/useLoading';
 import axios, { AxiosRequestConfig } from 'axios';
 import { CONFIG } from '../../../App/Config/constants';
-import { setUploadProgress } from '@tools/Store/actions/DashboardActions';
 
 //? ----------------- 👇 Initial data ------------------------------------
 
@@ -16,18 +14,12 @@ const ReqInit: RequestOptions = { base: true, throwError: false };
 const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?: RequestOptions) => {
 	const loadings = useLoading();
 	const { dispatch } = useStore();
-	const { user, tokenRef } = useAccount();
 	const [data, setData] = useState<null | T>(null);
 	const [error, setError] = useState<boolean | any>(false);
 
 	const setLoadingByMethod = (isLoading: boolean, method?: RequestMethods) => {
 		loadings.set('all', isLoading);
 		if (method) loadings.set(method, isLoading);
-	};
-
-	const onUploadProgress: OnUploadProgress = (event, percentage) => {
-		dispatch(setUploadProgress(percentage));
-		fetchOptions?.onUploadProgress?.(event, percentage);
 	};
 
 	const fetchByMethod = useCallback(
@@ -38,12 +30,12 @@ const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?
 			setError(false);
 			setLoadingByMethod(true, method);
 
-			const mergedOptions = { ...fetchOptions, ...options, onUploadProgress } as RequestOptions;
+			const mergedOptions = { ...fetchOptions, ...options } as RequestOptions;
 			const url = mergedOptions?.url || fetchUrl;
 			if (!url) return;
 
 			try {
-				const ext_options = { ...mergedOptions, token: tokenRef?.current, method: method };
+				const ext_options = { ...mergedOptions, method: method };
 				const { json: res_json } = await authFetch(url, ext_options);
 				json = res_json;
 				setData(json);
@@ -58,7 +50,7 @@ const useFetch = <T extends object | any = any>(fetchUrl?: string, fetchOptions?
 
 			return json as T;
 		},
-		[fetchOptions, fetchUrl, CONFIG, user]
+		[fetchOptions, fetchUrl, CONFIG]
 	);
 
 	const LOADING = {
@@ -97,7 +89,7 @@ export const authFetch = async (url: string, options?: RequestOptions) => {
 	if (!navigator.onLine) {
 		//! if the internet is offline, throw an error
 		const msg = 'You are offline. Please check your internet connection.';
-		Notify.error(msg, { duration: 4000, icon: 'l-wifi-slash' });
+		Notify.error(msg, { duration: 4000 });
 		throw new Error(msg);
 	}
 

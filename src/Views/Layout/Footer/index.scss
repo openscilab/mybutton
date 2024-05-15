@@ -26,10 +26,13 @@
 			}
 		}
 
-		.fa-icon {
-			@apply text-white p-1 rounded-full bg-gray-500 transition-colors;
+		.social-icon {
+			@apply p-1 rounded-full bg-gray-500 transition-colors;
 			width: 1.6rem;
+			height: 1.6rem;
 			padding: 0.3rem;
+
+			fill: white;
 		}
 	}
 

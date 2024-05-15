@@ -1,12 +1,10 @@
 const path = require('path');
-const { whenProd } = require('@craco/craco');
 const { pathsToModuleNameMapper } = require('ts-jest');
 const { compilerOptions } = require('./tsconfig.path.json');
 const sassResourcesLoader = require('craco-sass-resources-loader');
 
 module.exports = {
 	plugins: [
-		...whenProd(() => [{ plugin: require('./fontawesome.config') }], []),
 		{
 			plugin: require('craco-less'),
 			options: { lessLoaderOptions: { lessOptions: { javascriptEnabled: true } } },

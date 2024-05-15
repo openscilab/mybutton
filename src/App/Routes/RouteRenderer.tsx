@@ -1,15 +1,11 @@
 import routesArray from './routes';
-import { RolePath } from './Guard';
 import LoadingCover from '../../Components/LoadingCover';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { LazyExoticComponent, Suspense, Fragment, useRef } from 'react';
-import { ROLE_NAME } from '@src/Tools/Store/reducers/AccountReducer';
+import { LazyExoticComponent, Suspense, useRef } from 'react';
 
 export type Path = {
-	guard?: any;
 	exact: boolean;
 	path: string[];
-	role?: Partial<Record<'is' | 'not', ROLE_NAME[]>>;
 	component: LazyExoticComponent<() => JSX.Element> | (() => JSX.Element) | FC;
 };
 
@@ -37,20 +33,7 @@ const RouteRenderer: FC<RouteRendererProps> = props => {
 				{DefaultRoute}
 				{routes.map((route, i) =>
 					route.path.map(path => {
-						let PathGuard = route.guard || Fragment;
-						return (
-							<Route
-								key={i}
-								path={`${base}${path}`}
-								element={
-									<PathGuard>
-										<RolePath is={route?.role?.is} not={route?.role?.not}>
-											<route.component />
-										</RolePath>
-									</PathGuard>
-								}
-							/>
-						);
+						return <Route key={i} path={`${base}${path}`} element={<route.component />} />;
 					})
 				)}
 			</Routes>
