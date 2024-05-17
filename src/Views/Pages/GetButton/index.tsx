@@ -1,5 +1,5 @@
 import './index.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Service from '@src/Components/Service';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
@@ -115,7 +115,11 @@ const GetButton = () => {
 		];
 	};
 
-	// ---------------------------------------------------------------------
+	// ? ------------------------------ useEffect -------------------------------
+	useEffect(() => {
+		if (temp.showCode) getCode();
+	}, [selectedServices]);
+	// --------------------------------------------------------------------------
 	return (
 		<div className='get-button-layout'>
 			<div className='get-button-container'>
@@ -128,7 +132,6 @@ const GetButton = () => {
 						errorMessage='required'
 						onChange={e => {
 							if (!temp.isValid) {
-								console.log(temp);
 								set.ou.temp('isValid', true);
 							}
 							set.ou.temp('url', e.target.value);
