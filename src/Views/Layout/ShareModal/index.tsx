@@ -18,31 +18,37 @@ const ShareModal = () => {
 
 	// ? ------------------------- Functions -----------------------
 
-	const finalUrl = (url: string) => {
-		if (url.startsWith('https://') || url.startsWith('http://')) return url;
+	const urlValidation = (url: string) => {
+		if (url.includes('://')) return url;
 
 		return `http://${url}`;
 	};
 
 	// ? ---------------------- Var -------------------------------
+	const services_url = (): { [key: string]: string } => {
+		const validated_url = urlValidation(url);
+		return {
+			email: `mailto:?subject=${subject}&body=${validated_url}`,
+			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${validated_url}`,
+			telegram: `https://telegram.me/share/url?url=${validated_url}&text=${subject}`,
+		};
+	};
+
 	const Services = [
 		{
 			title: 'email',
 			icon: Email,
 			bg: '#888990',
-			url: `mailto:?subject=${subject}&body=${finalUrl(url)}`,
 		},
 		{
 			title: 'gmail',
 			icon: Gmail,
 			bg: '#EA4335',
-			url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${finalUrl(url)}`,
 		},
 		{
 			title: 'telegram',
 			icon: Telegram,
 			bg: '#2CA5E0',
-			url: `https://telegram.me/share/url?url=${finalUrl(url)}&text=${subject}`,
 		},
 	];
 	// --------------------------------------------------------------
@@ -86,7 +92,7 @@ const ShareModal = () => {
 										className='service-container'
 										onClick={() => {
 											if (url === '') setIsValid(false);
-											else window.open(service.url, '_blank');
+											else window.open(services_url()[service.title], '_blank');
 										}}>
 										<div className='service-logo' style={{ backgroundColor: service.bg }}>
 											<img src={service.icon} alt={service.title} />

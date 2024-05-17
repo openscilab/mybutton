@@ -48,6 +48,7 @@ const GetButton = () => {
 		}
 
 		const selected = Services(temp.url).filter(service => selectedServices.includes(service.title));
+
 		const buttons = (
 			<div className='flex-center'>
 				{selected.map((service, i) => {
@@ -79,36 +80,40 @@ const GetButton = () => {
 		set.ou.temp('showCode', true);
 	};
 
-	const finalUrl = (url: string) => {
-		if (url.startsWith('https://') || url.startsWith('http://')) return url;
+	const urlValidation = (url: string) => {
+		if (url.includes('://')) return url;
 
 		return `http://${url}`;
 	};
 
 	// ? ---------------------- Var -------------------------------
-	const Services = (url?: string) => [
-		{
-			title: 'email',
-			icon: Email,
-			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
-			bg: '#888990',
-			url: `mailto:?subject=${temp.subject}&body=${finalUrl(url || '')}`,
-		},
-		{
-			title: 'gmail',
-			icon: Gmail,
-			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
-			bg: '#EA4335',
-			url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${finalUrl(url || '')}`,
-		},
-		{
-			title: 'telegram',
-			icon: Telegram,
-			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
-			bg: '#2CA5E0',
-			url: `https://telegram.me/share/url?url=${finalUrl(url || '')}&text=${temp.subject}`,
-		},
-	];
+	const Services = (url?: string) => {
+		const validated_url = urlValidation(url || '');
+
+		return [
+			{
+				title: 'email',
+				icon: Email,
+				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
+				bg: '#888990',
+				url: `mailto:?subject=${temp.subject}&body=${validated_url}`,
+			},
+			{
+				title: 'gmail',
+				icon: Gmail,
+				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
+				bg: '#EA4335',
+				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${validated_url}`,
+			},
+			{
+				title: 'telegram',
+				icon: Telegram,
+				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
+				bg: '#2CA5E0',
+				url: `https://telegram.me/share/url?url=${validated_url}&text=${temp.subject}`,
+			},
+		];
+	};
 
 	// ---------------------------------------------------------------------
 	return (
