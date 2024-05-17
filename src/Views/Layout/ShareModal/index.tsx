@@ -66,7 +66,7 @@ const ShareModal = () => {
 			<Modal.Body>
 				<div className='editable-input-container'>
 					<EditableInput
-						label='URL'
+						label='Link'
 						onChange={e => {
 							if (!isValid) setIsValid(true);
 							setUrl(e.target.value);

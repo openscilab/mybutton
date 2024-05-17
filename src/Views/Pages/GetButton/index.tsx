@@ -122,7 +122,7 @@ const GetButton = () => {
 				<h1>Get share button code</h1>
 				<div className='input-container'>
 					<EditableInput
-						label='Page URL'
+						label='Link'
 						defaultValue={temp.url}
 						isValid={temp.isValid}
 						errorMessage='required'
