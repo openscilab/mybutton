@@ -1,5 +1,5 @@
 import './index.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Service from '@src/Components/Service';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
@@ -19,6 +19,7 @@ const GetButton = () => {
 	const { set, temp } = useData({
 		url: '',
 		code: '',
+		subject: '',
 		isValid: true,
 		showCode: false,
 		openModal: false,
@@ -47,6 +48,7 @@ const GetButton = () => {
 		}
 
 		const selected = Services(temp.url).filter(service => selectedServices.includes(service.title));
+
 		const buttons = (
 			<div className='flex-center'>
 				{selected.map((service, i) => {
@@ -78,56 +80,71 @@ const GetButton = () => {
 		set.ou.temp('showCode', true);
 	};
 
-	const finalUrl = (url: string) => {
-		if (url.startsWith('https://') || url.startsWith('http://')) return url;
+	const urlValidation = (url: string) => {
+		if (url.includes('://')) return url;
 
 		return `http://${url}`;
 	};
 
 	// ? ---------------------- Var -------------------------------
-	const Services = (url?: string) => [
-		{
-			title: 'email',
-			icon: Email,
-			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
-			bg: '#888990',
-			url: `mailto:?subject=&body=${finalUrl(url || '')}`,
-		},
-		{
-			title: 'gmail',
-			icon: Gmail,
-			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
-			bg: '#EA4335',
-			url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su&body=${finalUrl(url || '')}`,
-		},
-		{
-			title: 'telegram',
-			icon: Telegram,
-			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
-			bg: '#2CA5E0',
-			url: `https://telegram.me/share/url?url=${finalUrl(url || '')}&text=`,
-		},
-	];
+	const Services = (url?: string) => {
+		const validated_url = urlValidation(url || '');
 
-	// ---------------------------------------------------------------------
+		return [
+			{
+				title: 'email',
+				icon: Email,
+				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
+				bg: '#888990',
+				url: `mailto:?subject=${temp.subject}&body=${validated_url}`,
+			},
+			{
+				title: 'gmail',
+				icon: Gmail,
+				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
+				bg: '#EA4335',
+				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${validated_url}`,
+			},
+			{
+				title: 'telegram',
+				icon: Telegram,
+				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
+				bg: '#2CA5E0',
+				url: `https://telegram.me/share/url?url=${validated_url}&text=${temp.subject}`,
+			},
+		];
+	};
+
+	// ? ------------------------------ useEffect -------------------------------
+	useEffect(() => {
+		if (temp.showCode) getCode();
+	}, [selectedServices]);
+	// --------------------------------------------------------------------------
 	return (
 		<div className='get-button-layout'>
 			<div className='get-button-container'>
 				<h1>Get share button code</h1>
 				<div className='input-container'>
 					<EditableInput
-						label='Page URL'
+						label='Link'
 						defaultValue={temp.url}
 						isValid={temp.isValid}
 						errorMessage='required'
 						onChange={e => {
 							if (!temp.isValid) {
-								console.log(temp);
 								set.ou.temp('isValid', true);
 							}
 							set.ou.temp('url', e.target.value);
 						}}
 						placeholder='https://www.example.com'
+					/>
+					<EditableInput
+						label='Subject'
+						onChange={e => {
+							set.ou.temp('subject', e.target.value);
+						}}
+						defaultValue={temp.subject}
+						placeholder='Subject'
 					/>
 				</div>
 				<div className='buttons'>

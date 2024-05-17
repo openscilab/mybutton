@@ -21,6 +21,10 @@
 			.editable-input {
 				@apply sm:w-2/3;
 
+				::placeholder {
+					font-size: 0.9rem;
+				}
+
 				.labeled-wrapper {
 					min-height: 2.5rem;
 
@@ -31,6 +35,10 @@
 
 				.label {
 					@apply text-primary;
+				}
+
+				&:not(:last-of-type) {
+					@apply mb-6;
 				}
 			}
 		}
