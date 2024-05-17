@@ -1,6 +1,6 @@
 import './index.scss';
 import { Col, Modal, Row } from 'rsuite';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import useStore from '@src/Tools/Store/useStore';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
@@ -12,8 +12,9 @@ import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
 const ShareModal = () => {
 	const { dispatch } = useStore();
 	const [url, setUrl] = useState('');
-	const [isValid, setIsValid] = useState(true);
+	const [subject, setSubject] = useState('');
 	const { openShareModal } = useLocalCache();
+	const [isValid, setIsValid] = useState(true);
 
 	// ? ------------------------- Functions -----------------------
 
@@ -24,24 +25,26 @@ const ShareModal = () => {
 	};
 
 	// ? ---------------------- Var -------------------------------
-	const Services = useMemo(
-		() => [
-			{
-				title: 'email',
-				icon: Email,
-				bg: '#888990',
-				url: `mailto:?subject=&body=${finalUrl(url)}`,
-			},
-			{
-				title: 'gmail',
-				icon: Gmail,
-				bg: '#EA4335',
-				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su&body=${finalUrl(url)}`,
-			},
-			{ title: 'telegram', icon: Telegram, bg: '#2CA5E0', url: `https://telegram.me/share/url?url=${finalUrl(url)}&text=` },
-		],
-		[url]
-	);
+	const Services = [
+		{
+			title: 'email',
+			icon: Email,
+			bg: '#888990',
+			url: `mailto:?subject=${subject}&body=${finalUrl(url)}`,
+		},
+		{
+			title: 'gmail',
+			icon: Gmail,
+			bg: '#EA4335',
+			url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${finalUrl(url)}`,
+		},
+		{
+			title: 'telegram',
+			icon: Telegram,
+			bg: '#2CA5E0',
+			url: `https://telegram.me/share/url?url=${finalUrl(url)}&text=${subject}`,
+		},
+	];
 	// --------------------------------------------------------------
 	return (
 		<Modal
@@ -62,10 +65,16 @@ const ShareModal = () => {
 							if (!isValid) setIsValid(true);
 							setUrl(e.target.value);
 						}}
-						defaultValue={url}
 						errorMessage='required'
 						isValid={isValid}
 						placeholder='https://www.example.com'
+					/>
+					<EditableInput
+						label='Subject'
+						onChange={e => {
+							setSubject(e.target.value);
+						}}
+						placeholder='Subject'
 					/>
 				</div>
 				<div className='services-list'>

@@ -19,6 +19,7 @@ const GetButton = () => {
 	const { set, temp } = useData({
 		url: '',
 		code: '',
+		subject: '',
 		isValid: true,
 		showCode: false,
 		openModal: false,
@@ -91,21 +92,21 @@ const GetButton = () => {
 			icon: Email,
 			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
 			bg: '#888990',
-			url: `mailto:?subject=&body=${finalUrl(url || '')}`,
+			url: `mailto:?subject=${temp.subject}&body=${finalUrl(url || '')}`,
 		},
 		{
 			title: 'gmail',
 			icon: Gmail,
 			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
 			bg: '#EA4335',
-			url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su&body=${finalUrl(url || '')}`,
+			url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${finalUrl(url || '')}`,
 		},
 		{
 			title: 'telegram',
 			icon: Telegram,
 			iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
 			bg: '#2CA5E0',
-			url: `https://telegram.me/share/url?url=${finalUrl(url || '')}&text=`,
+			url: `https://telegram.me/share/url?url=${finalUrl(url || '')}&text=${temp.subject}`,
 		},
 	];
 
@@ -128,6 +129,14 @@ const GetButton = () => {
 							set.ou.temp('url', e.target.value);
 						}}
 						placeholder='https://www.example.com'
+					/>
+					<EditableInput
+						label='Subject'
+						onChange={e => {
+							set.ou.temp('subject', e.target.value);
+						}}
+						defaultValue={temp.subject}
+						placeholder='Subject'
 					/>
 				</div>
 				<div className='buttons'>

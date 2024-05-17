@@ -11,6 +11,20 @@
 
 			.editable-input-container {
 				@apply relative w-full pb-4;
+
+				.editable-input {
+					&:not(:last-of-type) {
+						@apply mb-5;
+					}
+
+					::placeholder {
+						font-size: 0.9rem;
+					}
+				}
+
+				.label {
+					@apply text-primary;
+				}
 			}
 
 			.services-list {
@@ -20,7 +34,7 @@
 					@apply md:flex md:justify-center;
 				}
 				.service-container {
-					@apply cursor-pointer flex items-center px-4 rounded-lg transition-colors duration-300;
+					@apply cursor-pointer flex items-center rounded-lg transition-colors duration-300;
 					width: fit-content;
 					height: fit-content;
 
