@@ -43,6 +43,39 @@
 			}
 		}
 
+		.mode-picker {
+			@apply mx-auto mt-8;
+			padding-left: 10px;
+			border-color: rgba(0, 0, 0, 0.23);
+
+			.box-label {
+				@apply text-sm mr-3 my-auto;
+				// padding: 7px 0;
+				height: fit-content;
+			}
+
+			.rs-radio-checker {
+				label {
+					@apply py-2 text-opacity-70;
+
+					&:hover {
+						@apply text-primary;
+					}
+				}
+			}
+
+			.rs-radio-checked {
+				label {
+					@apply text-primary;
+				}
+
+				.rs-radio-checker {
+					@apply border-primary;
+					border-bottom-width: 1.5px;
+				}
+			}
+		}
+
 		.buttons {
 			@apply flex flex-col items-center sm:flex-row sm:justify-center w-full mt-12;
 

@@ -3,15 +3,16 @@ import { useEffect, useState } from 'react';
 import Service from '@src/Components/Service';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
+import { CONFIG } from '@src/App/Config/constants';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import Telegram from '@assets/icons/services/telegram.svg';
-import { Button, Col, Modal, Row, Tooltip, Whisper } from 'rsuite';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
+import { Button, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
@@ -24,6 +25,7 @@ const GetButton = () => {
 		showCode: false,
 		openModal: false,
 		openTooltip: false,
+		shareMode: 'direct',
 	});
 	const [selectedServices, setSelectedServices] = useState<string[]>(['email']);
 
@@ -37,6 +39,10 @@ const GetButton = () => {
 		setSelectedServices(filtered);
 	};
 
+	const getShareLink = (service_title: string, url: string) => {
+		return `${CONFIG.FRONT_DOMAIN}/share/?service=${service_title}&subject=${temp.subject}&link=${url}`;
+	};
+
 	const getCode = () => {
 		if (!temp.url) {
 			set.ou.temp('isValid', false);
@@ -47,13 +53,15 @@ const GetButton = () => {
 			return;
 		}
 
-		const selected = Services(temp.url).filter(service => selectedServices.includes(service.title));
+		const validated_url = urlValidation(temp.url || '');
+		const selected = Services(validated_url).filter(service => selectedServices.includes(service.title));
 
 		const buttons = (
 			<div className='flex-center'>
 				{selected.map((service, i) => {
+					const href = temp.shareMode === 'direct' ? service.url : getShareLink(service.title, validated_url);
 					return (
-						<a href={service.url} target='_blank' rel='noreferrer' key={i}>
+						<a href={href} target='_blank' rel='noreferrer' key={i}>
 							<img
 								src={service.icon}
 								width={32}
@@ -71,7 +79,8 @@ const GetButton = () => {
 		const code = `	<div>
 			${selected
 				.map(service => {
-					return `<a href="${service.url}" target="_blank"><img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:4px"/></a>`;
+					const href = temp.shareMode === 'direct' ? service.url : getShareLink(service.title, validated_url);
+					return `<a href="${href}" target="_blank"><img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:4px"/></a>`;
 				})
 				.join(`\n			`)}
 	</div>`;
@@ -87,30 +96,29 @@ const GetButton = () => {
 	};
 
 	// ? ---------------------- Var -------------------------------
-	const Services = (url?: string) => {
-		const validated_url = urlValidation(url || '');
 
+	const Services = (url?: string) => {
 		return [
 			{
 				title: 'email',
 				icon: Email,
 				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
 				bg: '#888990',
-				url: `mailto:?subject=${temp.subject}&body=${validated_url}`,
+				url: `mailto:?subject=${temp.subject}&body=${url}`,
 			},
 			{
 				title: 'gmail',
 				icon: Gmail,
 				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
 				bg: '#EA4335',
-				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${validated_url}`,
+				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${url}`,
 			},
 			{
 				title: 'telegram',
 				icon: Telegram,
 				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
 				bg: '#2CA5E0',
-				url: `https://telegram.me/share/url?url=${validated_url}&text=${temp.subject}`,
+				url: `https://telegram.me/share/url?url=${url}&text=${temp.subject}`,
 			},
 		];
 	};
@@ -147,6 +155,17 @@ const GetButton = () => {
 						placeholder='Subject'
 					/>
 				</div>
+				<RadioGroup
+					name='radio-group-inline-picker-label'
+					inline
+					className='mode-picker'
+					appearance='picker'
+					defaultValue={temp.shareMode}
+					onChange={value => set.ou.temp('shareMode', value)}>
+					<label className='box-label'>Sharing Mode: </label>
+					<Radio value='direct'>Direct</Radio>
+					<Radio value='indirect'>Indirect</Radio>
+				</RadioGroup>
 				<div className='buttons'>
 					<Button className='choose' onClick={() => set.ou.temp('openModal', true)}>
 						Choose Services
