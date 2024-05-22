@@ -10,7 +10,12 @@
 }
 
 .loading-cover {
+	@apply absolute inset-0 bg-white text-white flex-center;
 	min-height: 300px;
+	z-index: 100;
+	.loading-cover-loader {
+		width: 110px;
+	}
 }
 
 .panel-loader-wrapper {
