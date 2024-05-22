@@ -27,6 +27,39 @@
 				}
 			}
 
+			.mode-picker {
+				@apply mx-auto mt-4;
+				padding-left: 10px;
+				border-color: rgba(0, 0, 0, 0.23);
+
+				.box-label {
+					@apply text-sm mr-3 my-auto;
+					// padding: 7px 0;
+					height: fit-content;
+				}
+
+				.rs-radio-checker {
+					label {
+						@apply py-2 text-opacity-70;
+
+						&:hover {
+							@apply text-primary;
+						}
+					}
+				}
+
+				.rs-radio-checked {
+					label {
+						@apply text-primary;
+					}
+
+					.rs-radio-checker {
+						@apply border-primary;
+						border-bottom-width: 1.5px;
+					}
+				}
+			}
+
 			.services-list {
 				@apply w-full overflow-y-auto mt-8;
 
@@ -34,7 +67,7 @@
 					@apply md:flex md:justify-center;
 				}
 				.service-container {
-					@apply cursor-pointer flex items-center rounded-lg transition-colors duration-300;
+					@apply cursor-pointer px-1 md:px-2 flex items-center rounded-lg transition-colors duration-300;
 					width: fit-content;
 					height: fit-content;
 
@@ -44,7 +77,7 @@
 						height: fit-content;
 
 						img {
-							@apply w-6 h-6 sm:w-8 sm:h-8;
+							@apply w-5 h-5 sm:w-8 sm:h-8;
 						}
 					}
 
