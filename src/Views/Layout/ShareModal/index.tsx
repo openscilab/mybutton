@@ -1,12 +1,13 @@
 import './index.scss';
 import { useState } from 'react';
 import useStore from '@src/Tools/Store/useStore';
+import { CONFIG } from '@src/App/Config/constants';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import Telegram from '@assets/icons/services/telegram.svg';
 import useLocalCache from '@src/Tools/Hooks/useLocalCache';
-import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
+import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
 
 const ShareModal = () => {
@@ -26,7 +27,7 @@ const ShareModal = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `http://localhost:3000/share/?service=${service_title}&subject=${subject}&link=${url}`;
+		return `${CONFIG.FRONT_DOMAIN}/share/?service=${service_title}&subject=${subject}&link=${url}`;
 	};
 
 	// ? ---------------------- Var -------------------------------
