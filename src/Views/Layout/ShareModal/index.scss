@@ -27,35 +27,37 @@
 				}
 			}
 
-			.mode-picker {
+			.radiogroup-whisper {
 				@apply mx-auto mt-4;
-				padding-left: 10px;
-				border-color: rgba(0, 0, 0, 0.23);
+				.mode-picker {
+					padding-left: 10px;
+					border-color: rgba(0, 0, 0, 0.23);
 
-				.box-label {
-					@apply text-sm mr-3 my-auto;
-					// padding: 7px 0;
-					height: fit-content;
-				}
-
-				.rs-radio-checker {
-					label {
-						@apply py-2 text-opacity-70;
-
-						&:hover {
-							@apply text-primary;
-						}
-					}
-				}
-
-				.rs-radio-checked {
-					label {
-						@apply text-primary;
+					.box-label {
+						@apply text-sm mr-3 my-auto;
+						// padding: 7px 0;
+						height: fit-content;
 					}
 
 					.rs-radio-checker {
-						@apply border-primary;
-						border-bottom-width: 1.5px;
+						label {
+							@apply py-2 text-opacity-70;
+
+							&:hover {
+								@apply text-primary;
+							}
+						}
+					}
+
+					.rs-radio-checked {
+						label {
+							@apply text-primary;
+						}
+
+						.rs-radio-checker {
+							@apply border-primary;
+							border-bottom-width: 1.5px;
+						}
 					}
 				}
 			}
@@ -91,6 +93,16 @@
 				}
 			}
 		}
+	}
+}
+
+.share-mode-tooltip {
+	@apply border border-primary text-primary;
+	// background-color: rgb(239, 240, 241);
+	background-color: rgb(246, 244, 248);
+
+	&::after {
+		border-top-color: $primary !important;
 	}
 }
 

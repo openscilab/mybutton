@@ -43,8 +43,11 @@
 			}
 		}
 
-		.mode-picker {
+		.radiogroup-whisper {
+			width: fit-content;
 			@apply mx-auto mt-8;
+		}
+		.mode-picker {
 			padding-left: 10px;
 			border-color: rgba(0, 0, 0, 0.23);
 
@@ -122,8 +125,11 @@
 	}
 }
 
-.copy-tooltip {
-	@apply border bg-white border-primary text-primary;
+.copy-tooltip,
+.share-mode-tooltip {
+	@apply border border-primary text-primary;
+	// background-color: rgb(239, 240, 241);
+	background-color: rgb(246, 244, 248);
 
 	&::after {
 		border-top-color: $primary !important;

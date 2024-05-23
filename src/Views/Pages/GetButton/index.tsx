@@ -155,17 +155,30 @@ const GetButton = () => {
 						placeholder='Subject'
 					/>
 				</div>
-				<RadioGroup
-					name='radio-group-inline-picker-label'
-					inline
-					className='mode-picker'
-					appearance='picker'
-					defaultValue={temp.shareMode}
-					onChange={value => set.ou.temp('shareMode', value)}>
-					<label className='box-label'>Sharing Mode: </label>
-					<Radio value='direct'>Direct</Radio>
-					<Radio value='indirect'>Indirect</Radio>
-				</RadioGroup>
+				<Whisper
+					placement='top'
+					controlId='control-id-hover'
+					trigger='hover'
+					speaker={
+						<Tooltip className='share-mode-tooltip'>
+							Choose to share your link directly on the selected services or do it through MyButton website.
+						</Tooltip>
+					}>
+					<div className='radiogroup-whisper'>
+						<RadioGroup
+							name='radio-group-inline-picker-label'
+							inline
+							className='mode-picker'
+							appearance='picker'
+							defaultValue={temp.shareMode}
+							onChange={value => set.ou.temp('shareMode', value)}>
+							<label className='box-label'>Sharing Mode: </label>
+							<Radio value='direct'>Direct</Radio>
+							<Radio value='indirect'>Indirect</Radio>
+						</RadioGroup>
+					</div>
+				</Whisper>
+
 				<div className='buttons'>
 					<Button className='choose' onClick={() => set.ou.temp('openModal', true)}>
 						Choose Services

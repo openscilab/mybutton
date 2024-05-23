@@ -5,7 +5,7 @@ import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import Telegram from '@assets/icons/services/telegram.svg';
 import useLocalCache from '@src/Tools/Hooks/useLocalCache';
-import { Col, Modal, Radio, RadioGroup, Row } from 'rsuite';
+import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
 
@@ -87,17 +87,29 @@ const ShareModal = () => {
 						placeholder='Subject'
 					/>
 				</div>
-				<RadioGroup
-					name='radio-group-inline-picker-label'
-					inline
-					className='mode-picker'
-					appearance='picker'
-					defaultValue={shareMode}
-					onChange={value => setShareMode(value.toString())}>
-					<label className='box-label'>Sharing Mode: </label>
-					<Radio value='direct'>Direct</Radio>
-					<Radio value='indirect'>Indirect</Radio>
-				</RadioGroup>
+				<Whisper
+					placement='top'
+					controlId='control-id-hover'
+					trigger='hover'
+					speaker={
+						<Tooltip className='share-mode-tooltip'>
+							Choose to share your link directly on the selected services or do it through MyButton website.
+						</Tooltip>
+					}>
+					<div className='radiogroup-whisper'>
+						<RadioGroup
+							name='radio-group-inline-picker-label'
+							inline
+							className='mode-picker'
+							appearance='picker'
+							defaultValue={shareMode}
+							onChange={value => setShareMode(value.toString())}>
+							<label className='box-label'>Sharing Mode: </label>
+							<Radio value='direct'>Direct</Radio>
+							<Radio value='indirect'>Indirect</Radio>
+						</RadioGroup>
+					</div>
+				</Whisper>
 				<div className='services-list'>
 					<Row>
 						{Services.map((service, i) => {
