@@ -1,7 +1,8 @@
 interface Window {
 	logs?: boolean;
 	user_token?: string;
-	server_health?: boolean;
+	CONFIG?: OBJECT;
+	MODE?: 'PRODUCTION' | 'DEVELOPMENT' | 'LOCAL';
 }
 
 declare module 'react-contextmenu' {

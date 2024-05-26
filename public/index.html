@@ -12,6 +12,24 @@
 		<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-osl.png" />
 		<title>MyButton</title>
 	</head>
+	<script>
+		//* Set mode
+		let MODE;
+		let src = window.location.hostname;
+		if (!!src) src = src.replace('www.', '');
+		switch (src) {
+			case 'localhost':
+				MODE = 'LOCAL';
+				break;
+			case 'dev.mybutton.click':
+				MODE = 'DEVELOPMENT';
+				break;
+			case 'mybutton.click':
+				MODE = 'PRODUCTION';
+				break;
+		}
+		window.MODE = MODE;
+	</script>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<div id="root"></div>
