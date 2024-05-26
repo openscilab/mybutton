@@ -43,6 +43,42 @@
 			}
 		}
 
+		.radiogroup-whisper {
+			width: fit-content;
+			@apply mx-auto mt-8;
+		}
+		.mode-picker {
+			padding-left: 10px;
+			border-color: rgba(0, 0, 0, 0.23);
+
+			.box-label {
+				@apply text-sm mr-3 my-auto;
+				// padding: 7px 0;
+				height: fit-content;
+			}
+
+			.rs-radio-checker {
+				label {
+					@apply py-2 text-opacity-70;
+
+					&:hover {
+						@apply text-primary;
+					}
+				}
+			}
+
+			.rs-radio-checked {
+				label {
+					@apply text-primary;
+				}
+
+				.rs-radio-checker {
+					@apply border-primary;
+					border-bottom-width: 1.5px;
+				}
+			}
+		}
+
 		.buttons {
 			@apply flex flex-col items-center sm:flex-row sm:justify-center w-full mt-12;
 
@@ -89,8 +125,11 @@
 	}
 }
 
-.copy-tooltip {
-	@apply border bg-white border-primary text-primary;
+.copy-tooltip,
+.share-mode-tooltip {
+	@apply border border-primary text-primary;
+	// background-color: rgb(239, 240, 241);
+	background-color: rgb(246, 244, 248);
 
 	&::after {
 		border-top-color: $primary !important;

@@ -1,15 +1,18 @@
 import RouteRenderer, { Path } from '@src/App/Routes/RouteRenderer';
-import Home from './Home/index';
-import GetButton from './GetButton';
+import { lazy } from 'react';
 
 const PagesRouter = () => <RouteRenderer {...{ routes }} />;
 
 export const routes: Path[] = [
-	{ exact: true, path: ['/get'], component: () => <GetButton /> },
+	{
+		path: ['/get'],
+		exact: true,
+		component: lazy(() => import('../Pages/GetButton')),
+	},
 	{
 		exact: false,
 		path: ['*'],
-		component: () => <Home />,
+		component: lazy(() => import('../Pages/Home')),
 	},
 ];
 

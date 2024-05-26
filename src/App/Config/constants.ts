@@ -1,32 +1,30 @@
-import { isDev } from '../../Tools/Utils/React';
-
 const BaseConfig = {
 	BASE_URL: '/',
 	SERVER: '<SERVER_ADDRESS>',
 	APP_NAME: '<APP_NAME>',
 	APP_SHORT_NAME: '<APP_SHORT_NAME>',
-
-	//* Parse
-	Parse: {
-		appId: '<appID>',
-		//exp: 'myAppId',
-
-		serverURL: '<serverURL>',
-		//exp: 'https://back.test.com/parse'
-
-		liveQueryServerURL: '<liveQueryServerURL>',
-		//exp: 'wss://back.test.com'
-	},
 };
 
-const DevConfig = {
-	// SERVER: 'http://127.0.0.1:1337',
-	// API_SERVER: `${BaseConfig.SERVER}/api`,
-	// API_SERVER: 'http://127.0.0.1:1337/api',
+const LOCAL = {
+	FRONT_DOMAIN: 'http://localhost:3000',
 };
 
-const ProdConfig = {
-	API_SERVER: `${BaseConfig.SERVER}/api`,
+const DEVELOPMENT = {
+	FRONT_DOMAIN: 'https://dev.mybutton.click',
 };
 
-export const CONFIG = { ...BaseConfig, ...(isDev ? DevConfig : ProdConfig) };
+const PRODUCTION = {
+	FRONT_DOMAIN: 'https://mybutton.click',
+};
+
+//? --------------------- Config selection ----------------------------------------
+
+export type CONFIG_TYPE = typeof BaseConfig & typeof PRODUCTION & typeof DEVELOPMENT & typeof LOCAL;
+
+const CONFIG_BY_MODE: CONFIG_TYPE = {
+	...(({ LOCAL, PRODUCTION, DEVELOPMENT } as any)[window.MODE as any] || {}),
+};
+
+export const CONFIG = { ...BaseConfig, ...CONFIG_BY_MODE };
+
+window.CONFIG = CONFIG;
