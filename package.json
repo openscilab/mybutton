@@ -1,7 +1,20 @@
 {
-	"name": "react-ts",
+	"name": "mybutton",
+	"description": "Effortless link sharing across your desired platforms",
 	"version": "0.1.0",
-	"private": true,
+	"author": "MyButton Development Team",
+	"license": "MIT",
+	"homepage": "https://github.com/openscilab/mybutton",
+	"bugs": "https://github.com/openscilab/mybutton/issues",
+	"keywords": [
+		"url-sharing",
+		"open-source",
+		"link-sharing",
+		"share-buttons",
+		"web-development",
+		"platform-integration",
+		"social-media-sharing"
+	],
 	"cracoConfig": "craco.config.js",
 	"dependencies": {
 		"@craco/craco": "^6.2.0",

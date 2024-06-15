@@ -16,7 +16,7 @@
 	},
 	"cSpell.words": [
 		"animatecss",
-		"autohqs",
+		"mybutton",
 		"btns",
 		"contextmenu",
 		"countup",
@@ -34,8 +34,7 @@
 		"sortablejs",
 		"swiper",
 		"tailwindcss",
-		"xmark",
-		"zipcode"
+		"xmark"
 	],
 	"svg.preview.background": "dark-transparent"
 }
