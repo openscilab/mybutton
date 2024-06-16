@@ -33,7 +33,7 @@ Just fill an issue and describe it. We'll check it ASAP! or send an email to [in
 
 You can also join our discord server
 
-<a href="https://discord.gg/JpvX3DQx">
+<a href="https://discord.gg/T2VzhzqU67">
   <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
 </a>
 
