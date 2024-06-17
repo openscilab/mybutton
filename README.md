@@ -27,7 +27,7 @@ MyButton is an open-source project that streamlines the process of sharing links
 
 ## Issues & bug reports
 
-Just fill an issue and describe it. We'll check it ASAP! or send an email to [info@openscilab.com](mailto:info@openscilab.com 'info@openscilab.com').
+Just fill an issue and describe it. We'll check it ASAP! or send an email to [mybutton@openscilab.com](mailto:mybutton@openscilab.com 'mybutton@openscilab.com').
 
 -   Please complete the issue template
 
