@@ -1,17 +1,15 @@
-## Table of contents
+<div align="center">
 
--   [Overview](https://github.com/openscilab/mybutton#overview)
--   [Supported Services](https://github.com/openscilab/mybutton#supported-services)
--   [Issues & Bug Reports](https://github.com/openscilab/mybutton#issues--bug-reports)
--   [Contribution](https://github.com/openscilab/mybutton/blob/main/.github/CONTRIBUTING.md)
--   [Authors](https://github.com/openscilab/mybutton/blob/main/AUTHORS.md)
--   [License](https://github.com/openscilab/mybutton/blob/main/LICENSE)
--   [Show Your Support](https://github.com/openscilab/mybutton#show-your-support)
--   [Changelog](https://github.com/openscilab/mybutton/blob/main/CHANGELOG.md)
--   [Code of Conduct](https://github.com/openscilab/mybutton/blob/main/.github/CODE_OF_CONDUCT.md)
+[![React](https://img.shields.io/badge/react-black?logo=react&style=for-the-badge)](https://reactjs.org/) 
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&style=for-the-badge)](https://www.typescriptlang.org/)
+
+<a href="https://discord.gg/T2VzhzqU67">
+  <img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel">
+</a>
+
+</div>
 
 ## Overview
-
 MyButton is an open-source project that streamlines the process of sharing links to your preferred online services. It provides a user-friendly interface that allows users to seamlessly share content with just a few clicks. MyButton takes care of the technical aspects. Depending on the chosen service, it might:
 
 -   Redirect you directly to the platform with the link pre-populated.
