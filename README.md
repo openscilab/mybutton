@@ -1,12 +1,13 @@
 <div align="center">
-
-[![React](https://img.shields.io/badge/react-black?logo=react&style=for-the-badge)](https://reactjs.org/) 
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&style=for-the-badge)](https://www.typescriptlang.org/)
-
+<a href="https://reactjs.org/">
+  <img src="https://img.shields.io/badge/react-black?logo=react&style=for-the-badge" alt="React"/>
+</a>
+<a href="https://www.typescriptlang.org/">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&style=for-the-badge" alt="TypeScript"/>
+</a>
 <a href="https://discord.gg/T2VzhzqU67">
   <img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel">
 </a>
-
 </div>
 
 ## Overview
