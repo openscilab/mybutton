@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/badge/react-black?logo=react&style=for-the-badge" alt="React"/>
 </a>
 <a href="https://www.typescriptlang.org/">
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&style=for-the-badge" alt="TypeScript"/>
+  <img src="https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square" alt="TypeScript"/>
 </a>
 <a href="https://discord.gg/T2VzhzqU67">
   <img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel">
