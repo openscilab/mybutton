@@ -51,14 +51,30 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: operating-system
+    id: device-type
     attributes:
-      label: Operating system
-      description: Which operating system are you using?
+      label: Device Type
+      description: What type of device are you using?
       options:
-        - Windows
-        - macOS
-        - Linux
+        - Desktop
+        - Mobile
+        - Tablet/iPad
+        - Other
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: What is your browser?
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Opera
+        - Other
       default: 0
     validations:
       required: true
