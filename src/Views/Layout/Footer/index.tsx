@@ -9,7 +9,7 @@ const Footer = () => {
 				Empowered by OSL team
 			</a>
 			<div className='social-links'>
-				<a href='https://discord.gg/JpvX3DQx' target='_blank' rel='noreferrer'>
+				<a href='https://discord.gg/T2VzhzqU67' target='_blank' rel='noreferrer'>
 					<Discord className='social-icon' />
 				</a>
 				<a href='https://github.com/openscilab/mybutton' target='_blank' rel='noreferrer'>
