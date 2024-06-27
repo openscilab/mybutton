@@ -1,5 +1,5 @@
 .footer-layout {
-	@apply bg-white bg-opacity-30 flex-center py-4 z-10 backdrop-filter backdrop-blur-md shadow-light md:fixed bottom-0 w-full;
+	@apply bg-white bg-opacity-30 flex-center flex-col pt-4 pb-2 z-10 backdrop-filter backdrop-blur-md shadow-light md:fixed bottom-0 w-full;
 
 	-webkit-backdrop-filter: blur(12px);
 	backdrop-filter: blur(12px);
@@ -9,34 +9,41 @@
 		width: contain;
 	}
 
-	.social-links {
-		@apply flex-center text-gray-700;
+	.about-mybutton {
+		@apply flex-center;
+		.social-links {
+			@apply flex;
 
-		a {
-			@apply transition-all;
-			&:hover {
-				scale: 1.05;
+			a {
+				@apply transition-all;
+				&:hover {
+					scale: 1.05;
 
-				.fa-icon {
-					@apply bg-gray-900;
+					.fa-icon {
+						@apply bg-gray-900;
+					}
+				}
+				&:not(:last-of-type) {
+					@apply mr-2;
 				}
 			}
-			&:not(:last-of-type) {
-				@apply mr-2;
+
+			.social-icon {
+				@apply p-1 rounded-full bg-primary bg-opacity-80 transition-colors;
+				width: 1.6rem;
+				height: 1.6rem;
+				padding: 0.3rem;
+
+				fill: white;
 			}
 		}
-
-		.social-icon {
-			@apply p-1 rounded-full bg-gray-500 transition-colors;
-			width: 1.6rem;
-			height: 1.6rem;
-			padding: 0.3rem;
-
-			fill: white;
+		.empowered {
+			font-size: 0.8rem;
+			@apply text-gray-600 hover:text-gray-900 font-medium transition-colors mr-2;
 		}
 	}
-
-	.empowered {
-		@apply mr-5 text-xs text-gray-500 hover:text-gray-900 transition-colors;
+	.version {
+		font-size: 0.6rem;
+		@apply text-xs text-gray-500 mt-1;
 	}
 }

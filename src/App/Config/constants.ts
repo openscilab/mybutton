@@ -3,6 +3,7 @@ const BaseConfig = {
 	SERVER: '<SERVER_ADDRESS>',
 	APP_NAME: '<APP_NAME>',
 	APP_SHORT_NAME: '<APP_SHORT_NAME>',
+	VERSION: 0.1,
 };
 
 const LOCAL = {
