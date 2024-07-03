@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-      - name: Version check
+      - name: Version Check
         run: |
           python otherfiles/version_check.py
       - name: Install Node 16.15.1
