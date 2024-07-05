@@ -19,7 +19,7 @@ FILES = {
     "CHANGELOG.md": CHANGELOG_ITEMS,
     "SECURITY.md": SECURITY_ITEMS,
     os.path.join(".github", "ISSUE_TEMPLATE", "bug_report.yml"): ISSUE_TEMPLATE_ITEMS,
-    os.path.join("src", "App", "Config", "constant.ts"): CONSTANT_ITEMS,
+    os.path.join("src", "App", "Config", "constants.ts"): CONSTANT_ITEMS,
 }
 
 TEST_NUMBER = len(FILES)
