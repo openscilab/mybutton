@@ -13,11 +13,13 @@ CHANGELOG_ITEMS = [
     "[{0}]:"]
 ISSUE_TEMPLATE_ITEMS = ["- MyButton {0}"]
 SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
+CONSTANT_ITEMS = ["	VERSION: {0},"]
 
 FILES = {
     "CHANGELOG.md": CHANGELOG_ITEMS,
     "SECURITY.md": SECURITY_ITEMS,
     os.path.join(".github", "ISSUE_TEMPLATE", "bug_report.yml"): ISSUE_TEMPLATE_ITEMS,
+    os.path.join("src", "App", "Config", "constant.ts"): CONSTANT_ITEMS,
 }
 
 TEST_NUMBER = len(FILES)
