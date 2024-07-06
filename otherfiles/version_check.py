@@ -14,7 +14,7 @@ CHANGELOG_ITEMS = [
 ISSUE_TEMPLATE_ITEMS = ["- MyButton {0}"]
 SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
 CONSTANT_ITEMS = ["	VERSION: {0},"]
-PACKAGE_ITEMS = ["	version: \"{0}\","]
+PACKAGE_ITEMS = ["	\"version\": \"{0}\","]
 
 FILES = {
     "CHANGELOG.md": CHANGELOG_ITEMS,
