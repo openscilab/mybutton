@@ -14,10 +14,12 @@ CHANGELOG_ITEMS = [
 ISSUE_TEMPLATE_ITEMS = ["- MyButton {0}"]
 SECURITY_ITEMS = ["| {0}           | :white_check_mark: |", "| < {0}         | :x:                |"]
 CONSTANT_ITEMS = ["	VERSION: {0},"]
+PACKAGE_ITEMS = ["	version: {0},"]
 
 FILES = {
     "CHANGELOG.md": CHANGELOG_ITEMS,
     "SECURITY.md": SECURITY_ITEMS,
+    "package.json": PACKAGE_ITEMS,
     os.path.join(".github", "ISSUE_TEMPLATE", "bug_report.yml"): ISSUE_TEMPLATE_ITEMS,
     os.path.join("src", "App", "Config", "constants.ts"): CONSTANT_ITEMS,
 }
