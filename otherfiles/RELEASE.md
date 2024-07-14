@@ -6,8 +6,8 @@
 2. Update all version tags
     1. `SECURITY.md`
     2. `package.json`
-    2. `otherfiles/version_check.py`
-    3. `src/App/Config/constants.ts`
+    3. `otherfiles/version_check.py`
+    4. `src/App/Config/constants.ts`
 3. Update `CHANGELOG.md`
     1. Add a new header under `Unreleased` section (Example: `## [0.1] - 2022-08-17`)
     2. Add a new compare link to the end of the file (Example: `[0.2]: https://github.com/openscilab/mybutton/compare/v0.1...v0.2`)
