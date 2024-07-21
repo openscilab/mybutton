@@ -1,8 +1,6 @@
 const BaseConfig = {
-	BASE_URL: '/',
-	SERVER: '<SERVER_ADDRESS>',
-	APP_NAME: '<APP_NAME>',
-	APP_SHORT_NAME: '<APP_SHORT_NAME>',
+	APP_NAME: 'MyButton',
+	APP_SHORT_NAME: 'MyBTN',
 	VERSION: 0.1,
 };
 
