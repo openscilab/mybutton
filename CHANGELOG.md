@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
-## [0.1] - 2024-xx-xx
+## [0.1] - 2024-07-24
 ### Added
 -   `Email` support
 -   `Gmail` support
