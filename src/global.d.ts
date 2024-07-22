@@ -1,6 +1,4 @@
 interface Window {
-	logs?: boolean;
-	user_token?: string;
 	CONFIG?: OBJECT;
 	MODE?: 'PRODUCTION' | 'DEVELOPMENT' | 'LOCAL';
 }
