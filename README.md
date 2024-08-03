@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://github.com/openscilab/mybutton/raw/main/otherfiles/logo.png" width="500" height="160">
+<img src="https://github.com/openscilab/mybutton/raw/main/otherfiles/logo.png" width="500" height="350">
     <br/>
     <br/>
 <a href="https://reactjs.org/">
