@@ -1,4 +1,7 @@
 <div align="center">
+<img src="https://github.com/openscilab/mybutton/raw/main/otherfiles/logo.png" width="500" height="350">
+    <br/>
+    <br/>
 <a href="https://reactjs.org/">
   <img src="https://img.shields.io/badge/react-black?logo=react&style=for-the-badge" alt="React" style="height: 24px;">
 </a>
@@ -11,6 +14,7 @@
 </div>
 
 ## Overview
+
 MyButton is an open-source project that streamlines the process of sharing links to your preferred online services. It provides a user-friendly interface that allows users to seamlessly share content with just a few clicks. MyButton takes care of the technical aspects. Depending on the chosen service, it might:
 
 -   Redirect you directly to the platform with the link pre-populated.

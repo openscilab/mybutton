@@ -13,7 +13,11 @@
 	}
 
 	@include down(md) {
-		padding: 5px 4%;
+		padding: 10px 4%;
+	}
+	@include down(sm) {
+		padding-top: 5px;
+		padding-bottom: 5px;
 	}
 
 	* {
@@ -64,81 +68,9 @@
 		.nav-brand {
 			@apply px-0 py-0 select-none text-primary font-bold text-lg sm:text-xl cursor-pointer;
 			height: max-content;
-		}
 
-		.login-btn {
-			@apply flex justify-end absolute right-0;
-			// @apply mt-12;
-			.fa-btn {
-				@apply text-white text-base font-medium animate-fade-in;
-				background-color: $secondary;
-				padding: 0.5rem 2.3rem;
-				border-radius: 20px;
-				.fa-icon {
-					@apply w-4;
-				}
-			}
-		}
-
-		.logout-btn {
-			width: 20px;
-			height: 20px;
-			@apply md:mr-6 md:mt-2.5 text-error text-opacity-60 cursor-pointer;
-			&:hover {
-				@apply text-opacity-100;
-			}
-
-			@include down(md) {
-				top: -19px;
-				@apply absolute right-14;
-			}
-		}
-	}
-}
-
-.navbar-layout-minimal {
-	@apply bg-white bg-opacity-50 backdrop-filter backdrop-blur-sm shadow-light transition-all;
-
-	padding: 10px 5% 10px 5%;
-
-	.logout-btn {
-		@include down(md) {
-			top: 0.75rem !important;
-		}
-	}
-
-	.rs-navbar-brand {
-		// padding-top: 5px !important;
-	}
-	img {
-		width: 70% !important;
-	}
-	.nav-item {
-		font-size: 14px !important;
-		padding: 0.5rem 0 !important;
-		margin-right: 2.5rem !important;
-		margin-left: 2.5rem !important;
-		// margin-top: 10px !important;
-		// margin-right: 0.5rem !important;
-		border: 0 !important;
-		@apply mt-1 rounded-md;
-		&.rs-navbar-item-active {
-			background: rgba($color: $primary, $alpha: 0.1) !important;
-
-			&::after {
-				top: 25px !important;
-				bottom: 0 !important;
-			}
-			// @apply shadow-inner;
-		}
-	}
-	.login-btn {
-		.fa-btn {
-			font-size: 14px !important;
-			padding: 0.4rem 1.5rem 0.4rem !important;
-
-			.fa-icon {
-				width: 0.8rem !important;
+			.logo-text {
+				@apply w-24 h-5 sm:w-32 sm:h-10;
 			}
 		}
 	}

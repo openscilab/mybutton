@@ -2,8 +2,9 @@ import './NavBar.scss';
 import { useState } from 'react';
 import { Navbar, Nav } from 'rsuite';
 import { classes } from '@tools/Utils/React';
-import useStore from '@src/Tools/Store/useStore';
 import { useNavigate } from 'react-router-dom';
+import useStore from '@src/Tools/Store/useStore';
+import { ReactComponent as Logo } from '@assets/Images/logo-text.svg';
 import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
 
 const NavBar = () => {
@@ -19,7 +20,7 @@ const NavBar = () => {
 		<div {...classes('navbar-layout')}>
 			<Navbar className='navbar'>
 				<Navbar.Brand className='nav-brand' onClick={() => navigate('/')}>
-					MyButton
+					<Logo className='logo-text' />
 				</Navbar.Brand>
 
 				<Nav className='main-nav' activeKey={activeKey} onSelect={setActiveKey} pullRight>
