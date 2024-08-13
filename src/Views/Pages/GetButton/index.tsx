@@ -40,7 +40,7 @@ const GetButton = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/share/?service=${service_title}&subject=${temp.subject}&link=${url}`;
+		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
 	};
 
 	const getCode = () => {
