@@ -126,7 +126,7 @@ const GetButton = () => {
 	// ? ------------------------------ useEffect -------------------------------
 	useEffect(() => {
 		if (temp.showCode) getCode();
-	}, [selectedServices]);
+	}, [selectedServices, temp.shareMode]);
 	// --------------------------------------------------------------------------
 	return (
 		<div className='get-button-layout'>
