@@ -5,10 +5,9 @@ import { CONFIG } from '@src/App/Config/constants';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import Telegram from '@assets/icons/services/telegram.svg';
-import useLocalCache from '@src/Tools/Hooks/useLocalCache';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
-import { setOpenShareModal } from '@src/Tools/Store/actions/LocalCacheActions';
+import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
 
 const ShareModal = () => {
 	const { dispatch } = useStore();

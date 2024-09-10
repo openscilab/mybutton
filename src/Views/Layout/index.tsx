@@ -1,30 +1,22 @@
 import './index.scss';
+import Footer from './Footer';
+import { useEffect } from 'react';
 import NavBar from './Navbar/NavBar';
 import ShareModal from './ShareModal';
-import PagesRouter from '../Pages/router';
+import PagesRouter from '../Pages/PagesRouter';
+import useStore from '@src/Tools/Store/useStore';
+import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as Bg } from '@assets/Images/bg.svg';
-import Footer from './Footer';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { setActivePage } from '@src/Tools/Store/slices/LocalCacheSlice';
 
 const Layout = () => {
-	const navigate = useNavigate();
-	const params_string = window.location.search;
-	const urlParams = new URLSearchParams(params_string);
+	const urlParams = useSearchParams()[0];
 	const path = urlParams.get('path');
+	const { dispatch } = useStore();
 
 	useEffect(() => {
-		if (path) {
-			urlParams.delete('path');
-			const new_params = urlParams.toString();
-			navigate(`/${path}`);
-			if (new_params) window.location.search = new_params;
-		}
-	}, []);
-
-	if (path) {
-		return <div className='root-layout' />;
-	}
+		dispatch(setActivePage(path));
+	}, [path]);
 
 	return (
 		<div className='root-layout'>

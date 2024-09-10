@@ -62,6 +62,10 @@
 				&:hover {
 					@apply text-primary text-opacity-100 font-medium cursor-pointer;
 				}
+
+				&.active {
+					@apply text-primary text-opacity-100 font-medium;
+				}
 			}
 		}
 
