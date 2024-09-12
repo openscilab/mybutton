@@ -1,18 +1,18 @@
 import './index.scss';
 import { Autoplay } from 'swiper';
 import { Button, Col, Row } from 'rsuite';
-import { useNavigate } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import useWindow from '@src/Tools/Hooks/useWindow';
+import { classes } from '../../../Tools/Utils/React';
 import responsive from '@assets/Images/responsive.png';
 import openSource from '@assets/Images/open-source.png';
 import noAccount from '@assets/Images/no-account-needed.png';
 import { Swiper, SwiperSlide, useSwiper, EffectCards } from '@components/Swiper/Swiper';
-import useWindow from '@src/Tools/Hooks/useWindow';
 import { ReactComponent as Right } from '@assets/icons/angle-right-solid.svg';
 import { ReactComponent as Left } from '@assets/icons/angle-left-solid.svg';
-import { classes } from '../../../Tools/Utils/React';
 
 const Home = () => {
-	const navigate = useNavigate();
+	const setSearchParams = useSearchParams()[1];
 
 	// -----------------------------------------------------------------
 	return (
@@ -38,7 +38,7 @@ const Home = () => {
 				</Col>
 				<Col xs={24} md={12} className='info-col'>
 					<h1>My Button</h1>
-					<Button className='get-share-buttons' onClick={() => navigate('/get')}>
+					<Button className='get-share-buttons' onClick={() => setSearchParams({ path: 'get' })}>
 						Get Share Buttons
 					</Button>
 				</Col>

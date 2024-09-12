@@ -1,24 +1,13 @@
 // <reference types="redux-persist" />
 import { Provider } from 'react-redux';
-import { createStateSyncMiddleware } from 'redux-state-sync';
-
-import { isDev } from '../Utils/React';
 import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-
-import persistStore from 'redux-persist/es/persistStore';
-import reducers from './reducers';
-
-const stateSyncConfig = { blacklist: ['persist/PERSIST', 'persist/REHYDRATE'] };
+import reducers from './slices';
 
 export const store = configureStore({
-	devTools: isDev,
 	reducer: reducers,
-	middleware: getDefMid => {
-		const mids = getDefMid({ serializableCheck: false });
-		mids.push(createStateSyncMiddleware(stateSyncConfig));
-		return mids;
-	},
+	middleware: getDefMid => getDefMid({ serializableCheck: false }),
 });
 
 const Store: FC = ({ children }) => (

@@ -1,4 +1,4 @@
-import { ReactComponent as Loader } from '@assets/icons/circles.svg';
+import { ReactComponent as Loader } from '@assets/icons/loader.svg';
 
 type LoadingCoverProps = { className?: string };
 
