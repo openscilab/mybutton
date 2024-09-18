@@ -7,8 +7,8 @@ on:
     branches: [dev]
 
 jobs:
-  build:
-    runs-on: self-hosted
+  version_check:
+    runs-on: ubuntu-latest
     steps:
       - name: Download Code
         uses: actions/checkout@v3
@@ -19,11 +19,32 @@ jobs:
       - name: Version Check
         run: |
           python otherfiles/version_check.py
-      - name: Install Node 16.15.1
+  build:
+    runs-on: ubuntu-latest
+    needs: version_check
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node.js 16.15.1
         uses: actions/setup-node@v3
         with:
           node-version: 16.15.1
-      - name: Install Dependencies & Build 
-        run: |
-          yarn install  
+      - run: |
+          yarn install
           yarn build
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: craco_build_output
+          path: build/**
+  deploy:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: craco_build_output
+          path: build
+      - run: |
+          yarn install
