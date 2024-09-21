@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
-- move `build` & `version_check` steps to `github runners`
+- Move `build` & `version_check` steps to `github runners`
 ## [0.2] - 2024-09-16
 ### Added
 -   MyButton Logo
