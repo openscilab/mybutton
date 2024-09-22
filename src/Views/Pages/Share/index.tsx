@@ -7,10 +7,11 @@ const Share = () => {
 	const location = useLocation();
 
 	const services_url = (subject: string, link: string): { [key: string]: string } => {
+		const encodedLink = encodeURIComponent(link);
 		return {
-			email: `mailto:?subject=${subject}&body=${link}`,
-			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${link}`,
-			telegram: `https://telegram.me/share/url?url=${link}&text=${subject}`,
+			email: `mailto:?subject=${subject}&body=${encodedLink}`,
+			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${encodedLink}`,
+			telegram: `https://telegram.me/share/url?url=${encodedLink}&text=${subject}`,
 		};
 	};
 
