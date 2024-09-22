@@ -26,15 +26,16 @@ const ShareModal = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${url}`;
+		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${encodeURIComponent(url)}`;
 	};
 
 	// ? ---------------------- Var -------------------------------
 	const services_url = (): { [key: string]: string } => {
+		const encodedLink = encodeURIComponent(url);
 		return {
-			email: `mailto:?subject=${subject}&body=${url}`,
-			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
-			telegram: `https://telegram.me/share/url?url=${url}&text=${subject}`,
+			email: `mailto:?subject=${subject}&body=${encodedLink}`,
+			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${encodedLink}`,
+			telegram: `https://telegram.me/share/url?url=${encodedLink}&text=${subject}`,
 		};
 	};
 
