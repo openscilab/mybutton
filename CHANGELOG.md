@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 ### Changed
 - Move `build` & `version_check` steps to `github runners`
+- `AUTHORS.md` updated
 ## [0.2] - 2024-09-16
 ### Added
 -   MyButton Logo
