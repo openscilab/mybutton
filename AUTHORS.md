@@ -1,4 +1,4 @@
-# Authors
+# Core Developers
 
 ---
 
@@ -10,3 +10,8 @@
 # Other Contributors
 
 ---
+
+- [@boreshnavard](https://github.com/boreshnavard) ++
+
+
+++ **Graphic designer**
