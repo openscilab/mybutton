@@ -40,9 +40,7 @@ const GetButton = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${temp.subject}&link=${encodeURIComponent(
-			url
-		)}`;
+		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
 	};
 
 	const getCode = () => {
@@ -92,36 +90,39 @@ const GetButton = () => {
 	};
 
 	const urlValidation = (url: string) => {
-		if (url.includes('://')) return url;
-
-		return `http://${url}`;
+		let validated = url;
+		const decoded_url = decodeURIComponent(url);
+		if (!url.includes('://')) {
+			if (decoded_url.includes('://')) return validated;
+			validated = `http://${url}`;
+		}
+		return encodeURIComponent(validated);
 	};
 
 	// ? ---------------------- Var -------------------------------
 
 	const Services = (url: string = '') => {
-		const encodedUrl = encodeURIComponent(url);
 		return [
 			{
 				title: 'email',
 				icon: Email,
 				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
 				bg: '#888990',
-				url: `mailto:?subject=${temp.subject}&body=${encodedUrl}`,
+				url: `mailto:?subject=${temp.subject}&body=${url}`,
 			},
 			{
 				title: 'gmail',
 				icon: Gmail,
 				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
 				bg: '#EA4335',
-				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${encodedUrl}`,
+				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${url}`,
 			},
 			{
 				title: 'telegram',
 				icon: Telegram,
 				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
 				bg: '#2CA5E0',
-				url: `https://telegram.me/share/url?url=${encodedUrl}&text=${temp.subject}`,
+				url: `https://telegram.me/share/url?url=${url}&text=${temp.subject}`,
 			},
 		];
 	};
