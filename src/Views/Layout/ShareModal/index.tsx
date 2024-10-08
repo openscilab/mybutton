@@ -20,22 +20,25 @@ const ShareModal = () => {
 	// ? ------------------------- Functions -----------------------
 
 	const urlValidation = (url: string) => {
-		if (url.includes('://')) return url;
-
-		return `http://${url}`;
+		let validated = url;
+		const decoded_url = decodeURIComponent(url);
+		if (!url.includes('://')) {
+			if (decoded_url.includes('://')) return validated;
+			validated = `http://${url}`;
+		}
+		return encodeURIComponent(validated);
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${encodeURIComponent(url)}`;
+		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${url}`;
 	};
 
 	// ? ---------------------- Var -------------------------------
-	const services_url = (): { [key: string]: string } => {
-		const encodedLink = encodeURIComponent(url);
+	const services_url = (url: string): { [key: string]: string } => {
 		return {
-			email: `mailto:?subject=${subject}&body=${encodedLink}`,
-			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${encodedLink}`,
-			telegram: `https://telegram.me/share/url?url=${encodedLink}&text=${subject}`,
+			email: `mailto:?subject=${subject}&body=${url}`,
+			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
+			telegram: `https://telegram.me/share/url?url=${url}&text=${subject}`,
 		};
 	};
 
@@ -117,7 +120,7 @@ const ShareModal = () => {
 							const validated_url = urlValidation(url);
 							const href =
 								shareMode === 'direct'
-									? services_url()[service.title]
+									? services_url(validated_url)[service.title]
 									: getShareLink(service.title, validated_url);
 							return (
 								<Col xs={8} key={i}>
