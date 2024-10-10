@@ -2,9 +2,7 @@ import './index.scss';
 import { useState } from 'react';
 import useStore from '@src/Tools/Store/useStore';
 import { CONFIG } from '@src/App/Config/constants';
-import Email from '@assets/icons/services/email.svg';
-import Gmail from '@assets/icons/services/gmail.svg';
-import Telegram from '@assets/icons/services/telegram.svg';
+import { Services, services_url } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
@@ -33,32 +31,6 @@ const ShareModal = () => {
 		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${url}`;
 	};
 
-	// ? ---------------------- Var -------------------------------
-	const services_url = (url: string): { [key: string]: string } => {
-		return {
-			email: `mailto:?subject=${subject}&body=${url}`,
-			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
-			telegram: `https://telegram.me/share/url?url=${url}&text=${subject}`,
-		};
-	};
-
-	const Services = [
-		{
-			title: 'email',
-			icon: Email,
-			bg: '#888990',
-		},
-		{
-			title: 'gmail',
-			icon: Gmail,
-			bg: '#EA4335',
-		},
-		{
-			title: 'telegram',
-			icon: Telegram,
-			bg: '#2CA5E0',
-		},
-	];
 	// --------------------------------------------------------------
 	return (
 		<Modal
@@ -120,7 +92,7 @@ const ShareModal = () => {
 							const validated_url = urlValidation(url);
 							const href =
 								shareMode === 'direct'
-									? services_url(validated_url)[service.title]
+									? services_url(validated_url, subject)[service.title]
 									: getShareLink(service.title, validated_url);
 							return (
 								<Col xs={8} key={i}>

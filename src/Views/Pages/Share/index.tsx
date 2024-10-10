@@ -2,18 +2,10 @@ import './index.scss';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import LoadingCover from '@src/Components/LoadingCover';
+import { services_url } from '@src/Data/services.data';
 
 const Share = () => {
 	const location = useLocation();
-
-	const services_url = (subject: string, link: string): { [key: string]: string } => {
-		const encodedLink = encodeURIComponent(link);
-		return {
-			email: `mailto:?subject=${subject}&body=${encodedLink}`,
-			gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${encodedLink}`,
-			telegram: `https://telegram.me/share/url?url=${encodedLink}&text=${subject}`,
-		};
-	};
 
 	useEffect(() => {
 		const urlParams = new URLSearchParams(location.search);
@@ -21,7 +13,7 @@ const Share = () => {
 		const subject = urlParams.get('subject') || '';
 		const link = urlParams.get('link') || '';
 
-		const url = services_url(subject, link)[service];
+		const url = services_url(encodeURIComponent(link), subject)[service];
 		setTimeout(() => {
 			window.open(url, '_self');
 		}, 100);

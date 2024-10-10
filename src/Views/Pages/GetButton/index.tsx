@@ -4,11 +4,9 @@ import Service from '@src/Components/Service';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
 import { CONFIG } from '@src/App/Config/constants';
-import Email from '@assets/icons/services/email.svg';
-import Gmail from '@assets/icons/services/gmail.svg';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
-import Telegram from '@assets/icons/services/telegram.svg';
+import { Services, services_url } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
@@ -54,12 +52,13 @@ const GetButton = () => {
 		}
 
 		const validated_url = urlValidation(temp.url || '');
-		const selected = Services(validated_url).filter(service => selectedServices.includes(service.title));
+		const selected = Services.filter(service => selectedServices.includes(service.title));
+		const urls = services_url(validated_url, temp.subject);
 
 		const buttons = (
 			<div className='flex-center'>
 				{selected.map((service, i) => {
-					const href = temp.shareMode === 'direct' ? service.url : getShareLink(service.title, validated_url);
+					const href = temp.shareMode === 'direct' ? urls[service.title] : getShareLink(service.title, validated_url);
 					return (
 						<a href={href} target='_blank' rel='noreferrer' key={i}>
 							<img
@@ -79,7 +78,7 @@ const GetButton = () => {
 		const code = `	<div>
 			${selected
 				.map(service => {
-					const href = temp.shareMode === 'direct' ? service.url : getShareLink(service.title, validated_url);
+					const href = temp.shareMode === 'direct' ? urls[service.title] : getShareLink(service.title, validated_url);
 					return `<a href="${href}" target="_blank"><img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:4px"/></a>`;
 				})
 				.join(`\n			`)}
@@ -97,34 +96,6 @@ const GetButton = () => {
 			validated = `http://${url}`;
 		}
 		return encodeURIComponent(validated);
-	};
-
-	// ? ---------------------- Var -------------------------------
-
-	const Services = (url: string = '') => {
-		return [
-			{
-				title: 'email',
-				icon: Email,
-				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
-				bg: '#888990',
-				url: `mailto:?subject=${temp.subject}&body=${url}`,
-			},
-			{
-				title: 'gmail',
-				icon: Gmail,
-				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
-				bg: '#EA4335',
-				url: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${temp.subject}&body=${url}`,
-			},
-			{
-				title: 'telegram',
-				icon: Telegram,
-				iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
-				bg: '#2CA5E0',
-				url: `https://telegram.me/share/url?url=${url}&text=${temp.subject}`,
-			},
-		];
 	};
 
 	// ? ------------------------------ useEffect -------------------------------
@@ -237,7 +208,7 @@ const GetButton = () => {
 				<Modal.Body>
 					<div className='services-list'>
 						<Row>
-							{Services().map((service, i) => {
+							{Services.map((service, i) => {
 								const checked = selectedServices.includes(service.title);
 								return (
 									<Col xs={12} sm={8} key={i}>
