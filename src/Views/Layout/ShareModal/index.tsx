@@ -95,7 +95,7 @@ const ShareModal = () => {
 									? services_url(validated_url, subject)[service.title]
 									: getShareLink(service.title, validated_url);
 							return (
-								<Col xs={8} key={i}>
+								<Col xs={12} sm={8} key={i}>
 									<div
 										className='service-container'
 										onClick={() => {

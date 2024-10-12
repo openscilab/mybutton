@@ -66,20 +66,19 @@
 				@apply w-full overflow-y-auto mt-8;
 
 				.rs-col {
-					@apply md:flex md:justify-center;
+					@apply md:flex md:justify-center sm:mb-2;
 				}
 				.service-container {
-					@apply cursor-pointer px-1 md:px-2 flex items-center rounded-lg transition-colors duration-300;
-					width: fit-content;
-					height: fit-content;
+					@apply cursor-pointer px-2 flex items-center rounded-lg transition-colors duration-300 w-32;
 
 					.service-logo {
-						@apply rounded-md;
+						border-radius: 4px;
 						width: fit-content;
 						height: fit-content;
+						padding: 0.03rem;
 
 						img {
-							@apply w-5 h-5 sm:w-8 sm:h-8;
+							@apply w-7 h-7 sm:w-8 sm:h-8;
 						}
 					}
 
