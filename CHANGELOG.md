@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Google analytics tags
 ### Changed
 - Move `build` & `version_check` steps to `github runners`
 - `AUTHORS.md` updated
