@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Support `X`
+- Support `WatsApp`
+- Support multi parameters
+- Handle url encoding
 ### Changed
+- Move all services data to `services.data` file
+- Improve loading-cover animation
 - Move `build` & `version_check` steps to `github runners`
 - `AUTHORS.md` updated
 ## [0.2] - 2024-09-16
