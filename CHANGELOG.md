@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Support `X`
-- Support `WatsApp`
+- Support `WhatsApp`
 - Support multi parameters
 - Handle url encoding
 ### Changed
