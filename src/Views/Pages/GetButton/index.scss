@@ -158,6 +158,10 @@
 		.services-list {
 			@apply overflow-y-auto;
 
+			.rs-col {
+				@apply sm:mb-2;
+			}
+
 			.service-radio {
 				.rs-radio-wrapper {
 					top: auto;
@@ -182,12 +186,12 @@
 					@apply flex items-center;
 
 					.service-logo {
-						@apply rounded-md;
+						border-radius: 4px;
 						width: fit-content;
 						height: fit-content;
 
 						img {
-							@apply w-6 h-6 sm:w-8 sm:h-8;
+							@apply w-7 h-7 sm:w-8 sm:h-8;
 						}
 					}
 
