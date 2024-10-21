@@ -1,7 +1,7 @@
 const BaseConfig = {
 	APP_NAME: 'MyButton',
 	APP_SHORT_NAME: 'MyBTN',
-	VERSION: 0.2,
+	VERSION: 0.3,
 };
 
 const LOCAL = {
