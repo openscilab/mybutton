@@ -27,6 +27,8 @@ MyButton is an open-source project that streamlines the process of sharing links
 | Email        | &#x2705; |
 | Gmail        | &#x2705; |
 | Telegram     | &#x2705; |
+| WhatsApp     | &#x2705; |
+| X            | &#x2705; |
 
 ## Issues & bug reports
 
