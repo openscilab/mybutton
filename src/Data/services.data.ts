@@ -40,7 +40,7 @@ export const Services = [
 		bg: '#1A1A1A',
 	},
 	{
-		title: 'whatsapp',
+		title: 'whatsApp',
 		icon: Whatsapp,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/whatsapp.svg',
 		bg: '#12AF0A',
