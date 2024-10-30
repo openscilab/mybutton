@@ -15,10 +15,14 @@
 
 ## Overview
 
-MyButton is an open-source project that streamlines the process of sharing links to your preferred online services. It provides a user-friendly interface that allows users to seamlessly share content with just a few clicks. MyButton takes care of the technical aspects. Depending on the chosen service, it might:
+MyButton is an open-source project that simplifies the process of sharing links of your preferred online services. It provides a user-friendly interface that allows users to seamlessly share links with just a few clicks. MyButton takes care of the technical aspects. Depending on the chosen service, it might:
 
--   Redirect you directly to the platform with the link pre-populated.
+-   Forward users to the chosen platform with the link already populated for easy sharing.
 -   Generate sharable buttons embedded with your link. Clicking these buttons redirects users to the chosen service.
+
+You can choose to forward users either directly to the platform or through the MyButton gateway for added flexibility.
+
+✨ Easily fork MyButton to create a custom link-sharing experience tailored to your brand, and deploy it smoothly on GitHub Pages.
 
 ## Supported services
 
@@ -27,6 +31,8 @@ MyButton is an open-source project that streamlines the process of sharing links
 | Email        | &#x2705; |
 | Gmail        | &#x2705; |
 | Telegram     | &#x2705; |
+| WhatsApp     | &#x2705; |
+| X            | &#x2705; |
 
 ## Issues & bug reports
 
