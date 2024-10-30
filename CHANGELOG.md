@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [0.3] - 2024-10-28
+## [0.3] - 2024-10-30
 ### Added
 - Google Tag Manager installed
 - Support `X`
@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Support multi parameters
 - Handle url encoding
 ### Changed
+- `README.md` description updated
 - Move all services data to `services.data` file
 - Improve loading-cover animation
 - Move `build` & `version_check` steps to `github runners`
