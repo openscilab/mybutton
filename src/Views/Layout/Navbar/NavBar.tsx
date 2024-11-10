@@ -18,7 +18,9 @@ const NavBar = () => {
 					className='nav-brand'
 					onClick={() =>
 						setSearchParams(params => {
-							params.delete('path');
+							params.forEach((val, key) => {
+								params.delete(key);
+							});
 							return params;
 						})
 					}>

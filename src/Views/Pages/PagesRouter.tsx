@@ -1,14 +1,11 @@
 import Home from './Home';
 import Share from './Share';
 import GetButton from './GetButton';
-import { useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
 
-const PagesRouter = () => {
-	const { activePage } = useLocalCache();
+const PagesRouter = (props: { path: string | null }) => {
+	if (props.path === 'get') return <GetButton />;
 
-	if (activePage === 'get') return <GetButton />;
-
-	if (activePage === 'share') return <Share />;
+	if (props.path === 'share') return <Share />;
 
 	return <Home />;
 };
