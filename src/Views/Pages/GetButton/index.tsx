@@ -4,13 +4,15 @@ import Service from '@src/Components/Service';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
 import { CONFIG } from '@src/App/Config/constants';
+import { encode } from '@src/Tools/Utils/URLEncoding';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import { Services, services_url } from '@src/Data/services.data';
+import { ReactComponent as Close } from '@assets/icons/close.svg';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
-import { Button, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import { Button, Col, Dropdown, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
@@ -24,6 +26,9 @@ const GetButton = () => {
 		openModal: false,
 		openTooltip: false,
 		shareMode: 'direct',
+		whisperOpen: false,
+		dropdownOpen: false,
+		urlEncoding: '',
 	});
 	const [selectedServices, setSelectedServices] = useState<string[]>(['email']);
 
@@ -38,7 +43,12 @@ const GetButton = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		const path = `?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		if (temp.urlEncoding !== '') {
+			const encoded_path = encode(path);
+			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
+		}
+		return `${CONFIG.FRONT_DOMAIN}/${path}`;
 	};
 
 	const getCode = () => {
@@ -101,7 +111,7 @@ const GetButton = () => {
 	// ? ------------------------------ useEffect -------------------------------
 	useEffect(() => {
 		if (temp.showCode) getCode();
-	}, [selectedServices, temp.shareMode]);
+	}, [selectedServices, temp.shareMode, temp.urlEncoding]);
 	// --------------------------------------------------------------------------
 	return (
 		<div className='get-button-layout'>
@@ -134,12 +144,16 @@ const GetButton = () => {
 					placement='top'
 					controlId='control-id-hover'
 					trigger='hover'
+					open={!!temp.dropdownOpen ? false : temp.whisperOpen}
 					speaker={
 						<Tooltip className='share-mode-tooltip'>
 							Choose to share your link directly on the selected services or do it through MyButton website.
 						</Tooltip>
 					}>
-					<div className='radiogroup-whisper'>
+					<div
+						className='radiogroup-whisper'
+						onMouseEnter={() => set.ou.temp('whisperOpen', true)}
+						onMouseLeave={() => set.ou.temp('whisperOpen', false)}>
 						<RadioGroup
 							name='radio-group-inline-picker-label'
 							inline
@@ -149,7 +163,37 @@ const GetButton = () => {
 							onChange={value => set.ou.temp('shareMode', value)}>
 							<label className='box-label'>Sharing Mode: </label>
 							<Radio value='direct'>Direct</Radio>
-							<Radio value='indirect'>Indirect</Radio>
+							<Dropdown
+								placement='bottomEnd'
+								activeKey={temp.urlEncoding}
+								className='encoding-dropdown'
+								onOpen={() => set.ou.temp('dropdownOpen', true)}
+								onClose={() => set.ou.temp('dropdownOpen', false)}
+								renderToggle={(props, ref) => (
+									<Radio {...props} ref={ref} value='indirect'>
+										Indirect
+									</Radio>
+								)}>
+								<Dropdown.Item
+									eventKey={'informative'}
+									className='relative'
+									{...(temp.urlEncoding === 'informative'
+										? {
+												icon: (
+													<Close
+														className='w-4 h-4 absolute inline-flex'
+														onClick={e => {
+															e.stopPropagation();
+															set.ou.temp('urlEncoding', '');
+														}}
+													/>
+												),
+										  }
+										: {})}
+									onSelect={() => set.ou.temp('urlEncoding', 'informative')}>
+									URL Encoding (most robustness)
+								</Dropdown.Item>
+							</Dropdown>
 						</RadioGroup>
 					</div>
 				</Whisper>
