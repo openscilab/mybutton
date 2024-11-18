@@ -181,7 +181,6 @@ const GetButton = () => {
 										? {
 												icon: (
 													<Close
-														className='w-4 h-4 absolute inline-flex'
 														onClick={e => {
 															e.stopPropagation();
 															set.ou.temp('urlEncoding', '');

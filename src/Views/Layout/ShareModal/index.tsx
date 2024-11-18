@@ -2,9 +2,11 @@ import './index.scss';
 import { useState } from 'react';
 import useStore from '@src/Tools/Store/useStore';
 import { CONFIG } from '@src/App/Config/constants';
+import { encode } from '@src/Tools/Utils/URLEncoding';
 import { Services, services_url } from '@src/Data/services.data';
+import { ReactComponent as Close } from '@assets/icons/close.svg';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
-import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import { Col, Dropdown, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
 
 const ShareModal = () => {
@@ -13,7 +15,10 @@ const ShareModal = () => {
 	const [subject, setSubject] = useState('');
 	const { openShareModal } = useLocalCache();
 	const [isValid, setIsValid] = useState(true);
+	const [urlEncoding, setUrlEncoding] = useState('');
 	const [shareMode, setShareMode] = useState('direct');
+	const [whisperOpen, setWhisperOpen] = useState(false);
+	const [dropdownOpen, setDropdownOpen] = useState(false);
 
 	// ? ------------------------- Functions -----------------------
 
@@ -28,7 +33,12 @@ const ShareModal = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${url}`;
+		const path = `?path=share&service=${service_title}&subject=${subject}&link=${url}`;
+		if (urlEncoding !== '') {
+			const encoded_path = encode(path);
+			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
+		}
+		return `${CONFIG.FRONT_DOMAIN}/${path}`;
 	};
 
 	// --------------------------------------------------------------
@@ -67,12 +77,16 @@ const ShareModal = () => {
 					placement='top'
 					controlId='control-id-hover'
 					trigger='hover'
+					open={!!dropdownOpen ? false : whisperOpen}
 					speaker={
 						<Tooltip className='share-mode-tooltip'>
 							Choose to share your link directly on the selected services or do it through MyButton website.
 						</Tooltip>
 					}>
-					<div className='radiogroup-whisper'>
+					<div
+						className='radiogroup-whisper'
+						onMouseEnter={() => setWhisperOpen(true)}
+						onMouseLeave={() => setWhisperOpen(false)}>
 						<RadioGroup
 							name='radio-group-inline-picker-label'
 							inline
@@ -82,7 +96,36 @@ const ShareModal = () => {
 							onChange={value => setShareMode(value.toString())}>
 							<label className='box-label'>Sharing Mode: </label>
 							<Radio value='direct'>Direct</Radio>
-							<Radio value='indirect'>Indirect</Radio>
+							<Dropdown
+								placement='bottomEnd'
+								activeKey={urlEncoding}
+								className='encoding-dropdown'
+								onOpen={() => setDropdownOpen(true)}
+								onClose={() => setDropdownOpen(false)}
+								renderToggle={(props, ref) => (
+									<Radio {...props} ref={ref} value='indirect'>
+										Indirect
+									</Radio>
+								)}>
+								<Dropdown.Item
+									eventKey={'informative'}
+									className='relative'
+									{...(urlEncoding === 'informative'
+										? {
+												icon: (
+													<Close
+														onClick={e => {
+															e.stopPropagation();
+															setUrlEncoding('');
+														}}
+													/>
+												),
+										  }
+										: {})}
+									onSelect={() => setUrlEncoding('informative')}>
+									URL Encoding (most robustness)
+								</Dropdown.Item>
+							</Dropdown>
 						</RadioGroup>
 					</div>
 				</Whisper>
