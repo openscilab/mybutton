@@ -77,34 +77,10 @@
 					border-bottom-width: 1.5px;
 				}
 			}
-
-			.encoding-dropdown {
-				.rs-dropdown-item {
-					@apply text-xs px-2;
-					font-size: 0.8rem;
-					&.rs-dropdown-item-focus,
-					&.rs-dropdown-item-active {
-						@apply text-primary text-opacity-80 bg-primary bg-opacity-10;
-					}
-
-					&.rs-dropdown-item-with-icon {
-						@apply inline-flex items-center flex-row-reverse;
-
-						svg {
-							@apply w-3 h-3 ml-1;
-							fill: #b1b1b1;
-
-							&:hover {
-								fill: #808080;
-							}
-						}
-					}
-				}
-			}
 		}
 
 		.buttons {
-			@apply flex flex-col items-center sm:flex-row sm:justify-center w-full mt-12;
+			@apply flex flex-col items-center sm:flex-row sm:justify-center w-full mt-10;
 
 			.rs-btn {
 				@apply w-40 text-white font-medium;
