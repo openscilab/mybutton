@@ -1,16 +1,19 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
 import Service from '@src/Components/Service';
+import { ValueType } from 'rsuite/esm/Checkbox';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
 import { CONFIG } from '@src/App/Config/constants';
+import { classes } from '../../../Tools/Utils/React';
+import { encode } from '@src/Tools/Utils/URLEncoding';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import { Services, services_url } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
-import { Button, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import { Button, Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
@@ -24,6 +27,9 @@ const GetButton = () => {
 		openModal: false,
 		openTooltip: false,
 		shareMode: 'direct',
+		whisperOpen: false,
+		dropdownOpen: false,
+		encodingValue: [],
 	});
 	const [selectedServices, setSelectedServices] = useState<string[]>(['email']);
 
@@ -38,7 +44,12 @@ const GetButton = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		const path = `?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		if (!!temp.encodingValue?.[0]) {
+			const encoded_path = encode(path);
+			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
+		}
+		return `${CONFIG.FRONT_DOMAIN}/${path}`;
 	};
 
 	const getCode = () => {
@@ -98,10 +109,15 @@ const GetButton = () => {
 		return encodeURIComponent(validated);
 	};
 
+	const onCheckboxChanged = (val: ValueType, checked: boolean) => {
+		if (checked) set.ou.temp('encodingValue', [val]);
+		else set.ou.temp('encodingValue', []);
+	};
+
 	// ? ------------------------------ useEffect -------------------------------
 	useEffect(() => {
 		if (temp.showCode) getCode();
-	}, [selectedServices, temp.shareMode]);
+	}, [selectedServices, temp.shareMode, temp.encodingValue]);
 	// --------------------------------------------------------------------------
 	return (
 		<div className='get-button-layout'>
@@ -134,12 +150,16 @@ const GetButton = () => {
 					placement='top'
 					controlId='control-id-hover'
 					trigger='hover'
+					open={!!temp.dropdownOpen ? false : temp.whisperOpen}
 					speaker={
 						<Tooltip className='share-mode-tooltip'>
 							Choose to share your link directly on the selected services or do it through MyButton website.
 						</Tooltip>
 					}>
-					<div className='radiogroup-whisper'>
+					<div
+						className='radiogroup-whisper'
+						onMouseEnter={() => set.ou.temp('whisperOpen', true)}
+						onMouseLeave={() => set.ou.temp('whisperOpen', false)}>
 						<RadioGroup
 							name='radio-group-inline-picker-label'
 							inline
@@ -153,7 +173,16 @@ const GetButton = () => {
 						</RadioGroup>
 					</div>
 				</Whisper>
-
+				<div
+					{...classes('encoding-mode-checkbox ', {
+						'is-visible': temp.shareMode === 'indirect',
+					})}>
+					<CheckboxGroup inline name='checkbox-group' value={temp.encodingValue}>
+						<Checkbox value='base64' onChange={onCheckboxChanged}>
+							Base64 Encoding (more robust)
+						</Checkbox>
+					</CheckboxGroup>
+				</div>
 				<div className='buttons'>
 					<Button className='choose' onClick={() => set.ou.temp('openModal', true)}>
 						Choose Services

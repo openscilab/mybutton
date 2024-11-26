@@ -1,11 +1,14 @@
 import './index.scss';
 import { useState } from 'react';
+import { ValueType } from 'rsuite/esm/Checkbox';
 import useStore from '@src/Tools/Store/useStore';
+import { classes } from '@src/Tools/Utils/React';
 import { CONFIG } from '@src/App/Config/constants';
+import { encode } from '@src/Tools/Utils/URLEncoding';
 import { Services, services_url } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
-import { Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
+import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 
 const ShareModal = () => {
 	const { dispatch } = useStore();
@@ -13,6 +16,7 @@ const ShareModal = () => {
 	const [subject, setSubject] = useState('');
 	const { openShareModal } = useLocalCache();
 	const [isValid, setIsValid] = useState(true);
+	const [encodingValue, setEncodingValue] = useState<any[]>([]);
 	const [shareMode, setShareMode] = useState('direct');
 
 	// ? ------------------------- Functions -----------------------
@@ -28,7 +32,17 @@ const ShareModal = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		return `${CONFIG.FRONT_DOMAIN}/?path=share&service=${service_title}&subject=${subject}&link=${url}`;
+		const path = `?path=share&service=${service_title}&subject=${subject}&link=${url}`;
+		if (!!encodingValue) {
+			const encoded_path = encode(path);
+			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
+		}
+		return `${CONFIG.FRONT_DOMAIN}/${path}`;
+	};
+
+	const onCheckboxChanged = (val: ValueType, checked: boolean) => {
+		if (checked) setEncodingValue([val]);
+		else setEncodingValue([]);
 	};
 
 	// --------------------------------------------------------------
@@ -86,6 +100,16 @@ const ShareModal = () => {
 						</RadioGroup>
 					</div>
 				</Whisper>
+				<div
+					{...classes('encoding-mode-checkbox ', {
+						'is-visible': shareMode === 'indirect',
+					})}>
+					<CheckboxGroup inline name='checkbox-group' value={encodingValue}>
+						<Checkbox value='base64' onChange={onCheckboxChanged}>
+							Base64 Encoding (more robust)
+						</Checkbox>
+					</CheckboxGroup>
+				</div>
 				<div className='services-list'>
 					<Row>
 						{Services.map((service, i) => {

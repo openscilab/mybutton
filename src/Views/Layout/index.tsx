@@ -8,10 +8,12 @@ import useStore from '@src/Tools/Store/useStore';
 import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as Bg } from '@assets/Images/bg.svg';
 import { setActivePage } from '@src/Tools/Store/slices/LocalCacheSlice';
+import { decode } from '@src/Tools/Utils/URLEncoding';
 
 const Layout = () => {
 	const urlParams = useSearchParams()[0];
-	const path = urlParams.get('path');
+	const encoded = urlParams.get('encoded');
+	const path = urlParams.get('path') || new URLSearchParams(decode(encoded || '')).get('path');
 	const { dispatch } = useStore();
 
 	useEffect(() => {
@@ -23,7 +25,7 @@ const Layout = () => {
 			<ShareModal />
 			<NavBar />
 			<Bg className='background-img' />
-			<PagesRouter />
+			<PagesRouter path={path} />
 			<Footer />
 		</div>
 	);

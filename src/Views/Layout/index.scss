@@ -14,6 +14,30 @@
 	}
 }
 
+.encoding-mode-checkbox {
+	@apply mx-auto mt-2;
+	visibility: hidden;
+
+	&.is-visible {
+		@apply animate-fade-in;
+		animation-duration: 500ms;
+		visibility: visible;
+	}
+
+	.rs-checkbox-inline {
+		@apply ml-0;
+	}
+
+	label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
+		border-color: $primary;
+	}
+
+	.rs-checkbox-checked .rs-checkbox-inner::before {
+		@apply bg-primary;
+		border-color: $primary;
+	}
+}
+
 .rs-modal {
 	&.rs-anim-bounce-in {
 		-webkit-animation-name: bounce-in;

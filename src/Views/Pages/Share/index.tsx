@@ -3,12 +3,17 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import LoadingCover from '@src/Components/LoadingCover';
 import { services_url } from '@src/Data/services.data';
+import { decode } from '@src/Tools/Utils/URLEncoding';
 
 const Share = () => {
 	const location = useLocation();
 
 	useEffect(() => {
-		const urlParams = new URLSearchParams(location.search);
+		let urlParams = new URLSearchParams(location.search);
+		const encoded_param = urlParams.get('encoded') || '';
+		if (encoded_param) {
+			urlParams = new URLSearchParams(decode(encoded_param));
+		}
 		const service = urlParams.get('service') || '';
 		const subject = urlParams.get('subject') || '';
 		const link = urlParams.get('link') || '';
