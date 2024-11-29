@@ -10,7 +10,7 @@
 			overflow: visible !important;
 
 			.editable-input-container {
-				@apply relative w-full pb-4;
+				@apply relative w-full md:w-5/6 pb-4;
 
 				.editable-input {
 					&:not(:last-of-type) {
@@ -93,7 +93,7 @@
 					@apply md:flex md:justify-center sm:mb-2;
 				}
 				.service-container {
-					@apply cursor-pointer px-2 flex items-center rounded-lg transition-colors duration-300 w-32;
+					@apply cursor-pointer px-2 flex items-center rounded-lg transition-colors duration-300 w-36;
 
 					.service-logo {
 						border-radius: 4px;

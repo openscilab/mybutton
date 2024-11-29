@@ -2,6 +2,8 @@ import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import Telegram from '@assets/icons/services/telegram.svg';
 import Whatsapp from '@assets/icons/services/whatsapp.svg';
+import Yahoo from '@assets/icons/services/yahoo.svg';
+import HackerNews from '@assets/icons/services/hacker-news.svg';
 import X from '@assets/icons/services/x.svg';
 
 export const services_url = (url: string, subject?: string): { [key: string]: string } => {
@@ -11,6 +13,8 @@ export const services_url = (url: string, subject?: string): { [key: string]: st
 		telegram: `https://telegram.me/share/url?url=${url}&text=${subject}`,
 		x: `https://x.com/intent/post?url=${url}&text=${subject}`,
 		whatsapp: `https://api.whatsapp.com/send?text=${subject}%20${url}`,
+		'yahoo mail': `http://compose.mail.yahoo.com/?subject=${subject}&body=${url}`,
+		'hacker news': `https://news.ycombinator.com/submitlink?u=${url}&t=${subject}`,
 	};
 };
 
@@ -44,5 +48,17 @@ export const Services = [
 		icon: Whatsapp,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/whatsapp.svg',
 		bg: '#12AF0A',
+	},
+	{
+		title: 'yahoo mail',
+		icon: Yahoo,
+		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/yahoo.svg',
+		bg: '#400090',
+	},
+	{
+		title: 'hacker news',
+		icon: HackerNews,
+		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/hacker-news.svg',
+		bg: '#ff6600',
 	},
 ];
