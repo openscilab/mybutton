@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Support `Hacker News`
+- Support `Yahoo Mail`
+- Custom 404 page
 - Support URL-safe encoding using `Base64URL` format
 ## [0.3] - 2024-10-30
 ### Added

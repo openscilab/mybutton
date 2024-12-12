@@ -33,6 +33,8 @@ You can choose to forward users either directly to the platform or through the M
 | Telegram     | &#x2705; |
 | WhatsApp     | &#x2705; |
 | X            | &#x2705; |
+| Yahoo Mail   | &#x2705; |
+| Hacker News  | &#x2705; |
 
 ## Issues & bug reports
 

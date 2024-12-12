@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>404 Page Not Found</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				background: linear-gradient(135deg, #f0f4f8, #f1edf6);
+				color: #333;
+			}
+			.container {
+				text-align: center;
+				padding-left: 15px;
+				padding-right: 15px;
+			}
+			.magnifier-layer {
+				position: relative;
+				margin-top: -60px;
+			}
+			.magnifier {
+				position: relative;
+				display: inline-block;
+				width: 130px;
+				height: 130px;
+				background: white;
+				border-radius: 50%;
+				border: 8px solid #4b2b79;
+				box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+				animation: magnifierMovement 4s infinite ease-in-out;
+			}
+			.magnifier::before {
+				content: '';
+				position: absolute;
+				bottom: -55px;
+				left: 100%;
+				transform: translateX(-20%) rotate(-42deg);
+				width: 15px;
+				height: 80px;
+				background: #4b2b79;
+				border-radius: 20px;
+			}
+			span {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				font-size: 50px;
+				font-weight: bold;
+				color: #999;
+			}
+			h1 {
+				margin-top: 70px;
+			}
+			p {
+				line-height: 1.5rem;
+				color: #555;
+			}
+			a {
+				text-decoration: none;
+				color: #4b2b79;
+				font-weight: bold;
+			}
+			a:hover {
+				text-decoration: underline;
+			}
+			.footer {
+				position: fixed;
+				display: flex;
+				align-items: center;
+				bottom: 20px;
+			}
+			.footer img {
+				cursor: pointer;
+			}
+			.osl-logo {
+				opacity: 0.75;
+				margin-right: 8px;
+			}
+			@keyframes magnifierMovement {
+				0% {
+					transform: translate3d(0px, 0px, 0px);
+				}
+				25% {
+					transform: translate3d(-15px, -15px, 15px);
+				}
+				50% {
+					transform: translate3d(15px, -5px, -15px);
+				}
+				75% {
+					transform: translate3d(-5px, 15px, 5px);
+				}
+				100% {
+					transform: translate3d(0px, 0px, 0px);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="magnifier-layer">
+				<div class="magnifier"></div>
+				<span>404</span>
+			</div>
+			<h1>Page Not Found</h1>
+			<p>
+				Sorry, we couldn't find the page you're looking for.<br />
+				Go back to the <a href="https://mybutton.click">homepage</a>.
+			</p>
+		</div>
+		<div class="footer">
+			<a href="https://openscilab.com">
+				<img src="https://openscilab.com/static/media/logo-with-text.89d26004.svg" width="65" class="osl-logo" />
+			</a>
+			<a href="https://mybutton.click">
+				<img src="https://github.com/openscilab/mybutton/raw/main/otherfiles/logo-without-name.svg" width="40" />
+			</a>
+		</div>
+	</body>
+</html>
