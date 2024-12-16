@@ -8,55 +8,55 @@ import X from '@assets/icons/services/x.svg';
 
 export const services_url = (url: string, subject?: string): { [key: string]: string } => {
 	return {
-		email: `mailto:?subject=${subject}&body=${url}`,
-		gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
-		telegram: `https://telegram.me/share/url?url=${url}&text=${subject}`,
-		x: `https://x.com/intent/post?url=${url}&text=${subject}`,
-		whatsapp: `https://api.whatsapp.com/send?text=${subject}%20${url}`,
-		'yahoo mail': `http://compose.mail.yahoo.com/?subject=${subject}&body=${url}`,
-		'hacker news': `https://news.ycombinator.com/submitlink?u=${url}&t=${subject}`,
+		Email: `mailto:?subject=${subject}&body=${url}`,
+		Gmail: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
+		Telegram: `https://telegram.me/share/url?url=${url}&text=${subject}`,
+		X: `https://x.com/intent/post?url=${url}&text=${subject}`,
+		WhatsApp: `https://api.whatsapp.com/send?text=${subject}%20${url}`,
+		'Yahoo Mail': `http://compose.mail.yahoo.com/?subject=${subject}&body=${url}`,
+		'Hacker News': `https://news.ycombinator.com/submitlink?u=${url}&t=${subject}`,
 	};
 };
 
 export const Services = [
 	{
-		title: 'email',
+		title: 'Email',
 		icon: Email,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/email.svg',
 		bg: '#888990',
 	},
 	{
-		title: 'gmail',
+		title: 'Gmail',
 		icon: Gmail,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/gmail.svg',
 		bg: '#EA4335',
 	},
 	{
-		title: 'telegram',
+		title: 'Telegram',
 		icon: Telegram,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/telegram.svg',
 		bg: '#2CA5E0',
 	},
 	{
-		title: 'x',
+		title: 'X',
 		icon: X,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/x.svg',
 		bg: '#1A1A1A',
 	},
 	{
-		title: 'whatsApp',
+		title: 'WhatsApp',
 		icon: Whatsapp,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/whatsapp.svg',
 		bg: '#12AF0A',
 	},
 	{
-		title: 'yahoo mail',
+		title: 'Yahoo Mail',
 		icon: Yahoo,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/yahoo.svg',
 		bg: '#400090',
 	},
 	{
-		title: 'hacker news',
+		title: 'Hacker News',
 		icon: HackerNews,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/hacker-news.svg',
 		bg: '#ff6600',

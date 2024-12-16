@@ -31,7 +31,7 @@ const GetButton = () => {
 		dropdownOpen: false,
 		encodingValue: [],
 	});
-	const [selectedServices, setSelectedServices] = useState<string[]>(['email']);
+	const [selectedServices, setSelectedServices] = useState<string[]>(['Email']);
 
 	// ? -------------------------- Functions ------------------------------
 	const onAddService = (title: string) => {
