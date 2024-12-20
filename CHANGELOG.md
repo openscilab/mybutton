@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Support `Yahoo Mail`
 - Custom 404 page
 - Support URL-safe encoding using `Base64URL` format
+### Changed
+- `README.md` updated
 ## [0.3] - 2024-10-30
 ### Added
 - Google Tag Manager installed
