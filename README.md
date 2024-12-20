@@ -2,15 +2,10 @@
 <img src="https://github.com/openscilab/mybutton/raw/main/otherfiles/logo.png" width="500" height="350">
     <br/>
     <br/>
-<a href="https://reactjs.org/">
-  <img src="https://img.shields.io/badge/react-black?logo=react&style=for-the-badge" alt="React" style="height: 24px;">
-</a>
-<a href="https://www.typescriptlang.org/">
-  <img src="https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square" alt="TypeScript" style="height: 24px;">
-</a>
-<a href="https://discord.gg/T2VzhzqU67">
-  <img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel" style="height: 24px;">
-</a>
+<a href="https://reactjs.org/"><img src="https://img.shields.io/badge/react-black?logo=react&style=for-the-badge" alt="React" style="height: 24px;"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=for-the-badge" alt="TypeScript" style="height: 24px;"></a>
+<a href="https://github.com/openscilab/mybutton"><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/openscilab/mybutton?style=for-the-badge" style="height: 24px;"></a>
+<a href="https://discord.gg/T2VzhzqU67"><img src="https://img.shields.io/discord/1064533716615049236.svg" alt="Discord Channel" style="height: 24px;"></a>
 </div>
 
 ## Overview
@@ -48,7 +43,7 @@ You can also join our discord server
   <img src="https://img.shields.io/discord/1064533716615049236.svg?style=for-the-badge" alt="Discord Channel">
 </a>
 
-## Show Your Support
+## Show your support
 
 <h3>Star this repo</h3>
 
