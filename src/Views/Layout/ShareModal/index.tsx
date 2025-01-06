@@ -1,5 +1,4 @@
 import './index.scss';
-import { useState } from 'react';
 import { ValueType } from 'rsuite/esm/Checkbox';
 import useStore from '@src/Tools/Store/useStore';
 import { classes } from '@src/Tools/Utils/React';
@@ -9,15 +8,24 @@ import { Services, services_url } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import { useSearchParams } from 'react-router-dom';
+import { useData } from '@src/Tools/Hooks/useData';
 
 const ShareModal = () => {
 	const { dispatch } = useStore();
-	const [url, setUrl] = useState('');
-	const [subject, setSubject] = useState('');
+	const urlParams = useSearchParams()[0];
+	const path = urlParams.get('path');
 	const { openShareModal } = useLocalCache();
-	const [isValid, setIsValid] = useState(true);
-	const [encodingValue, setEncodingValue] = useState<any[]>([]);
-	const [shareMode, setShareMode] = useState('direct');
+	const { set, temp, discard } = useData(
+		{
+			url: path === 'custom_share' ? urlParams.get('link') || '' : '',
+			subject: path === 'custom_share' ? urlParams.get('subject') || '' : '',
+			isValid: true,
+			encodingValue: [],
+			shareMode: 'direct',
+		},
+		[urlParams]
+	);
 
 	// ? ------------------------- Functions -----------------------
 
@@ -32,8 +40,8 @@ const ShareModal = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		const path = `?path=share&service=${service_title}&subject=${subject}&link=${url}`;
-		if (!!encodingValue) {
+		const path = `?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		if (temp.encodingValue?.length) {
 			const encoded_path = encode(path);
 			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
 		}
@@ -41,8 +49,8 @@ const ShareModal = () => {
 	};
 
 	const onCheckboxChanged = (val: ValueType, checked: boolean) => {
-		if (checked) setEncodingValue([val]);
-		else setEncodingValue([]);
+		if (checked) set.ou.temp('encodingValue', [val]);
+		else set.ou.temp('encodingValue', []);
 	};
 
 	// --------------------------------------------------------------
@@ -52,7 +60,7 @@ const ShareModal = () => {
 			size='sm'
 			onClose={() => {
 				dispatch(setOpenShareModal(false));
-				setIsValid(true);
+				discard();
 			}}
 			backdrop
 			className='share-modal'>
@@ -62,17 +70,19 @@ const ShareModal = () => {
 					<EditableInput
 						label='Link'
 						onChange={e => {
-							if (!isValid) setIsValid(true);
-							setUrl(e.target.value);
+							if (!temp.isValid) set.ou.temp('isValid', true);
+							set.ou.temp('url', e.target.value);
 						}}
+						value={temp.url}
 						errorMessage='required'
-						isValid={isValid}
+						isValid={temp.isValid}
 						placeholder='https://www.example.com'
 					/>
 					<EditableInput
 						label='Subject'
+						value={temp.subject}
 						onChange={e => {
-							setSubject(e.target.value);
+							set.ou.temp('subject', e.target.value);
 						}}
 						placeholder='Subject'
 					/>
@@ -92,8 +102,8 @@ const ShareModal = () => {
 							inline
 							className='mode-picker'
 							appearance='picker'
-							defaultValue={shareMode}
-							onChange={value => setShareMode(value.toString())}>
+							defaultValue={temp.shareMode}
+							onChange={value => set.ou.temp('shareMode', value.toString())}>
 							<label className='box-label'>Sharing Mode: </label>
 							<Radio value='direct'>Direct</Radio>
 							<Radio value='indirect'>Indirect</Radio>
@@ -102,9 +112,9 @@ const ShareModal = () => {
 				</Whisper>
 				<div
 					{...classes('encoding-mode-checkbox ', {
-						'is-visible': shareMode === 'indirect',
+						'is-visible': temp.shareMode === 'indirect',
 					})}>
-					<CheckboxGroup inline name='checkbox-group' value={encodingValue}>
+					<CheckboxGroup inline name='checkbox-group' value={temp.encodingValue}>
 						<Checkbox value='base64' onChange={onCheckboxChanged}>
 							Base64 Encoding (more robust)
 						</Checkbox>
@@ -113,17 +123,17 @@ const ShareModal = () => {
 				<div className='services-list'>
 					<Row>
 						{Services.map((service, i) => {
-							const validated_url = urlValidation(url);
+							const validated_url = urlValidation(temp.url);
 							const href =
-								shareMode === 'direct'
-									? services_url(validated_url, subject)[service.title]
+								temp.shareMode === 'direct'
+									? services_url(validated_url, temp.subject)[service.title]
 									: getShareLink(service.title, validated_url);
 							return (
 								<Col xs={12} sm={8} key={i}>
 									<div
 										className='service-container'
 										onClick={() => {
-											if (url === '') setIsValid(false);
+											if (temp.url === '') set.ou.temp('isValid', false);
 											else window.open(href, '_blank');
 										}}>
 										<div className='service-logo' style={{ backgroundColor: service.bg }}>
