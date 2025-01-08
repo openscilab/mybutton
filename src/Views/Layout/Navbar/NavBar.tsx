@@ -9,21 +9,20 @@ import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalC
 const NavBar = () => {
 	const { activePage } = useLocalCache();
 	const { dispatch } = useStore();
-	const setSearchParams = useSearchParams()[1];
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	return (
 		<div className='navbar-layout'>
 			<Navbar className='navbar'>
 				<Navbar.Brand
 					className='nav-brand'
-					onClick={() =>
-						setSearchParams(params => {
-							params.forEach((val, key) => {
-								params.delete(key);
-							});
-							return params;
-						})
-					}>
+					onClick={() => {
+						const newParams = new URLSearchParams(searchParams);
+						searchParams.forEach((_, key) => {
+							newParams.delete(key);
+						});
+						setSearchParams(newParams);
+					}}>
 					<Logo className='logo-text' />
 				</Navbar.Brand>
 

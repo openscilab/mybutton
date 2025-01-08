@@ -7,7 +7,7 @@ import PagesRouter from '../Pages/PagesRouter';
 import useStore from '@src/Tools/Store/useStore';
 import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as Bg } from '@assets/Images/bg.svg';
-import { setActivePage } from '@src/Tools/Store/slices/LocalCacheSlice';
+import { setActivePage, setOpenShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { decode } from '@src/Tools/Utils/URLEncoding';
 
 const Layout = () => {
@@ -18,6 +18,9 @@ const Layout = () => {
 
 	useEffect(() => {
 		dispatch(setActivePage(path));
+		if (path === 'custom_share') {
+			dispatch(setOpenShareModal(true));
+		}
 	}, [path]);
 
 	return (
