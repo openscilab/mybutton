@@ -3,6 +3,8 @@ import Gmail from '@assets/icons/services/gmail.svg';
 import Telegram from '@assets/icons/services/telegram.svg';
 import Whatsapp from '@assets/icons/services/whatsapp.svg';
 import Yahoo from '@assets/icons/services/yahoo.svg';
+import Facebook from '@assets/icons/services/facebook.svg';
+import Linkedin from '@assets/icons/services/linkedin.svg';
 import HackerNews from '@assets/icons/services/hacker-news.svg';
 import X from '@assets/icons/services/x.svg';
 
@@ -15,6 +17,8 @@ export const services_url = (url: string, subject?: string): { [key: string]: st
 		WhatsApp: `https://api.whatsapp.com/send?text=${subject}%20${url}`,
 		'Yahoo Mail': `http://compose.mail.yahoo.com/?subject=${subject}&body=${url}`,
 		'Hacker News': `https://news.ycombinator.com/submitlink?u=${url}&t=${subject}`,
+		Facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}&t=${subject}`,
+		LinkedIn: `https://www.linkedin.com/shareArticle?mini=true&url=${url}&text=${subject}`,
 	};
 };
 
@@ -60,5 +64,17 @@ export const Services = [
 		icon: HackerNews,
 		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/hacker-news.svg',
 		bg: '#ff6600',
+	},
+	{
+		title: 'Facebook',
+		icon: Facebook,
+		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/facebook.svg',
+		bg: '#0866ff',
+	},
+	{
+		title: 'LinkedIn',
+		icon: Linkedin,
+		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/linkedin.svg',
+		bg: '#007bb5',
 	},
 ];
