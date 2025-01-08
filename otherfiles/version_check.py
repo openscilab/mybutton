@@ -4,7 +4,7 @@ import os
 import sys
 import codecs
 Failed = 0
-MYBUTTON_VERSION = "0.4"
+MYBUTTON_VERSION = "0.5"
 
 
 CHANGELOG_ITEMS = [

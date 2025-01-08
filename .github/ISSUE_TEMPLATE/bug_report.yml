@@ -84,6 +84,7 @@ body:
       label: MyButton version
       description: Which version of MyButton are you using?
       options:
+        - MyButton 0.5
         - MyButton 0.4
         - MyButton 0.3
         - MyButton 0.2
