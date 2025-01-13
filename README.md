@@ -31,7 +31,7 @@ You can choose to forward users either directly to the platform or through the M
 | Yahoo Mail   | &#x2705; |
 | Hacker News  | &#x2705; |
 | Facebook     | &#x2705; |
-| Linkedin     | &#x2705; |
+| LinkedIn     | &#x2705; |
 | Reddit       | &#x2705; |
 | Pinterest    | &#x2705; |
 | Blogger      | &#x2705; |
