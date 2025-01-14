@@ -30,6 +30,12 @@ You can choose to forward users either directly to the platform or through the M
 | X            | &#x2705; |
 | Yahoo Mail   | &#x2705; |
 | Hacker News  | &#x2705; |
+| Facebook     | &#x2705; |
+| LinkedIn     | &#x2705; |
+| Reddit       | &#x2705; |
+| Pinterest    | &#x2705; |
+| Blogger      | &#x2705; |
+| Trello       | &#x2705; |
 
 ## Issues & bug reports
 
