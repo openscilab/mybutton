@@ -4,7 +4,7 @@ import useStore from '@src/Tools/Store/useStore';
 import { classes } from '@src/Tools/Utils/React';
 import { CONFIG } from '@src/App/Config/constants';
 import { encode } from '@src/Tools/Utils/URLEncoding';
-import { Services, services_url } from '@src/Data/services.data';
+import { services, serviceUrls } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
@@ -122,11 +122,11 @@ const ShareModal = () => {
 				</div>
 				<div className='services-list'>
 					<Row>
-						{Services.map((service, i) => {
+						{services.map((service, i) => {
 							const validated_url = urlValidation(temp.url);
 							const href =
 								temp.shareMode === 'direct'
-									? services_url(validated_url, temp.subject)[service.title]
+									? serviceUrls(validated_url, temp.subject)[service.title]
 									: getShareLink(service.title, validated_url);
 							return (
 								<Col xs={12} sm={8} key={i}>
