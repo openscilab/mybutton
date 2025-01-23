@@ -2,7 +2,7 @@ import './index.scss';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import LoadingCover from '@src/Components/LoadingCover';
-import { serviceUrls } from '@src/Data/services.data';
+import { getServiceURL } from '@src/Data/services.data';
 import { decode } from '@src/Tools/Utils/URLEncoding';
 
 const Share = () => {
@@ -18,7 +18,7 @@ const Share = () => {
 		const subject = urlParams.get('subject') || '';
 		const link = urlParams.get('link') || '';
 
-		const url = serviceUrls(encodeURIComponent(link), subject)[service];
+		const url = getServiceURL(encodeURIComponent(link), subject)[service];
 		setTimeout(() => {
 			window.open(url, '_self');
 		}, 100);

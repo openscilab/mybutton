@@ -13,7 +13,7 @@ import Pinterest from '@assets/icons/services/pinterest.svg';
 import HackerNews from '@assets/icons/services/hacker-news.svg';
 import { ServiceName } from './constants.data';
 
-export const serviceUrls = (url: string, subject?: string): { [key: string]: string } => {
+export const getServiceURL = (url: string, subject?: string): { [key: string]: string } => {
 	return {
 		[ServiceName.Email]: `mailto:?subject=${subject}&body=${url}`,
 		[ServiceName.Gmail]: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
@@ -31,7 +31,7 @@ export const serviceUrls = (url: string, subject?: string): { [key: string]: str
 	};
 };
 
-export const services = [
+export const SERVICES = [
 	{
 		title: ServiceName.Email,
 		icon: Email,

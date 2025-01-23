@@ -9,7 +9,7 @@ import { classes } from '../../../Tools/Utils/React';
 import { encode } from '@src/Tools/Utils/URLEncoding';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
-import { services, serviceUrls } from '@src/Data/services.data';
+import { SERVICES, getServiceURL } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
@@ -63,8 +63,8 @@ const GetButton = () => {
 		}
 
 		const validated_url = urlValidation(temp.url || '');
-		const selected = services.filter(service => selectedServices.includes(service.title));
-		const urls = serviceUrls(validated_url, temp.subject);
+		const selected = SERVICES.filter(service => selectedServices.includes(service.title));
+		const urls = getServiceURL(validated_url, temp.subject);
 
 		const buttons = (
 			<div className='flex-center'>
@@ -237,7 +237,7 @@ const GetButton = () => {
 				<Modal.Body>
 					<div className='services-list'>
 						<Row>
-							{services.map((service, i) => {
+							{SERVICES.map((service, i) => {
 								const checked = selectedServices.includes(service.title);
 								return (
 									<Col xs={12} sm={8} key={i}>
