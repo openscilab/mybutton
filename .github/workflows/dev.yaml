@@ -13,7 +13,7 @@ jobs:
       - name: Download Code
         uses: actions/checkout@v4
       - name: Install Python 3.9
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
       - name: Version Check
@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Node.js 16.15.1
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16.15.1
       - run: |
