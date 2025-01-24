@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 ### Changed
-- GitHub action versions (checkout, download-artifact, upload-artifact, setup-node, setup-python)
+- GitHub action versions updated
 ## [0.5] - 2025-01-15
 ### Added
 - Support `Reddit`
