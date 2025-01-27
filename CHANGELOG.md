@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- Add `ServiceName` enum
 ### Changed
+- Update naming conventions
 - GitHub action versions updated
 ## [0.5] - 2025-01-15
 ### Added
