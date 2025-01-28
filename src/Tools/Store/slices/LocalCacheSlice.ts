@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import useStore from '../useStore';
 
-type InitStateType = { openShareModal: boolean; activePage: string };
+type InitStateType = { shareModal: { open: boolean; url?: string; subject?: string }; activePage: string };
 
-const initialState: InitStateType = { openShareModal: false, activePage: 'home' };
+const initialState: InitStateType = { shareModal: { open: false }, activePage: 'home' };
 
 const localCacheSlice = createSlice({
 	name: 'localCache',
 	initialState,
 	reducers: {
-		setOpenShareModal(state, { payload }) {
-			state.openShareModal = payload;
+		setShareModal(state, { payload }) {
+			state.shareModal = payload;
 		},
 		setActivePage(state, { payload }) {
 			state.activePage = payload;
@@ -23,6 +23,6 @@ export const useLocalCache = () => {
 	return selector(s => s?.localStorage);
 };
 
-export const { setOpenShareModal, setActivePage } = localCacheSlice.actions;
+export const { setShareModal, setActivePage } = localCacheSlice.actions;
 
 export default localCacheSlice;

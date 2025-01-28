@@ -4,7 +4,7 @@ import useStore from '@src/Tools/Store/useStore';
 import { classes } from '@src/Tools/Utils/React';
 import { useSearchParams } from 'react-router-dom';
 import { ReactComponent as Logo } from '@assets/Images/logo-text.svg';
-import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
+import { setShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
 
 const NavBar = () => {
 	const { activePage } = useLocalCache();
@@ -27,7 +27,7 @@ const NavBar = () => {
 				</Navbar.Brand>
 
 				<Nav className='main-nav' pullRight>
-					<div className='nav-item' onClick={() => dispatch(setOpenShareModal(true))}>
+					<div className='nav-item' onClick={() => dispatch(setShareModal({ open: true }))}>
 						Share
 					</div>
 					<div

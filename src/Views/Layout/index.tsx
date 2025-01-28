@@ -6,21 +6,21 @@ import ShareModal from './ShareModal';
 import PagesRouter from '../Pages/PagesRouter';
 import useStore from '@src/Tools/Store/useStore';
 import { useSearchParams } from 'react-router-dom';
-import { ReactComponent as Bg } from '@assets/Images/bg.svg';
-import { setActivePage, setOpenShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { decode } from '@src/Tools/Utils/URLEncoding';
+import { ReactComponent as Bg } from '@assets/Images/bg.svg';
+import { setActivePage, setShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
 
 const Layout = () => {
 	const urlParams = useSearchParams()[0];
 	const encoded = urlParams.get('encoded');
-	const path = urlParams.get('path') || new URLSearchParams(decode(encoded || '')).get('path');
+	const paramsString = encoded ? new URLSearchParams(decode(encoded || '')) : urlParams;
+	const path = paramsString.get('path');
 	const { dispatch } = useStore();
 
 	useEffect(() => {
-		dispatch(setActivePage(path));
 		if (path === 'custom_share') {
-			dispatch(setOpenShareModal(true));
-		}
+			dispatch(setShareModal({ open: true, url: paramsString.get('link'), subject: paramsString.get('subject') }));
+		} else dispatch(setActivePage(path));
 	}, [path]);
 
 	return (
