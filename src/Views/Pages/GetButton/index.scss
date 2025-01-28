@@ -159,7 +159,7 @@
 			@apply overflow-y-auto;
 
 			.rs-col {
-				@apply sm:mb-2;
+				@apply sm:mb-2 p-0;
 			}
 
 			.service-radio {
@@ -196,7 +196,10 @@
 					}
 
 					h2 {
-						@apply ml-1.5 capitalize transition-colors;
+						@apply ml-1.5 transition-colors;
+						@include down(md) {
+							font-size: 0.75rem;
+						}
 					}
 				}
 			}

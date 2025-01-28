@@ -1,4 +1,6 @@
 import X from '@assets/icons/services/x.svg';
+import { ServiceName } from './constants.data';
+import { CONFIG } from '@src/App/Config/constants';
 import Email from '@assets/icons/services/email.svg';
 import Gmail from '@assets/icons/services/gmail.svg';
 import Yahoo from '@assets/icons/services/yahoo.svg';
@@ -11,10 +13,11 @@ import Facebook from '@assets/icons/services/facebook.svg';
 import Linkedin from '@assets/icons/services/linkedin.svg';
 import Pinterest from '@assets/icons/services/pinterest.svg';
 import HackerNews from '@assets/icons/services/hacker-news.svg';
-import { ServiceName } from './constants.data';
+import CustomShare from '@assets/icons/services/custom-share.svg';
 
 export const getServiceURL = (url: string, subject?: string): { [key: string]: string } => {
 	return {
+		[ServiceName.Custom]: `${CONFIG.FRONT_DOMAIN}/?path=custom_share&link=${url}&subject=${subject}`,
 		[ServiceName.Email]: `mailto:?subject=${subject}&body=${url}`,
 		[ServiceName.Gmail]: `https://mail.google.com/mail/u/0/?ui=2&fs=1&tf=cm&su=${subject}&body=${url}`,
 		[ServiceName.Telegram]: `https://telegram.me/share/url?url=${url}&text=${subject}`,
@@ -32,6 +35,12 @@ export const getServiceURL = (url: string, subject?: string): { [key: string]: s
 };
 
 export const SERVICES = [
+	{
+		title: ServiceName.Custom,
+		icon: CustomShare,
+		iconUrl: 'https://github.com/openscilab/mybutton/raw/main/src/Assets/icons/services/custom-share.svg',
+		bg: '#4b2b79',
+	},
 	{
 		title: ServiceName.Email,
 		icon: Email,
