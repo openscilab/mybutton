@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Added
+- `Custom Share` button
 - Add `ServiceName` enum
 ### Changed
 - Update naming conventions
