@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `Custom Share` button
 - Add `ServiceName` enum
 ### Changed
+- Update `ShareModal` display settings to handle `Custom Share` button action
 - Update naming conventions
 - GitHub action versions updated
 ## [0.5] - 2025-01-15
