@@ -8,7 +8,7 @@ import { useData } from '@src/Tools/Hooks/useData';
 import { CONFIG } from '@src/App/Config/constants';
 import { classes } from '../../../Tools/Utils/React';
 import { encode } from '@src/Tools/Utils/URLEncoding';
-import { ServiceName } from '@src/Data/constants.data';
+import { ServiceName, SharingMode } from '@src/Data/constants.data';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import { SERVICES, getServiceURL } from '@src/Data/services.data';
@@ -30,12 +30,13 @@ const GetButton = () => {
 		showCode: false,
 		openModal: false,
 		openTooltip: false,
-		shareMode: 'direct',
+		shareMode: SharingMode.Direct,
 		whisperOpen: false,
 		dropdownOpen: false,
 		encodingValue: [],
 	});
-	const [selectedServices, setSelectedServices] = useState<string[]>(['Email']);
+	const [selectedServices, setSelectedServices] = useState<string[]>([ServiceName.Email]);
+	const services = temp.shareMode === SharingMode.Indirect ? SERVICES : SERVICES.filter(s => s.title !== ServiceName.Custom);
 
 	// ? -------------------------- Functions ------------------------------
 	const onAddService = (title: string) => {
@@ -188,14 +189,14 @@ const GetButton = () => {
 							defaultValue={temp.shareMode}
 							onChange={value => set.ou.temp('shareMode', value)}>
 							<label className='box-label'>Sharing Mode: </label>
-							<Radio value='direct'>Direct</Radio>
-							<Radio value='indirect'>Indirect</Radio>
+							<Radio value={SharingMode.Direct}>Direct</Radio>
+							<Radio value={SharingMode.Indirect}>Indirect</Radio>
 						</RadioGroup>
 					</div>
 				</Whisper>
 				<div
 					{...classes('encoding-mode-checkbox ', {
-						'is-visible': temp.shareMode === 'indirect',
+						'is-visible': temp.shareMode === SharingMode.Indirect,
 					})}>
 					<CheckboxGroup inline name='checkbox-group' value={temp.encodingValue}>
 						<Checkbox value='base64' onChange={onCheckboxChanged}>
@@ -257,7 +258,7 @@ const GetButton = () => {
 				<Modal.Body>
 					<div className='services-list'>
 						<Row>
-							{SERVICES.map((service, i) => {
+							{services.map((service, i) => {
 								const checked = selectedServices.includes(service.title);
 								return (
 									<Col xs={12} sm={8} key={i}>
