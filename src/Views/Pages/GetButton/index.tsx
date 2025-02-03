@@ -2,15 +2,18 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 import Service from '@src/Components/Service';
 import { ValueType } from 'rsuite/esm/Checkbox';
+import useStore from '@src/Tools/Store/useStore';
 import useWindow from '@src/Tools/Hooks/useWindow';
 import { useData } from '@src/Tools/Hooks/useData';
 import { CONFIG } from '@src/App/Config/constants';
 import { classes } from '../../../Tools/Utils/React';
 import { encode } from '@src/Tools/Utils/URLEncoding';
+import { ServiceName, SharingMode } from '@src/Data/constants.data';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import { SERVICES, getServiceURL } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
+import { setShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
 import { Button, Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
@@ -18,6 +21,7 @@ import { Button, Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, To
 const GetButton = () => {
 	const { isMobile } = useWindow();
 	const [buttons, setButtons] = useState<JSX.Element>();
+	const { dispatch } = useStore();
 	const { set, temp } = useData({
 		url: '',
 		code: '',
@@ -26,12 +30,13 @@ const GetButton = () => {
 		showCode: false,
 		openModal: false,
 		openTooltip: false,
-		shareMode: 'direct',
+		shareMode: SharingMode.Direct,
 		whisperOpen: false,
 		dropdownOpen: false,
 		encodingValue: [],
 	});
-	const [selectedServices, setSelectedServices] = useState<string[]>(['Email']);
+	const [selectedServices, setSelectedServices] = useState<string[]>([ServiceName.Email]);
+	const services = temp.shareMode === SharingMode.Indirect ? SERVICES : SERVICES.filter(s => s.title !== ServiceName.Custom);
 
 	// ? -------------------------- Functions ------------------------------
 	const onAddService = (title: string) => {
@@ -71,7 +76,18 @@ const GetButton = () => {
 				{selected.map((service, i) => {
 					const href = temp.shareMode === 'direct' ? urls[service.title] : getShareLink(service.title, validated_url);
 					return (
-						<a href={href} target='_blank' rel='noreferrer' key={i}>
+						<a
+							href={href}
+							{...(service.title === ServiceName.Custom
+								? {
+										onClick: e => {
+											openShareModal(e, temp.url);
+										},
+								  }
+								: {})}
+							target='_blank'
+							rel='noreferrer'
+							key={i}>
 							<img
 								src={service.icon}
 								width={32}
@@ -114,10 +130,15 @@ const GetButton = () => {
 		else set.ou.temp('encodingValue', []);
 	};
 
+	const openShareModal = (e: any, url: string) => {
+		e.preventDefault();
+		dispatch(setShareModal({ open: true, url, subject: temp.subject }));
+	};
+
 	// ? ------------------------------ useEffect -------------------------------
 	useEffect(() => {
 		if (temp.showCode) getCode();
-	}, [selectedServices, temp.shareMode, temp.encodingValue]);
+	}, [selectedServices, temp.shareMode, temp.encodingValue.length]);
 	// --------------------------------------------------------------------------
 	return (
 		<div className='get-button-layout'>
@@ -168,14 +189,14 @@ const GetButton = () => {
 							defaultValue={temp.shareMode}
 							onChange={value => set.ou.temp('shareMode', value)}>
 							<label className='box-label'>Sharing Mode: </label>
-							<Radio value='direct'>Direct</Radio>
-							<Radio value='indirect'>Indirect</Radio>
+							<Radio value={SharingMode.Direct}>Direct</Radio>
+							<Radio value={SharingMode.Indirect}>Indirect</Radio>
 						</RadioGroup>
 					</div>
 				</Whisper>
 				<div
 					{...classes('encoding-mode-checkbox ', {
-						'is-visible': temp.shareMode === 'indirect',
+						'is-visible': temp.shareMode === SharingMode.Indirect,
 					})}>
 					<CheckboxGroup inline name='checkbox-group' value={temp.encodingValue}>
 						<Checkbox value='base64' onChange={onCheckboxChanged}>
@@ -237,7 +258,7 @@ const GetButton = () => {
 				<Modal.Body>
 					<div className='services-list'>
 						<Row>
-							{SERVICES.map((service, i) => {
+							{services.map((service, i) => {
 								const checked = selectedServices.includes(service.title);
 								return (
 									<Col xs={12} sm={8} key={i}>

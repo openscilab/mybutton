@@ -6,25 +6,23 @@ import { CONFIG } from '@src/App/Config/constants';
 import { encode } from '@src/Tools/Utils/URLEncoding';
 import { SERVICES, getServiceURL } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
-import { setOpenShareModal, useLocalCache } from '@src/Tools/Store/slices/LocalCacheSlice';
+import { useLocalCache, setShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
-import { useSearchParams } from 'react-router-dom';
 import { useData } from '@src/Tools/Hooks/useData';
+import { ServiceName } from '@src/Data/constants.data';
 
 const ShareModal = () => {
 	const { dispatch } = useStore();
-	const urlParams = useSearchParams()[0];
-	const path = urlParams.get('path');
-	const { openShareModal } = useLocalCache();
+	const { shareModal } = useLocalCache();
 	const { set, temp, discard } = useData(
 		{
-			url: path === 'custom_share' ? urlParams.get('link') || '' : '',
-			subject: path === 'custom_share' ? urlParams.get('subject') || '' : '',
+			url: shareModal.url || '',
+			subject: shareModal.subject || '',
 			isValid: true,
 			encodingValue: [],
 			shareMode: 'direct',
 		},
-		[urlParams]
+		[shareModal]
 	);
 
 	// ? ------------------------- Functions -----------------------
@@ -56,10 +54,10 @@ const ShareModal = () => {
 	// --------------------------------------------------------------
 	return (
 		<Modal
-			open={openShareModal}
+			open={shareModal.open}
 			size='sm'
 			onClose={() => {
-				dispatch(setOpenShareModal(false));
+				dispatch(setShareModal({ open: false }));
 				discard();
 			}}
 			backdrop
@@ -122,7 +120,7 @@ const ShareModal = () => {
 				</div>
 				<div className='services-list'>
 					<Row>
-						{SERVICES.map((service, i) => {
+						{SERVICES.filter(s => s.title !== ServiceName.Custom).map((service, i) => {
 							const validated_url = urlValidation(temp.url);
 							const href =
 								temp.shareMode === 'direct'

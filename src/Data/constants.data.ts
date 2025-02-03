@@ -14,3 +14,8 @@ export enum ServiceName {
 	Pinterest = 'Pinterest',
 	HackerNews = 'Hacker News',
 }
+
+export enum SharingMode {
+	Direct = 'direct',
+	Indirect = 'indirect',
+}
