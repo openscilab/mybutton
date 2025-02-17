@@ -34,6 +34,7 @@
 		"craco-less": "^1.20.0",
 		"decode-uri-component": "^0.2.1",
 		"html-react-parser": "^1.4.5",
+		"ip": "2.0.1",
 		"json5": "^2.2.2",
 		"loader-utils": "^2.0.4",
 		"minimatch": "^3.0.5",
@@ -101,7 +102,8 @@
 		"json5": "2.2.2",
 		"semver": "7.5.2",
 		"lodash": "4.17.21",
-		"immer": "9.0.6"
+		"immer": "9.0.6",
+		"ip": "2.0.1"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.14",
