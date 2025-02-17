@@ -55,6 +55,7 @@
 		"redux-persist": "^6.0.0",
 		"redux-persist-transform-compress": "^4.2.0",
 		"redux-state-sync": "^3.1.4",
+		"rollup": "^2.79.2",
 		"rsuite": "^5.0.1",
 		"scss-tokenizer": "^0.4.3",
 		"semver": "^7.5.2",
@@ -107,7 +108,8 @@
 		"immer": "9.0.6",
 		"ip": "2.0.1",
 		"braces": "3.0.3",
-		"path-to-regexp": "0.1.12"
+		"path-to-regexp": "0.1.12",
+		"rollup": "2.79.2"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.14",
