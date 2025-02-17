@@ -55,6 +55,7 @@
 		"scss-tokenizer": "^0.4.3",
 		"semver": "^7.5.2",
 		"swiper": "^8.4.5",
+		"lodash": "^4.17.21",
 		"tailwind-animatecss": "^1.0.0",
 		"typescript": "^4.1.2",
 		"web-vitals": "^1.0.1"
@@ -98,7 +99,8 @@
 		"loader-utils": "2.0.4",
 		"decode-uri-component": "0.2.1",
 		"json5": "2.2.2",
-		"semver": "7.5.2"
+		"semver": "7.5.2",
+		"lodash": "4.17.21"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.14",
