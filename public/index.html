@@ -8,6 +8,24 @@
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 		})(window,document,'script','dataLayer','GTM-5LHKDJ9L');</script>
 		<!-- End Google Tag Manager -->
+		<script>
+			//* Set mode
+			let MODE;
+			let src = window.location.hostname;
+			if (!!src) src = src.replace('www.', '');
+			switch (src) {
+				case 'localhost':
+					MODE = 'LOCAL';
+					break;
+				case 'dev.mybutton.click':
+					MODE = 'DEVELOPMENT';
+					break;
+				case 'mybutton.click':
+					MODE = 'PRODUCTION';
+					break;
+			}
+			window.MODE = MODE;
+		</script>
 		<meta charset="utf-8" >
 		<meta name="theme-color" content="#2D2D2D">
 		<meta
@@ -33,24 +51,6 @@
 			content="MyButton is an open-source project that streamlines the process of sharing links to your preferred online services."
 		>
 	</head>
-	<script>
-		//* Set mode
-		let MODE;
-		let src = window.location.hostname;
-		if (!!src) src = src.replace('www.', '');
-		switch (src) {
-			case 'localhost':
-				MODE = 'LOCAL';
-				break;
-			case 'dev.mybutton.click':
-				MODE = 'DEVELOPMENT';
-				break;
-			case 'mybutton.click':
-				MODE = 'PRODUCTION';
-				break;
-		}
-		window.MODE = MODE;
-	</script>
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 		<!-- Google Tag Manager (noscript) -->
@@ -58,13 +58,13 @@
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 		<div id="root"></div>
+		<script>
+			//* Registering service worker
+			if (navigator.serviceWorker) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/service-worker.js');
+				});
+			}
+		</script>
 	</body>
-	<script>
-		//* Registering service worker
-		if (navigator.serviceWorker) {
-			window.addEventListener('load', () => {
-				navigator.serviceWorker.register('/service-worker.js');
-			});
-		}
-	</script>
 </html>
