@@ -10,6 +10,7 @@ import { useLocalCache, setShareModal } from '@src/Tools/Store/slices/LocalCache
 import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
 import { useData } from '@src/Tools/Hooks/useData';
 import { ServiceName } from '@src/Data/constants.data';
+import { toStandardName } from '@src/Tools/Utils/Standardize';
 
 const ShareModal = () => {
 	const { dispatch } = useStore();
@@ -38,7 +39,8 @@ const ShareModal = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		const path = `?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		const serviceName = toStandardName(service_title);
+		const path = `?path=share&service=${serviceName}&subject=${temp.subject}&link=${url}`;
 		if (temp.encodingValue?.length) {
 			const encoded_path = encode(path);
 			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
