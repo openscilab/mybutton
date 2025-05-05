@@ -17,6 +17,7 @@ import { setShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
 import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
 import { Button, Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import { toStandardName } from '@src/Tools/Utils/Standardize';
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
@@ -49,7 +50,8 @@ const GetButton = () => {
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
-		const path = `?path=share&service=${service_title}&subject=${temp.subject}&link=${url}`;
+		const serviceName = toStandardName(service_title);
+		const path = `?path=share&service=${serviceName}&subject=${temp.subject}&link=${url}`;
 		if (!!temp.encodingValue?.[0]) {
 			const encoded_path = encode(path);
 			return `${CONFIG.FRONT_DOMAIN}/?encoded=${encoded_path}`;
@@ -262,12 +264,7 @@ const GetButton = () => {
 								const checked = selectedServices.includes(service.title);
 								return (
 									<Col xs={12} sm={8} key={i}>
-										<Service
-											{...service}
-											checked={checked}
-											onSelect={onAddService}
-											onRemove={onRemoveService}
-										/>
+										<Service {...service} checked={checked} onSelect={onAddService} onRemove={onRemoveService} />
 									</Col>
 								);
 							})}
