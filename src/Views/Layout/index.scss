@@ -28,6 +28,13 @@
 		@apply ml-0;
 	}
 
+	.rs-checkbox-inline .rs-checkbox-checker > label {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		padding-left: 2px;
+	}
+
 	label:hover .rs-checkbox-wrapper .rs-checkbox-inner::before {
 		border-color: $primary;
 	}
