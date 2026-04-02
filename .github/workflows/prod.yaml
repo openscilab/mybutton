@@ -12,19 +12,15 @@ permissions:
 jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }}
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [16.15.1]
+    runs-on: ubuntu-latest
     steps:
       - name: Download Code
         uses: actions/checkout@v4
 
-      - name: Install Node.js ${{ matrix.node-version }}
+      - name: Install Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 20
 
       - name: Install and Build
         run: |
