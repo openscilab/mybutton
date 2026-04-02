@@ -1,5 +1,5 @@
 import './index.scss';
-import { Autoplay } from 'swiper';
+import type { FC, PropsWithChildren } from 'react';
 import { Button, Col, Row } from 'rsuite';
 import { useSearchParams } from 'react-router-dom';
 import useWindow from '@src/Tools/Hooks/useWindow';
@@ -7,7 +7,7 @@ import { classes } from '../../../Tools/Utils/React';
 import responsive from '@assets/Images/responsive.png';
 import openSource from '@assets/Images/open-source.png';
 import noAccount from '@assets/Images/no-account-needed.png';
-import { Swiper, SwiperSlide, useSwiper, EffectCards } from '@components/Swiper/Swiper';
+import { Swiper, SwiperSlide, useSwiper, EffectCards, Autoplay, FreeMode, Pagination } from '@components/Swiper/Swiper';
 import { ReactComponent as Right } from '@assets/icons/angle-right-solid.svg';
 import { ReactComponent as Left } from '@assets/icons/angle-left-solid.svg';
 
@@ -47,7 +47,7 @@ const Home = () => {
 	);
 };
 
-const SwiperWrapper: FC = ({ children }) => {
+const SwiperWrapper: FC<PropsWithChildren> = ({ children }) => {
 	const { registerSwiper, swiper } = useSwiper();
 	const { isDesktop, size } = useWindow();
 	const numberOfSlides = size.width < 680 ? 1 : 2;
@@ -71,6 +71,7 @@ const SwiperWrapper: FC = ({ children }) => {
 			speed={2500}
 			spaceBetween={45}
 			{...registerSwiper}
+			modules={[FreeMode, Autoplay, Pagination]}
 			slidesPerView={numberOfSlides}
 			pagination={{ clickable: true }}
 			allowTouchMove={true}
