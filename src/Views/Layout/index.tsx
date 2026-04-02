@@ -19,7 +19,7 @@ const Layout = () => {
 
 	useEffect(() => {
 		if (path === 'custom_share') {
-			dispatch(setShareModal({ open: true, url: paramsString.get('link'), subject: paramsString.get('subject') }));
+			dispatch(setShareModal({ open: true, url: paramsString.get('link'), subject: paramsString.get('subject'), isCustomShare: true }));
 		} else dispatch(setActivePage(path));
 	}, [path]);
 
