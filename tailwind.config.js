@@ -1,7 +1,8 @@
 const plugin = require('tailwindcss/plugin');
+
 module.exports = {
-	purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-	darkMode: false,
+	content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+	darkMode: 'class',
 
 	theme: {
 		animatecss: {
@@ -219,9 +220,6 @@ module.exports = {
 				widest: '0.3em',
 			},
 		},
-	},
-	variants: {
-		extend: {},
 	},
 	plugins: [
 		require('tailwind-animatecss'),
