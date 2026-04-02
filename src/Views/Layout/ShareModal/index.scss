@@ -1,13 +1,25 @@
-.share-modal {
+.rs-modal.share-modal {
+	width: 90%;
+	max-width: 560px;
+	
 	.rs-modal-header {
-		@apply text-center text-lg font-medium block p-0;
+		@apply text-center text-lg font-medium p-0 justify-center;
+		border: none;
+		
+		.rs-modal-title {
+			text-align: center;
+			width: 100%;
+		}
 	}
+	
 	.rs-modal-content {
 		@apply sm:px-8;
+		padding: 20px;
 
 		.rs-modal-body {
-			@apply flex-center flex-col;
-			overflow: visible !important;
+			@apply flex flex-col items-center;
+			overflow: visible;
+			max-height: 60vh;
 
 			.editable-input-container {
 				@apply relative w-full md:w-5/6 pb-4;
@@ -27,79 +39,108 @@
 				}
 			}
 
+			/* Match Get page: full-width row centers sharing mode + tooltip */
+			.share-mode-tooltip-wrapper {
+				@apply w-full flex justify-center mt-4;
+			}
+
 			.radiogroup-whisper {
-				@apply mx-auto mt-4;
-				.mode-picker {
-					padding-left: 10px;
-					border-color: rgba(0, 0, 0, 0.23);
+				width: fit-content;
+				
+				.rs-radio-group.mode-picker {
+					padding: 0 10px;
+					border: 1px solid rgba(0, 0, 0, 0.23);
+					border-radius: 6px;
+					display: inline-flex;
+					align-items: center;
+					background: white;
 
 					.box-label {
 						@apply text-sm mr-3 my-auto;
-						// padding: 7px 0;
 						height: fit-content;
+						padding: 8px 0;
+					}
+
+					.rs-radio {
+						display: inline-flex;
+						margin: 0;
+					}
+					
+					.rs-radio-control,
+					.rs-radio-wrapper {
+						display: none;
 					}
 
 					.rs-radio-checker {
-						label {
-							@apply py-2 text-opacity-70;
+						padding-left: 0;
+						min-height: auto;
+						
+						> label {
+							color: rgba(0, 0, 0, 0.7);
+							padding: 8px 12px;
+							cursor: pointer;
+							border-bottom: 2px solid transparent;
 
 							&:hover {
-								@apply text-primary;
+								color: $primary;
 							}
 						}
 					}
 
-					.rs-radio-checked {
-						label {
-							@apply text-primary;
-						}
-
-						.rs-radio-checker {
-							@apply border-primary;
-							border-bottom-width: 1.5px;
-						}
+					.rs-radio-checked .rs-radio-checker > label {
+						color: $primary;
+						border-bottom-color: $primary;
 					}
+				}
+			}
+			
+			/* Match Get page: same as global .encoding-mode-checkbox (layout/index.scss) */
+			.encoding-mode-checkbox {
+				display: none;
+				@apply mx-auto mt-2 w-full;
+				justify-content: center;
 
-					.encoding-dropdown {
-						.rs-dropdown-item {
-							@apply text-xs px-2;
-							font-size: 0.8rem;
-							&.rs-dropdown-item-focus,
-							&.rs-dropdown-item-active {
-								@apply text-primary text-opacity-80 bg-primary bg-opacity-10;
-							}
-
-							&.rs-dropdown-item-with-icon {
-								@apply inline-flex items-center flex-row-reverse;
-
-								svg {
-									@apply w-3 h-3 ml-1;
-									fill: #b1b1b1;
-
-									&:hover {
-										fill: #808080;
-									}
-								}
-							}
-						}
-					}
+				&.is-visible {
+					display: flex;
 				}
 			}
 
 			.services-list {
 				@apply w-full overflow-y-auto mt-6;
 
-				.rs-col {
-					@apply md:flex md:justify-center sm:mb-2;
+				.rs-row {
+					display: flex;
+					flex-wrap: wrap;
 				}
+
+				.rs-col {
+					@apply flex justify-center mb-2;
+					
+					@media (max-width: 480px) {
+						width: 50%;
+						flex: 0 0 50%;
+					}
+					
+					@media (min-width: 481px) {
+						width: 33.333%;
+						flex: 0 0 33.333%;
+					}
+				}
+				
 				.service-container {
-					@apply cursor-pointer px-2 flex items-center rounded-lg transition-colors duration-300 w-36;
+					@apply cursor-pointer px-2 py-1 flex items-center rounded-lg transition-colors duration-300;
+					width: 150px;
 
 					.service-logo {
 						border-radius: 4px;
-						width: fit-content;
-						height: fit-content;
-						padding: 0.03rem;
+						width: 32px;
+						min-width: 32px;
+						height: 32px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						flex-shrink: 0;
+						padding: 2px;
 
 						img {
 							@apply w-7 h-7 sm:w-8 sm:h-8;
@@ -107,11 +148,11 @@
 					}
 
 					h2 {
-						@apply ml-1.5 capitalize transition-colors;
+						@apply ml-1.5 capitalize transition-colors text-sm;
 					}
 
 					&:hover {
-						@apply bg-gray-50 bg-opacity-20;
+						@apply bg-gray-100;
 					}
 				}
 			}
@@ -119,36 +160,20 @@
 	}
 }
 
-.share-mode-tooltip {
-	@apply border border-primary text-primary;
-	// background-color: rgb(239, 240, 241);
-	background-color: rgb(246, 244, 248);
-
-	&::after {
-		border-top-color: $primary !important;
-	}
-}
-
 .rs-modal-backdrop {
-	@apply backdrop-filter backdrop-blur-md;
-	-webkit-backdrop-filter: blur(12px);
-	backdrop-filter: blur(12px);
-	&::before {
-		backdrop-filter: blur(12px) contrast(60%);
-		-webkit-backdrop-filter: blur(12px) contrast(60%);
-		width: contain;
-	}
+	@apply backdrop-blur-sm;
+	-webkit-backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px);
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
 @keyframes bounce-in {
 	0% {
 		opacity: 0;
-		-webkit-transform: scale(0.8);
 		transform: scale(0.8);
 	}
 	100% {
 		opacity: 1;
-		-webkit-transform: scale(1);
 		transform: scale(1);
 	}
 }
@@ -156,12 +181,10 @@
 @keyframes bounce-out {
 	0% {
 		opacity: 1;
-		-webkit-transform: scale(1);
 		transform: scale(1);
 	}
 	100% {
 		opacity: 0;
-		-webkit-transform: scale(0.8);
 		transform: scale(0.8);
 	}
 }
