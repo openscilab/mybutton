@@ -1,24 +1,18 @@
-import { EffectFade, EffectCards } from 'swiper';
 import { createContext, useState } from 'react';
 import { Swiper as SwiperType } from 'swiper/types';
-import { SwiperProps, Swiper, SwiperSlide } from 'swiper/react/swiper-react';
-import SwiperCore, { Mousewheel, Keyboard, Pagination, Scrollbar, Autoplay, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { SwiperProps } from 'swiper/react';
+import { EffectFade, EffectCards, Mousewheel, Keyboard, Pagination, Scrollbar, Autoplay, Navigation, FreeMode } from 'swiper/modules';
 
-//? ------------------- Load styles --------------------------------------
-import 'swiper/swiper.scss'; // core Swiper
-import 'swiper/modules/effect-cards/effect-cards';
-import 'swiper/modules/effect-fade/effect-fade';
-import 'swiper/modules/navigation/navigation.scss'; // Navigation module
-import 'swiper/modules/pagination/pagination.scss'; // Pagination module
-
-//? ------------------- Load modules -------------------------------------
-SwiperCore.use([Mousewheel, Keyboard, Scrollbar, Pagination, Autoplay, Navigation]);
-
-//? ------------------- Utils --------------------------------------------
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export const SwiperContext = createContext<{ swiper?: SwiperType; setSwiper?: any }>({});
 
-export { Swiper, SwiperSlide, EffectFade, EffectCards };
+export { Swiper, SwiperSlide, EffectFade, EffectCards, Autoplay, FreeMode, Pagination };
 
 export const useSwiper = () => {
 	const [swiper, setSwiper] = useState<SwiperType>();
@@ -26,6 +20,7 @@ export const useSwiper = () => {
 
 	const registerSwiper: SwiperProps = {
 		keyboard: true,
+		modules: [Mousewheel, Keyboard, Scrollbar, Pagination, Autoplay, Navigation, EffectFade, EffectCards, FreeMode],
 		onInit: sw => setSwiper(sw),
 		mousewheel: { thresholdDelta: 5, forceToAxis: true },
 		onSwiper: sw => setIndex({ cur: sw.activeIndex, pre: sw?.previousIndex }),
