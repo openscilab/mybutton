@@ -24,10 +24,10 @@ jobs:
     needs: version_check
     steps:
       - uses: actions/checkout@v4
-      - name: Install Node.js 16.15.1
+      - name: Install Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 16.15.1
+          node-version: 20
       - run: |
           yarn install
           yarn build
