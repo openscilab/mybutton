@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $xs: 0;
 $sm: 481;
 $md: 992;
@@ -15,8 +17,8 @@ $breakpoints: (
 );
 
 @mixin up($breakpoint) {
-	@if map-has-key($breakpoints, $breakpoint) {
-		$breakpoint-value: map-get($breakpoints, $breakpoint);
+	@if map.has-key($breakpoints, $breakpoint) {
+		$breakpoint-value: map.get($breakpoints, $breakpoint);
 		@media (min-width: $breakpoint-value) {
 			@content;
 		}
@@ -24,13 +26,12 @@ $breakpoints: (
 		@media (min-width: $breakpoint) {
 			@content;
 		}
-		// @warn 'Invalid breakpoint: #{$breakpoint}.';
 	}
 }
 
 @mixin down($breakpoint) {
-	@if map-has-key($breakpoints, $breakpoint) {
-		$breakpoint-value: map-get($breakpoints, $breakpoint);
+	@if map.has-key($breakpoints, $breakpoint) {
+		$breakpoint-value: map.get($breakpoints, $breakpoint);
 		@media (max-width: $breakpoint-value) {
 			@content;
 		}
@@ -38,22 +39,21 @@ $breakpoints: (
 		@media (max-width: $breakpoint) {
 			@content;
 		}
-		// @warn 'Invalid breakpoint: #{$breakpoint}.';
 	}
 }
 
 @mixin between($lower, $upper) {
-	@if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
-		$lower-breakpoint: map-get($breakpoints, $lower);
-		$upper-breakpoint: map-get($breakpoints, $upper);
+	@if map.has-key($breakpoints, $lower) and map.has-key($breakpoints, $upper) {
+		$lower-breakpoint: map.get($breakpoints, $lower);
+		$upper-breakpoint: map.get($breakpoints, $upper);
 		@media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
 			@content;
 		}
 	} @else {
-		@if (map-has-key($breakpoints, $lower) == false) {
+		@if (map.has-key($breakpoints, $lower) == false) {
 			@warn 'Your lower breakpoint was invalid: #{$lower}.';
 		}
-		@if (map-has-key($breakpoints, $upper) == false) {
+		@if (map.has-key($breakpoints, $upper) == false) {
 			@warn 'Your upper breakpoint was invalid: #{$upper}.';
 		}
 	}
