@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Radio } from 'rsuite';
+import { Checkbox } from 'rsuite';
 
 type Props = {
 	bg: string;
@@ -10,25 +9,28 @@ type Props = {
 	onRemove: (title: string) => void;
 };
 
+/**
+ * Multi-select row. Checkbox matches real behavior (toggle on/off from the whole label);
+ * native Radio does not uncheck when clicking the label while selected.
+ */
 const Service = (props: Props) => {
-	const [checked, setChecked] = useState(props.checked || false);
+	const checked = !!props.checked;
 
-	// ? --------------------------- Functions --------------------------
-	const onChange = () => {
-		if (!checked) props.onSelect(props.title);
-		else props.onRemove(props.title);
-
-		setChecked(!checked);
+	const handleChange = (_value: unknown, nextChecked: boolean) => {
+		if (nextChecked) {
+			props.onSelect(props.title);
+		} else {
+			props.onRemove(props.title);
+		}
 	};
 
-	// -------------------------------------------------------
 	return (
-		<Radio className='service-radio' checked={checked} onClick={onChange}>
+		<Checkbox className='service-radio' checked={checked} value={props.title} onChange={handleChange}>
 			<div className='service-logo' style={{ backgroundColor: props.bg }}>
-				<img src={props.icon} alt={props.title} />
+				<img src={props.icon} alt='' draggable={false} />
 			</div>
 			<h2>{props.title}</h2>
-		</Radio>
+		</Checkbox>
 	);
 };
 
