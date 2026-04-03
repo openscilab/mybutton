@@ -42,14 +42,30 @@ const GetButton = () => {
 	const [selectedServices, setSelectedServices] = useState<string[]>([ServiceName.Email]);
 	const services = temp.shareMode === SharingMode.Indirect ? SERVICES : SERVICES.filter(s => s.title !== ServiceName.Custom);
 
+	// Indirect: default first choice is Custom; Direct: Email. Keep multi-select when switching modes.
+	useEffect(() => {
+		if (temp.shareMode === SharingMode.Indirect) {
+			setSelectedServices(prev => {
+				if (prev.length === 1 && prev[0] === ServiceName.Email) {
+					return [ServiceName.Custom];
+				}
+				return prev;
+			});
+		} else {
+			setSelectedServices(prev => {
+				const next = prev.filter(s => s !== ServiceName.Custom);
+				return next.length === 0 ? [ServiceName.Email] : next;
+			});
+		}
+	}, [temp.shareMode]);
+
 	// ? -------------------------- Functions ------------------------------
 	const onAddService = (title: string) => {
-		setSelectedServices([...selectedServices, title]);
+		setSelectedServices(prev => (prev.includes(title) ? prev : [...prev, title]));
 	};
 
 	const onRemoveService = (title: string) => {
-		const filtered = selectedServices?.filter(service => service !== title);
-		setSelectedServices(filtered);
+		setSelectedServices(prev => prev.filter(service => service !== title));
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
@@ -274,10 +290,10 @@ const GetButton = () => {
 				<Modal.Body>
 					<div className='services-list'>
 						<Row>
-							{services.map((service, i) => {
+							{services.map(service => {
 								const checked = selectedServices.includes(service.title);
 								return (
-									<Col xs={12} sm={8} key={i}>
+									<Col xs={12} sm={8} key={service.title}>
 										<Service {...service} checked={checked} onSelect={onAddService} onRemove={onRemoveService} />
 									</Col>
 								);
