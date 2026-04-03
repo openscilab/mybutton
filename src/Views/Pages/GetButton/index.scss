@@ -272,14 +272,17 @@
 				}
 			}
 
-			/* RSuite 5: children live inside .rs-radio-label, not direct under label */
-			.rs-radio.service-radio {
-				margin: 6px 0;
+			/* Checkbox used for multi-select (RSuite Radio cannot uncheck via label click) */
+			.rs-checkbox.service-radio {
+				display: block;
+				width: 100%;
+				max-width: 100%;
+				margin: 4px 0;
 				padding: 0;
 
-				.rs-radio-checker {
+				.rs-checkbox-checker {
 					padding: 0;
-					min-height: 36px;
+					min-height: 44px;
 
 					> label {
 						display: flex;
@@ -287,12 +290,21 @@
 						flex-wrap: nowrap;
 						align-items: center;
 						cursor: pointer;
-						padding: 0;
+						padding: 6px 8px;
 						margin: 0;
 						gap: 12px;
+						min-height: 44px;
+						width: 100%;
+						box-sizing: border-box;
+						border-radius: 6px;
+						transition: background-color 0.15s ease;
+
+						&:hover {
+							background-color: rgba(75, 43, 121, 0.06);
+						}
 					}
 
-					.rs-radio-label {
+					.rs-checkbox-label {
 						display: flex;
 						flex-direction: row;
 						flex-wrap: nowrap;
@@ -300,6 +312,8 @@
 						margin: 0;
 						padding: 0;
 						gap: 0;
+						flex: 1;
+						min-width: 0;
 					}
 
 					/* Same logo box + image size as Share to modal .service-container */
@@ -317,6 +331,7 @@
 
 						img {
 							@apply w-7 h-7 sm:w-8 sm:h-8 block;
+							user-select: none;
 						}
 					}
 
@@ -326,10 +341,11 @@
 						margin: 0;
 						white-space: nowrap;
 						line-height: 1.2;
+						user-select: none;
 					}
 				}
 
-				&.rs-radio-checked .rs-radio-checker h2 {
+				&.rs-checkbox-checked .rs-checkbox-checker h2 {
 					color: #4b2b79;
 					font-weight: 500;
 				}
