@@ -18,6 +18,7 @@ const EditableInput: FC<EditableInputProp> = inputProps => {
 		editable = true,
 		autoFill = false,
 		innerComponentPosition,
+		children: _children,
 		...props
 	} = inputProps;
 
@@ -30,7 +31,8 @@ const EditableInput: FC<EditableInputProp> = inputProps => {
 
 	if (lines && lines > 1) InputElement = <textarea {...props} rows={lines} />;
 
-	if (mask) InputElement = <InputMask mask={mask} {...props} />;
+	// @ts-expect-error react-input-mask types not fully compatible with React 18
+	if (mask) InputElement = <InputMask mask={mask} {...(props as any)} />;
 
 	const errMsg = errorMessage !== undefined ? errorMessage : `Invalid`;
 

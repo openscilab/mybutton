@@ -1,25 +1,39 @@
 const path = require('path');
-const { pathsToModuleNameMapper } = require('ts-jest');
-const { compilerOptions } = require('./tsconfig.path.json');
+const fs = require('fs');
 const sassResourcesLoader = require('craco-sass-resources-loader');
+const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
+const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
+const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
+const paths = require('react-scripts/config/paths');
 
 module.exports = {
+	devServer: (devServerConfig) => {
+		delete devServerConfig.onBeforeSetupMiddleware;
+		delete devServerConfig.onAfterSetupMiddleware;
+
+		devServerConfig.setupMiddlewares = (middlewares, devServer) => {
+			if (!devServer) {
+				throw new Error('webpack-dev-server is not defined');
+			}
+			middlewares.push(evalSourceMapMiddleware(devServer));
+			if (fs.existsSync(paths.proxySetup)) {
+				require(paths.proxySetup)(devServer.app);
+			}
+			middlewares.push(
+				redirectServedPath(paths.publicUrlOrPath),
+				noopServiceWorkerMiddleware(paths.publicUrlOrPath)
+			);
+			return middlewares;
+		};
+		return devServerConfig;
+	},
 	plugins: [
-		{
-			plugin: require('craco-less'),
-			options: { lessLoaderOptions: { lessOptions: { javascriptEnabled: true } } },
-		},
 		{
 			plugin: sassResourcesLoader,
 			options: { resources: ['./src/Assets/scss/base/export.scss'] },
 		},
 	],
 
-	style: {
-		postcss: { plugins: [require('autoprefixer'), require('tailwindcss')] },
-	},
-
-	//* Loading absolute paths
 	webpack: {
 		alias: {
 			'@src': path.resolve(__dirname, 'src'),
@@ -29,14 +43,33 @@ module.exports = {
 			'@config': path.resolve(__dirname, 'src/App/Config'),
 			'@components': path.resolve(__dirname, 'src/Components'),
 		},
+		configure: (webpackConfig) => {
+			webpackConfig.module.rules.push({
+				test: /\.less$/,
+				use: [
+					'style-loader',
+					'css-loader',
+					{
+						loader: 'less-loader',
+						options: {
+							lessOptions: {
+								javascriptEnabled: true,
+							},
+						},
+					},
+				],
+			});
+			return webpackConfig;
+		},
 	},
 
-	jest: {
-		configure: {
-			preset: 'ts-jest',
-			moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-				prefix: '<rootDir>/src/',
-			}),
+	style: {
+		sass: {
+			loaderOptions: {
+				sassOptions: {
+					silenceDeprecations: ['legacy-js-api', 'import'],
+				},
+			},
 		},
 	},
 };

@@ -37,6 +37,12 @@
 .rs-grid-container,
 .rs-row {
 	@apply w-full m-0 p-0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.rs-col {
+	flex-shrink: 0;
 }
 
 .rs-toast-container {
@@ -85,17 +91,50 @@
 }
 
 .rs-modal-wrapper {
-	@apply flex-center;
+	position: fixed;
+	inset: 0;
+	z-index: 1050;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: auto;
+}
+
+.rs-modal-backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 1040;
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
 .rs-modal {
-	@apply m-0;
+	position: relative;
+	z-index: 1050;
+	margin: auto;
+	background: white;
+	border-radius: 6px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	
+	.rs-modal-content {
+		position: relative;
+	}
+	
 	.rs-modal-header {
 		@apply border-b pb-2 border-opacity-30 text-base flex items-center;
+		position: relative;
+		padding: 15px 20px;
+		
+		.rs-modal-title {
+			flex: 1;
+		}
+		
 		.rs-modal-header-close {
-			top: 10px;
+			position: absolute;
+			right: 15px;
+			top: 50%;
+			transform: translateY(-50%);
 			font-size: 12px;
-			@apply text-black transition-all mr-0;
+			@apply text-black transition-all;
 			&:hover {
 				@apply text-error;
 			}
@@ -105,11 +144,13 @@
 	.rs-modal-body {
 		max-height: 50vh;
 		@apply py-2 mt-0 overflow-y-auto;
+		padding: 15px 20px;
 	}
 
 	.rs-modal-footer {
-		border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
 		@apply pt-3;
+		padding: 15px 20px;
 	}
 
 	.btn-accept {
@@ -131,23 +172,17 @@
 .rs-modal-no-border {
 	.rs-modal-header,
 	.rs-modal-footer {
-		border: none !important;
+		border: none;
 	}
 }
 
-.rs-notification {
-	.rs-btn-close {
-		svg {
-			color: white !important;
-		}
-	}
+.rs-notification .rs-btn-close svg {
+	color: white;
 }
 
-.rs-picker-toggle,
-.rs-btn {
-	&:focus {
-		box-shadow: none !important;
-	}
+.rs-picker-toggle:focus,
+.rs-btn:focus {
+	box-shadow: none;
 }
 
 .rs-picker-none {
@@ -155,7 +190,7 @@
 }
 
 .rs-btn-outline {
-	border-width: 1px !important;
+	border-width: 1px;
 	@apply border-primary text-primary bg-transparent;
 	&:hover {
 		@apply bg-primary text-white;
@@ -164,4 +199,52 @@
 
 .rs-picker-select-menu-items {
 	@apply my-0;
+}
+
+.rs-tooltip {
+	z-index: 9999;
+}
+
+.rs-radio-group-inline {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.rs-radio-inline {
+	display: inline-flex;
+	margin-right: 10px;
+}
+
+.rs-checkbox-group-inline {
+	display: inline-flex;
+	flex-direction: row;
+}
+
+.rs-checkbox-inline {
+	display: inline-flex;
+}
+
+.rs-radio-group.mode-picker {
+	display: inline-flex;
+	align-items: center;
+	
+	.rs-radio {
+		margin: 0;
+	}
+	
+	.rs-radio-checker {
+		padding-left: 0;
+		
+		> label {
+			padding: 8px 12px;
+			cursor: pointer;
+			border-bottom: 2px solid transparent;
+		}
+	}
+	
+	.rs-radio-checked .rs-radio-checker > label {
+		color: #4b2b79;
+		border-bottom-color: #4b2b79;
+	}
 }

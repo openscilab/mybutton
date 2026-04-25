@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import useStore from '../useStore';
 
-type InitStateType = { shareModal: { open: boolean; url?: string; subject?: string }; activePage: string };
+type InitStateType = { shareModal: { open: boolean; url?: string; subject?: string; isCustomShare?: boolean }; activePage: string };
 
 const initialState: InitStateType = { shareModal: { open: false }, activePage: 'home' };
 

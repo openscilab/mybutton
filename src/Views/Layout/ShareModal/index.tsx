@@ -7,7 +7,8 @@ import { encode } from '@src/Tools/Utils/URLEncoding';
 import { SERVICES, getServiceURL } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { useLocalCache, setShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
-import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import { Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row } from 'rsuite';
+import ShareModeTooltip from '@src/Components/ShareModeTooltip';
 import { useData } from '@src/Tools/Hooks/useData';
 import { ServiceName } from '@src/Data/constants.data';
 import { toStandardName } from '@src/Tools/Utils/Standardize';
@@ -48,8 +49,8 @@ const ShareModal = () => {
 		return `${CONFIG.FRONT_DOMAIN}/${path}`;
 	};
 
-	const onCheckboxChanged = (val: ValueType, checked: boolean) => {
-		if (checked) set.ou.temp('encodingValue', [val]);
+	const onCheckboxChanged = (val: ValueType | undefined, checked: boolean) => {
+		if (checked && val) set.ou.temp('encodingValue', [val]);
 		else set.ou.temp('encodingValue', []);
 	};
 
@@ -59,7 +60,7 @@ const ShareModal = () => {
 			open={shareModal.open}
 			size='sm'
 			onClose={() => {
-				dispatch(setShareModal({ open: false }));
+				dispatch(setShareModal({ open: false, isCustomShare: false }));
 				discard();
 			}}
 			backdrop
@@ -87,39 +88,35 @@ const ShareModal = () => {
 						placeholder='Subject'
 					/>
 				</div>
-				<Whisper
-					placement='top'
-					controlId='control-id-hover'
-					trigger='hover'
-					speaker={
-						<Tooltip className='share-mode-tooltip'>
-							Choose to share your link directly on the selected services or do it through MyButton website.
-						</Tooltip>
-					}>
-					<div className='radiogroup-whisper'>
-						<RadioGroup
-							name='radio-group-inline-picker-label'
-							inline
-							className='mode-picker'
-							appearance='picker'
-							defaultValue={temp.shareMode}
-							onChange={value => set.ou.temp('shareMode', value.toString())}>
-							<label className='box-label'>Sharing Mode: </label>
-							<Radio value='direct'>Direct</Radio>
-							<Radio value='indirect'>Indirect</Radio>
-						</RadioGroup>
-					</div>
-				</Whisper>
-				<div
-					{...classes('encoding-mode-checkbox ', {
-						'is-visible': temp.shareMode === 'indirect',
-					})}>
-					<CheckboxGroup inline name='checkbox-group' value={temp.encodingValue}>
-						<Checkbox value='base64' onChange={onCheckboxChanged}>
-							Base64 Encoding (more robust)
-						</Checkbox>
-					</CheckboxGroup>
-				</div>
+				{!shareModal.isCustomShare && (
+					<>
+						<ShareModeTooltip text='Choose to share your link directly on the selected services or do it through MyButton website.'>
+							<div className='radiogroup-whisper'>
+								<RadioGroup
+									name='radio-group-inline-picker-label'
+									inline
+									className='mode-picker'
+									appearance='picker'
+									defaultValue={temp.shareMode}
+									onChange={value => set.ou.temp('shareMode', value.toString())}>
+									<label className='box-label'>Sharing Mode: </label>
+									<Radio value='direct'>Direct</Radio>
+									<Radio value='indirect'>Indirect</Radio>
+								</RadioGroup>
+							</div>
+						</ShareModeTooltip>
+						<div
+							{...classes('encoding-mode-checkbox ', {
+								'is-visible': temp.shareMode === 'indirect',
+							})}>
+							<CheckboxGroup inline name='checkbox-group' value={temp.encodingValue}>
+								<Checkbox value='base64' onChange={onCheckboxChanged}>
+									Base64 Encoding (more robust)
+								</Checkbox>
+							</CheckboxGroup>
+						</div>
+					</>
+				)}
 				<div className='services-list'>
 					<Row>
 						{SERVICES.filter(s => s.title !== ServiceName.Custom).map((service, i) => {

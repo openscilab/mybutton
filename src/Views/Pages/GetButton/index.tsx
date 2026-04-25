@@ -9,15 +9,20 @@ import { CONFIG } from '@src/App/Config/constants';
 import { classes } from '../../../Tools/Utils/React';
 import { encode } from '@src/Tools/Utils/URLEncoding';
 import { ServiceName, SharingMode } from '@src/Data/constants.data';
-import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Prism as SyntaxHighlighterPrism } from 'react-syntax-highlighter';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { copyToClipboard } from '@src/Tools/Utils/React';
 import { SERVICES, getServiceURL } from '@src/Data/services.data';
 import EditableInput from '@src/Components/EditableInput/EditableInput';
 import { setShareModal } from '@src/Tools/Store/slices/LocalCacheSlice';
-import { lightfair } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { ReactComponent as Clone } from '@assets/icons/clone-regular.svg';
 import { Button, Checkbox, CheckboxGroup, Col, Modal, Radio, RadioGroup, Row, Tooltip, Whisper } from 'rsuite';
+import ShareModeTooltip from '@src/Components/ShareModeTooltip';
 import { toStandardName } from '@src/Tools/Utils/Standardize';
+
+// Default export is highlight.js; Prism theme + markup need the Prism build (React 18 types are loose)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CodeHighlighter = SyntaxHighlighterPrism as any;
 
 const GetButton = () => {
 	const { isMobile } = useWindow();
@@ -32,21 +37,35 @@ const GetButton = () => {
 		openModal: false,
 		openTooltip: false,
 		shareMode: SharingMode.Direct,
-		whisperOpen: false,
-		dropdownOpen: false,
 		encodingValue: [],
 	});
 	const [selectedServices, setSelectedServices] = useState<string[]>([ServiceName.Email]);
 	const services = temp.shareMode === SharingMode.Indirect ? SERVICES : SERVICES.filter(s => s.title !== ServiceName.Custom);
 
+	// Indirect: default first choice is Custom; Direct: Email. Keep multi-select when switching modes.
+	useEffect(() => {
+		if (temp.shareMode === SharingMode.Indirect) {
+			setSelectedServices(prev => {
+				if (prev.length === 1 && prev[0] === ServiceName.Email) {
+					return [ServiceName.Custom];
+				}
+				return prev;
+			});
+		} else {
+			setSelectedServices(prev => {
+				const next = prev.filter(s => s !== ServiceName.Custom);
+				return next.length === 0 ? [ServiceName.Email] : next;
+			});
+		}
+	}, [temp.shareMode]);
+
 	// ? -------------------------- Functions ------------------------------
 	const onAddService = (title: string) => {
-		setSelectedServices([...selectedServices, title]);
+		setSelectedServices(prev => (prev.includes(title) ? prev : [...prev, title]));
 	};
 
 	const onRemoveService = (title: string) => {
-		const filtered = selectedServices?.filter(service => service !== title);
-		setSelectedServices(filtered);
+		setSelectedServices(prev => prev.filter(service => service !== title));
 	};
 
 	const getShareLink = (service_title: string, url: string) => {
@@ -104,14 +123,11 @@ const GetButton = () => {
 		);
 		setButtons(buttons);
 
-		const code = `	<div>
-			${selected
-				.map(service => {
-					const href = temp.shareMode === 'direct' ? urls[service.title] : getShareLink(service.title, validated_url);
-					return `<a href="${href}" target="_blank"><img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:4px"/></a>`;
-				})
-				.join(`\n			`)}
-	</div>`;
+		const lines = selected.map(service => {
+			const href = temp.shareMode === 'direct' ? urls[service.title] : getShareLink(service.title, validated_url);
+			return `<a href="${href}" target="_blank"><img src="${service.iconUrl}" width="32" height="32" style="background-color:${service.bg}; border-radius:4px"/></a>`;
+		});
+		const code = `<div>\n${lines.join('\n')}\n</div>`;
 		set.ou.temp('code', code);
 
 		set.ou.temp('showCode', true);
@@ -127,8 +143,8 @@ const GetButton = () => {
 		return encodeURIComponent(validated);
 	};
 
-	const onCheckboxChanged = (val: ValueType, checked: boolean) => {
-		if (checked) set.ou.temp('encodingValue', [val]);
+	const onCheckboxChanged = (val: ValueType | undefined, checked: boolean) => {
+		if (checked && val) set.ou.temp('encodingValue', [val]);
 		else set.ou.temp('encodingValue', []);
 	};
 
@@ -146,7 +162,7 @@ const GetButton = () => {
 		<div className='get-button-layout'>
 			<div className='get-button-container'>
 				<h1>Get share button code</h1>
-				<div className='input-container'>
+					<div className='input-container'>
 					<EditableInput
 						label='Link'
 						defaultValue={temp.url}
@@ -169,20 +185,8 @@ const GetButton = () => {
 						placeholder='Subject'
 					/>
 				</div>
-				<Whisper
-					placement='top'
-					controlId='control-id-hover'
-					trigger='hover'
-					open={!!temp.dropdownOpen ? false : temp.whisperOpen}
-					speaker={
-						<Tooltip className='share-mode-tooltip'>
-							Choose to share your link directly on the selected services or do it through MyButton website.
-						</Tooltip>
-					}>
-					<div
-						className='radiogroup-whisper'
-						onMouseEnter={() => set.ou.temp('whisperOpen', true)}
-						onMouseLeave={() => set.ou.temp('whisperOpen', false)}>
+				<ShareModeTooltip text='Choose to share your link directly on the selected services or do it through MyButton website.'>
+					<div className='radiogroup-whisper'>
 						<RadioGroup
 							name='radio-group-inline-picker-label'
 							inline
@@ -195,7 +199,7 @@ const GetButton = () => {
 							<Radio value={SharingMode.Indirect}>Indirect</Radio>
 						</RadioGroup>
 					</div>
-				</Whisper>
+				</ShareModeTooltip>
 				<div
 					{...classes('encoding-mode-checkbox ', {
 						'is-visible': temp.shareMode === SharingMode.Indirect,
@@ -222,7 +226,33 @@ const GetButton = () => {
 				</div>
 				{temp.showCode && (
 					<div className='code-container'>
-						<SyntaxHighlighter language={'xml'} style={lightfair} children={temp.code} />
+						<div className='get-code-block'>
+							<CodeHighlighter
+								language='markup'
+								style={oneLight}
+								customStyle={{
+									margin: 0,
+									padding: '1rem 1.35rem',
+									paddingRight: '2.75rem',
+									background: 'transparent',
+									maxHeight: `min(50vh, ${Math.min(320, 88 + selectedServices.length * 26)}px)`,
+									overflow: 'auto',
+									overflowX: 'auto',
+									fontSize: '0.8125rem',
+									lineHeight: 1.55,
+									whiteSpace: 'pre',
+								}}
+								codeTagProps={{
+									style: {
+										fontFamily:
+											'ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, "Liberation Mono", monospace',
+										fontVariantLigatures: 'none',
+										whiteSpace: 'pre',
+									},
+								}}>
+								{temp.code}
+							</CodeHighlighter>
+						</div>
 						<Whisper
 							className='copy-whisper'
 							onClick={() => {
@@ -260,10 +290,10 @@ const GetButton = () => {
 				<Modal.Body>
 					<div className='services-list'>
 						<Row>
-							{services.map((service, i) => {
+							{services.map(service => {
 								const checked = selectedServices.includes(service.title);
 								return (
-									<Col xs={12} sm={8} key={i}>
+									<Col xs={12} sm={8} key={service.title}>
 										<Service {...service} checked={checked} onSelect={onAddService} onRemove={onRemoveService} />
 									</Col>
 								);
