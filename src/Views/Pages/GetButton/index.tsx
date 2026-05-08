@@ -134,13 +134,11 @@ const GetButton = () => {
 	};
 
 	const urlValidation = (url: string) => {
-		let validated = url;
 		const decoded_url = decodeURIComponent(url);
 		if (!url.includes('://')) {
-			if (decoded_url.includes('://')) return validated;
-			validated = `http://${url}`;
+			if (decoded_url.includes('://')) return url;
 		}
-		return encodeURIComponent(validated);
+		return encodeURIComponent(url);
 	};
 
 	const onCheckboxChanged = (val: ValueType | undefined, checked: boolean) => {
